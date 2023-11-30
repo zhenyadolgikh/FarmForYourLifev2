@@ -42,16 +42,4 @@ public class DisplayedCard : MonoBehaviour
 
     }
 
-
-    /*void Shuffle()
-    {
-        for(int i = 0; i < deckSize; i++)
-        {
-            container[0] = faceUpCard[i];
-            int randomIndex = Random.Range(i, deckSize);
-            faceUpCard[i] = faceUpCard[randomIndex];
-            faceUpCard[randomIndex] = container[0];
-        }
-    }*/
-
 }

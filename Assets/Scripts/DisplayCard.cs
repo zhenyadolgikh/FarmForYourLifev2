@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System.ComponentModel;
 
-public class DisplayedCard : MonoBehaviour
+public class DisplayCard : MonoBehaviour
 {
     public List<Card> faceUpCard = new List<Card>();
 
@@ -19,26 +20,36 @@ public class DisplayedCard : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
 
+    public GameObject SpecialCardsPanel;
+    public int cardsInDeck;
+
     // Start is called before the first frame update
     void Start()
     {
+        cardsInDeck = CardDeck.deckSize;
 
         faceUpCard[0] = CardDatabase.cardList[displayId];
+        
 
-      
     }
 
     // Update is called once per frame
     void Update()
     {
+        id = faceUpCard[0].id;
+        cardName = faceUpCard[0].cardName;
+        cardDescription = faceUpCard[0].cardDescription;
 
-            id = faceUpCard[0].id;
-            cardName = faceUpCard[0].cardName;
-            cardDescription = faceUpCard[0].cardDescription;
-
-            nameText.text = " " + cardName;
-            descriptionText.text = " " + cardDescription;
-        
+        nameText.text = " " + cardName;
+        descriptionText.text = " " + cardDescription;
+    
+        if(this.tag == "Clone")
+        {
+            faceUpCard[0] = CardDeck.staticDeck[cardsInDeck - 1];
+            cardsInDeck -= 1;
+            CardDeck.deckSize -= 1;
+            this.tag = "Untagged";            
+        }
 
     }
 

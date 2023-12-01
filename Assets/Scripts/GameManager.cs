@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Card> card = new List<Card>();
+    public List<Card> deck = new List<Card>();
     public Transform[] cardHandSlots;
     public bool[] availableCardHandSlots;
 
@@ -21,21 +21,19 @@ public class GameManager : MonoBehaviour
         
     }
 
-    /*public void DrawCard(int cardIndex)
+    /*public void DrawCard()
     {
-        if (card.Count >= cardIndex)
+        if (deck.Count >= 1)
         {
-            Card selectedCard = card[cardIndex];
+            Card randomCard = deck[Random.Range(0, deck.Count)];
 
             for (int i = 0; i < availableCardHandSlots.Length; i++)
             {
                 if (availableCardHandSlots[i] == true)
                 {
                     Debug.Log("Clicked");
-                    selectedCard.transform.position = cardHandSlots[i].position;
-                    availableCardHandSlots[i] = false;
-                    card.Remove(selectedCard);
-                    return;
+                    randomCard.gameObject.SetActive(true);
+                    randomCard.transform.position = cardHandSlots[i].position;
                 }
             }
         }

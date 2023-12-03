@@ -6,15 +6,21 @@ public class CardDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
     public static List<Card> staticDeck = new List<Card>();
-
+ 
     public static int deckSize;
 
     public GameObject DisplayedCard;
     public GameObject[] Clones;
     public GameObject SpecialCardsPanel;
 
+    public List<Card> shuffleContainer = new List<Card>();
     private float waitTime = 0.2f;
 
+    //Reference for the instatiated prefabs
+    private GameObject cardClone;
+
+    //List to keep track of the instantiated prefabs
+    private List<GameObject> destroyCard = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +28,7 @@ public class CardDeck : MonoBehaviour
         deckSize = CardDatabase.cardList.Count;
 
         GenerateSpecialDeck();
-        ShuffleDeck(deck);
+        ShuffleDeck();
 
         StartCoroutine(DealCards());
     }
@@ -31,6 +37,14 @@ public class CardDeck : MonoBehaviour
     void Update()
     {
         staticDeck = deck;
+
+        //Re-shuffling the cards
+        if(TurnSystem.reShuffle == true)
+        {
+            StartCoroutine(ReShuffle(3));
+            TurnSystem.reShuffle = false;
+
+        }
     }
 
     void GenerateSpecialDeck()
@@ -41,18 +55,21 @@ public class CardDeck : MonoBehaviour
         }
     }
 
-    public void ShuffleDeck<T>(List<T> list)
+    public void ShuffleDeck()
     {
-        System.Random random = new System.Random();
-        int n = list.Count;
-        while (n > 1)
+        for(int i = 0; i < deckSize; i++)
         {
-            int k = random.Next(n);
-            n--;
-            T temp = list[k];
-            list[k] = list[n];
-            list[n] = temp;
+            shuffleContainer[0] = deck[i];
+            int randomIndex = Random.Range(i, deckSize);
+            deck[i] = deck[randomIndex];
+            deck[randomIndex] = shuffleContainer[0];
         }
+    }
+
+    //Create instantiated prefabs for the DisplayedCard prefab
+    void CreateCard()
+    {
+        cardClone = Instantiate(DisplayedCard, transform.position, Quaternion.identity);
     }
 
     IEnumerator DealCards()
@@ -60,9 +77,38 @@ public class CardDeck : MonoBehaviour
         for(int i = 0; i <= 2; i++)
         {
             yield return new WaitForSeconds(waitTime);
-            Debug.Log("Waiting");
-            Instantiate(DisplayedCard, transform.position, Quaternion.identity);
-            //xOffset = xOffset + 160;
+            CreateCard();
+            //the list of DestroyedCard clones
+            destroyCard.Add(cardClone);
         }
+    }
+
+
+    IEnumerator ReShuffle(int x)
+    {
+        List<GameObject> cardsToDestroy = new List<GameObject>(destroyCard);
+
+        foreach (GameObject card in cardsToDestroy)
+        {
+            destroyCard.Remove(card);
+            Destroy(card);
+        }
+
+        destroyCard.Clear();
+        yield return new WaitForSeconds(waitTime);
+
+        //DisplayCard.faceUpCard[0] = CardDeck.staticDeck[DisplayCard.cardsInDeck + 3];
+        DisplayCard.cardsInDeck += 3;
+        deckSize += 3;
+
+        ShuffleDeck();
+
+        for (int i = 0; i < x; i++)
+        {
+            yield return new WaitForSeconds(waitTime);
+            CreateCard();
+            destroyCard.Add(cardClone);
+        }
+         
     }
 }

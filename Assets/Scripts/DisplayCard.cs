@@ -21,7 +21,7 @@ public class DisplayCard : MonoBehaviour
     public TextMeshProUGUI descriptionText;
 
     public GameObject SpecialCardsPanel;
-    public int cardsInDeck;
+    public static int cardsInDeck;
 
     // Start is called before the first frame update
     void Start()

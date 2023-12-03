@@ -16,7 +16,6 @@ public class CardOnBoard : MonoBehaviour
         //DisplayedCard.transform.localScale = Vector3.one;
         DisplayedCard.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         //DisplayedCard.transform.eulerAngles = new Vector3(0, 25, 0);
-        Debug.Log("Hello");
     }
 
     // Update is called once per frame

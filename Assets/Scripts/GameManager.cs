@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Card> deck = new List<Card>();
-    public Transform[] cardHandSlots;
+    public List<Card> displayedCard = new List<Card>();
+    public GameObject HandPanel;
+    public GameObject[] ClickedCard;
     public bool[] availableCardHandSlots;
 
 
@@ -23,17 +24,17 @@ public class GameManager : MonoBehaviour
 
     /*public void DrawCard()
     {
-        if (deck.Count >= 1)
+        if (displayedCard.Count >= 1)
         {
-            Card randomCard = deck[Random.Range(0, deck.Count)];
+            selectedCard = 
 
             for (int i = 0; i < availableCardHandSlots.Length; i++)
             {
                 if (availableCardHandSlots[i] == true)
                 {
                     Debug.Log("Clicked");
-                    randomCard.gameObject.SetActive(true);
-                    randomCard.transform.position = cardHandSlots[i].position;
+                    selectedCard.gameObject.SetActive(true);
+                    selectedCard.transform.position = cardHandSlots[i].position;
                 }
             }
         }

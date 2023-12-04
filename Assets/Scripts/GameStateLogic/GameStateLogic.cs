@@ -148,7 +148,7 @@ public class GameStateLogic : MonoBehaviour
         listToSend.Add(new SpecialCard(0, "Labour Rush", "Hire 3 workers for 3 rounds"));
         listToSend.Add(new SpecialCard(1, "Wheat Season", "Double the Wheat production for 2 rounds"));
         listToSend.Add(new SpecialCard(2, "Wheat Alchemy", "Use Wheat to cover the difference of another resource to fulfill the next contract"));
-        listToSend.Add(new SpecialCard(3, "Animal Fasting", "The animals don't need to eat Wheat for 3 rounds"));
+
 
         return listToSend;
     }

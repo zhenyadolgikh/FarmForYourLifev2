@@ -33,7 +33,7 @@ public class GameStateLogic : MonoBehaviour
 
     private Dictionary<int, FarmTile> farmTileRegistry = new Dictionary<int, FarmTile>();
 
-    [SerializeField] private List<SpecialCard> specialCardDeck = new List<SpecialCard>();  
+    public List<SpecialCard> specialCardDeck = new List<SpecialCard>();  
     private List<SpecialCard> specialCardsOnTable = new List<SpecialCard>();
 
     [SerializeField] private List<ContractCard> contractCardDeck = new List<ContractCard>();
@@ -42,10 +42,7 @@ public class GameStateLogic : MonoBehaviour
     private List<Card> cardsOnHand = new List<Card>();
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     void Setup()
     {
         for (int i = 0; i < 9; i++)
@@ -53,7 +50,10 @@ public class GameStateLogic : MonoBehaviour
             farmTileRegistry.Add(i, new FarmTile());
         }
 
-
+        specialCardDeck.Add(new MoneyPrinter(0,"Money printer", "Get 300 money"));
+        specialCardDeck.Add(new WheatSeason(1,"Wheat Season", "Double the wheat production in 3 turns"));
+        specialCardDeck.Add(new ExponentialAnimalGrowth(2,"Exponential Animal Growth", "Increase the animals an extra time"));
+        specialCardDeck.Add(new UnionCrackDown(3,"Union crackdown", "Pay nothing for workes in 3 turns"));
 
 
         AddWorker();
@@ -202,9 +202,12 @@ public class GameStateLogic : MonoBehaviour
 
     public void DoAction(Action action)
     {
-
+        if(action is EndTurnAction)
+        {
+            StartTurnUpkeep();
+        }
     }
-    int GetStoredResourceAmount(Resource resourceType)
+    public int GetStoredResourceAmount(Resource resourceType)
     {
         if (resourceType == Resource.wheat)
         {
@@ -222,6 +225,11 @@ public class GameStateLogic : MonoBehaviour
         if (resourceType == Resource.pigMeat)
         {
             return pigMeatStored;
+        }
+
+        if (resourceType == Resource.money)
+        {
+            return moneyStored;
         }
         return -1;
     }

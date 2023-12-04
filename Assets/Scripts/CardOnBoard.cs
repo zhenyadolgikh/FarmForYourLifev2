@@ -7,6 +7,7 @@ public class CardOnBoard : MonoBehaviour
 {
     public GameObject SpecialCardsPanel;
     public GameObject DisplayedCard;
+    public GameObject CardHand;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,19 @@ public class CardOnBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
+
+    }
+
+    public void SelectCard()
+    {
+        CardHand = GameObject.Find("CardHand");
+        Vector3 worldPosition = DisplayedCard.transform.position;
+
+
+        DisplayedCard.transform.SetParent(CardHand.transform);
+
+        DisplayedCard.transform.localPosition = CardHand.transform.InverseTransformPoint(worldPosition);
+
 
     }
 }

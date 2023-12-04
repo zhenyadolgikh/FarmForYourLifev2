@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmTile : MonoBehaviour
+public class FarmTileUI : MonoBehaviour
 {
     public GameObject optionPanel;
 

@@ -22,6 +22,13 @@ public class UIManager : MonoBehaviour
     
     }
         
+    public void EndTurn()
+    {
+        EndTurnAction endTurnAction = new EndTurnAction();
+
+        DoAction(endTurnAction);
+    }
+
     public void Refresh()
     {
         cardDeck.ResetCards();

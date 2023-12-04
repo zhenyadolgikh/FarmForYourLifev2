@@ -9,6 +9,8 @@ public class TurnSystem : MonoBehaviour
     public int yourTurn;
     public TextMeshProUGUI turnText;
 
+    public UIManager uiManager;
+
     public static bool startTurn;
     public static bool reShuffle;
 
@@ -36,6 +38,7 @@ public class TurnSystem : MonoBehaviour
 
     public void ReShuffle()
     {
-        reShuffle = true;
+        //reShuffle = true;
+        uiManager.Refresh();
     }
 }

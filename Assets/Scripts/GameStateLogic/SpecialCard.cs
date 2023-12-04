@@ -6,5 +6,10 @@ using UnityEngine;
 public class SpecialCard : Card
 {
 
-
+    public SpecialCard(int Id, string CardName, string CardDescription)
+    {
+        id = Id;
+        cardName = CardName;
+        cardDescription = CardDescription;
+    }
 }

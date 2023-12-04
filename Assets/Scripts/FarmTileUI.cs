@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FarmTileUI : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class FarmTileUI : MonoBehaviour
     public UIManager manager;
 
     public int farmTileIndex = -1;
+
+    public Button[] options;
 
 
     // Start is called before the first frame update
@@ -50,9 +54,19 @@ public class FarmTileUI : MonoBehaviour
         {
             bool isActive = optionPanel.activeSelf;
             optionPanel.SetActive(!isActive);
+
+            options[2].enabled = false;
+
+            BuildAction buildAction = new BuildAction();
+
+        //   if (!manager.IsActionValid(buildAction))
+        //   {
+        //       optionPanel.GetComponentInChildren<FarmTile>(true);
+        //
+        //   }
             //sätt knapparnas active utifrån IsActionValid
-            
-            //Sätt knapparnas OnClick 
+
+                //Sätt knapparnas OnClick 
         }
     }
 }

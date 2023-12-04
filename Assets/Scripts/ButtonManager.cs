@@ -5,6 +5,8 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
     public GameObject buttonPanel;
+    public UIManager manager;
+
     // Start is called before the first frame update
     void Start()
     {

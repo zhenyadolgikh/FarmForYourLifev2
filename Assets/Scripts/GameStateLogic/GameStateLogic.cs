@@ -154,12 +154,12 @@ public class GameStateLogic : MonoBehaviour
 
     }
     // void AddMoney(int32 amount);
-    bool IsActionValid(Action action)
+    public bool IsActionValid(Action action)
     {
         return true;
     }
 
-    void DoAction(Action action)
+    public void DoAction(Action action)
     {
 
     }

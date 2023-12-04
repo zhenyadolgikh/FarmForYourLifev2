@@ -79,6 +79,18 @@ public class GameStateLogic : MonoBehaviour
             cards[n] = value;
         }
     }
+    void ShuffleSpecialCards(List<SpecialCard> cards)
+    {
+        int n = cards.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            SpecialCard value = cards[k];
+            cards[k] = cards[n];
+            cards[n] = value;
+        }
+    }
 
     void StartTurnUpkeep()
     {
@@ -149,6 +161,8 @@ public class GameStateLogic : MonoBehaviour
         listToSend.Add(new SpecialCard(1, "Wheat Season", "Double the Wheat production for 2 rounds"));
         listToSend.Add(new SpecialCard(2, "Wheat Alchemy", "Use Wheat to cover the difference of another resource to fulfill the next contract"));
 
+
+        ShuffleSpecialCards(listToSend);
 
         return listToSend;
     }

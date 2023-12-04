@@ -233,4 +233,26 @@ public class GameStateLogic : MonoBehaviour
         }
         return -1;
     }
+    public int GetBuildingCost(Resource resource) 
+    {
+        if (resource == Resource.wheat)
+        {
+            return 500;
+        }
+
+        if (resource == Resource.apple)
+        {
+            return 600;
+        }
+        if (resource == Resource.cotton)
+        {
+            return 700;
+        }
+        if (resource == Resource.pigMeat)
+        {
+            return 600;
+        }
+
+        return -1; 
+    }
 }

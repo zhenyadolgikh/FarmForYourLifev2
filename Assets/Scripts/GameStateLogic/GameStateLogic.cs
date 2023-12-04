@@ -95,7 +95,8 @@ public class GameStateLogic : MonoBehaviour
 
     void MoveCards()
     {
-        
+        bool hej = true;
+        hej = false;
     }
 
     void PlaySpecialCard( SpecialCard specialCard)

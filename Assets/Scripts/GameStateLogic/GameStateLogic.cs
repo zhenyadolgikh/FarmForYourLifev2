@@ -58,7 +58,7 @@ public class GameStateLogic : MonoBehaviour
 
         AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
-        AddResources(Resource.Money,1500);
+        AddResources(Resource.money,1500);
         FillCardsOnTable();
     }
 
@@ -107,8 +107,23 @@ public class GameStateLogic : MonoBehaviour
 
     void MoveCards()
     {
-        bool hej = true;
-        hej = false;
+        List<SpecialCard> cardsToRemove = new List<SpecialCard>();
+        for(int i = 0; i < specialCardsOnTable.Count; i++)
+        {
+            if (specialCardsOnTable[i] != null && cardsToRemove.Count < 2)
+            {
+                cardsToRemove.Add(specialCardsOnTable[i]);
+            }
+        }
+        specialCardDeck.AddRange(cardsToRemove);
+
+        ShuffleSpecialCards(specialCardDeck);
+        for(int i = 0; i < 3 ; i++) 
+        {
+            specialCardsOnTable[i] = specialCardDeck[i];
+            specialCardDeck.RemoveAt(i);
+        }
+
     }
 
     void PlaySpecialCard( SpecialCard specialCard)

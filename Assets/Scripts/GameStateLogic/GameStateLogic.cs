@@ -45,7 +45,6 @@ public class GameStateLogic : MonoBehaviour
 
     public void Setup()
     {
-        Debug.Log("innan loop");
         for (int i = 0; i < 9; i++)
         {
             farmTileRegistry.Add(i, new FarmTile());
@@ -60,7 +59,6 @@ public class GameStateLogic : MonoBehaviour
         AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
         AddResources(Resource.money,1500);
-        print(moneyStored);
         FillCardsOnTable();
     }
 
@@ -211,6 +209,12 @@ public class GameStateLogic : MonoBehaviour
         {
             StartTurnUpkeep();
         }
+        if(action is BuildAction)
+        {
+            BuildAction buildAction = (BuildAction)action;
+
+            print("Built!" + buildAction.resource);
+        }
     }
     public int GetStoredResourceAmount(Resource resourceType)
     {
@@ -223,7 +227,7 @@ public class GameStateLogic : MonoBehaviour
         {
             return appleStored;
         }
-        if (resourceType == Resource.cotton)
+        if (resourceType == Resource.cinnamon)
         {
             return cottonStored;
         }
@@ -251,7 +255,7 @@ public class GameStateLogic : MonoBehaviour
         {
             return 600;
         }
-        if (resource == Resource.cotton)
+        if (resource == Resource.cinnamon)
         {
             return 700;
         }
@@ -261,5 +265,10 @@ public class GameStateLogic : MonoBehaviour
         }
 
         return -1; 
+    }
+
+    public Dictionary<int, FarmTile> GetFarmTiles()
+    {
+        return farmTileRegistry;
     }
 }

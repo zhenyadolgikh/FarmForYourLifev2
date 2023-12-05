@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
 
     public GameStateLogic gameStateLogic;
+    public List<GameObject> farmTilePositions = new List<GameObject>();
+    public List<Tuple<GameObject, bool>> placedMeshes = new List<Tuple<GameObject, bool>>();  
 
     public CardDeck cardDeck;
 
@@ -17,9 +20,7 @@ public class UIManager : MonoBehaviour
     }
     public bool IsActionValid(Action action)
     {
-        return gameStateLogic.IsActionValid(action);
-
-    
+        return gameStateLogic.IsActionValid(action);    
     }
         
     public void EndTurn()
@@ -39,6 +40,33 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         gameStateLogic.Setup();
-        print("setup har hänt" + gameStateLogic.GetStoredResourceAmount(Resource.money));
+
+        for(int i = 0; i < 9; i++)
+        {
+            farmTilePositions.Add(null);
+            placedMeshes.Add(new Tuple<GameObject, bool>(null, false));
+        }
+        FarmMeshPosition[] foundPositions = FindObjectsByType<FarmMeshPosition>(FindObjectsSortMode.None);
+        print(foundPositions.Length);
+        foreach(FarmMeshPosition position in foundPositions)
+        {
+            farmTilePositions[position.farmTileIndex] = position.gameObject;
+        }
+    }
+
+    void PlaceMeshes()
+    {
+        foreach(KeyValuePair<int, FarmTile> farmTileValue in gameStateLogic.GetFarmTiles())
+        {
+            if(farmTileValue.Value.buildingOnTile && placedMeshes[farmTileValue.Key].Item1 == null)
+            { 
+        //      farmTileValue.Value.resourceOnTile lägg ut mesh
+        //          farmtileposition för mesh
+            }
+            if(farmTileValue.Value.isBuilt && placedMeshes[farmTileValue.Key].Item2 == false)
+            {
+
+            }
+        }
     }
 }

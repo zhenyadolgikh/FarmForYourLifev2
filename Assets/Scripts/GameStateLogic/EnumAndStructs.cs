@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Resource
 {
-    wheat, apple, cotton, pigMeat, money
+    wheat, apple, cinnamon, pigMeat, money
 };
 public enum WorkType
 {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class FarmTileUI : MonoBehaviour
 {
@@ -11,11 +12,10 @@ public class FarmTileUI : MonoBehaviour
     public Button[] options;
 
     public UIManager manager;
-    int currentMoney;
 
     public int farmTileIndex = -1;
 
-    bool canClick = false;
+    private Camera cam;
 
 
 
@@ -23,13 +23,32 @@ public class FarmTileUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void PopUp()
     {
-        
+
+        if (optionPanel != null)
+        {
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+            optionPanel.transform.position = new Vector2(mousePosition.x, mousePosition.y + 130);
+            bool isActive = optionPanel.activeSelf;
+            optionPanel.SetActive(!isActive);
+        }
+
+        foreach (Button button in options)
+        {
+            BuildAction buildAction = new BuildAction();
+            button.interactable = manager.IsActionValid(buildAction);
+
+            if (button.interactable)
+            {
+                //canClick = true;
+                //bygg
+
+            }
+        }
     }
 
     void OnMouseDown()
@@ -46,11 +65,36 @@ public class FarmTileUI : MonoBehaviour
     //    }
     }
 
-    void OnClickBuildWheat()
+    public void OnClickBuildWheat()
     {
         BuildAction buildAction = new BuildAction();
         buildAction.farmTileIndex = farmTileIndex;
         buildAction.resource = Resource.wheat;
+        manager.DoAction(buildAction);
+    }
+
+    public void OnClickBuildApple()
+    {
+        BuildAction buildAction = new BuildAction();
+        buildAction.farmTileIndex = farmTileIndex;
+        buildAction.resource = Resource.apple;
+        manager.DoAction(buildAction);
+    }
+
+    public void OnClickBuildCinnamon()
+    {
+        BuildAction buildAction = new BuildAction();
+        buildAction.farmTileIndex = farmTileIndex;
+        buildAction.resource = Resource.cinnamon;
+        manager.DoAction(buildAction);
+    }
+
+    public void OnClickBuildPig()
+    {
+        BuildAction buildAction = new BuildAction();
+        buildAction.farmTileIndex = farmTileIndex;
+        buildAction.resource = Resource.pigMeat;
+        manager.DoAction(buildAction);
     }
 
     private Resource GetAssociatedResource(string buttonName)
@@ -63,7 +107,7 @@ public class FarmTileUI : MonoBehaviour
             case "AppleButton":
                 return Resource.apple;
             case "CinnamonButton":
-                return Resource.cotton;
+                return Resource.cinnamon;
             case "PigButton":
                 return Resource.pigMeat;
             default:
@@ -71,41 +115,5 @@ public class FarmTileUI : MonoBehaviour
                 throw new ArgumentException($"Unknown buttonName: {buttonName}");
         }
     }
-
-    private void PopUp()
-    {
-        currentMoney = manager.gameStateLogic.GetStoredResourceAmount(Resource.money);
-        print(currentMoney);
-
-        if (optionPanel != null)
-        {
-            bool isActive = optionPanel.activeSelf;
-            optionPanel.SetActive(!isActive);
-            
-           foreach (Button button in options)
-           {
-               Resource associateResource = GetAssociatedResource(button.name);
-               int cost = manager.gameStateLogic.GetBuildingCost(associateResource);
-               BuildAction buildAction = new BuildAction();
-               button.interactable = manager.IsActionValid(buildAction);
-
-                if (button.interactable)
-                {
-                    canClick = true;
-                    //bygg
-
-                }
-           }
-
-            
-
-        //   if (!manager.IsActionValid(buildAction))
-        //   {
-        //               //
-        //   }
-            //sätt knapparnas active utifrån IsActionValid
-
-                //Sätt knapparnas OnClick 
-        }
-    }
+    
 }

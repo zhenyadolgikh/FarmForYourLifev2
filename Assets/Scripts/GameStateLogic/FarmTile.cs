@@ -18,6 +18,7 @@ public class FarmTile : MonoBehaviour
     }
 
     public bool buildingOnTile = false;
+    public bool isBuilt = false;
 
     public Resource resourceOnTile = Resource.wheat;
      

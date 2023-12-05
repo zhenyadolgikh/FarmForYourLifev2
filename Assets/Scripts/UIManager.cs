@@ -31,7 +31,14 @@ public class UIManager : MonoBehaviour
 
     public void Refresh()
     {
+        
         cardDeck.ResetCards();
         cardDeck.CreateDisplayCards();
+    }
+
+    void Start()
+    {
+        gameStateLogic.Setup();
+        print("setup har hänt" + gameStateLogic.GetStoredResourceAmount(Resource.money));
     }
 }

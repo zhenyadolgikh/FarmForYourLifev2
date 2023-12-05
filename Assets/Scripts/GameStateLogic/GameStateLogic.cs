@@ -43,8 +43,9 @@ public class GameStateLogic : MonoBehaviour
 
     // Update is called once per frame
 
-    void Setup()
+    public void Setup()
     {
+        Debug.Log("innan loop");
         for (int i = 0; i < 9; i++)
         {
             farmTileRegistry.Add(i, new FarmTile());
@@ -59,6 +60,7 @@ public class GameStateLogic : MonoBehaviour
         AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
         AddResources(Resource.money,1500);
+        print(moneyStored);
         FillCardsOnTable();
     }
 
@@ -192,7 +194,10 @@ public class GameStateLogic : MonoBehaviour
     }
     void AddResources(Resource resource, int amount)
     {
-
+        if(resource == Resource.money)
+        {
+            moneyStored += amount;
+        }
     }
     // void AddMoney(int32 amount);
     public bool IsActionValid(Action action)
@@ -229,7 +234,9 @@ public class GameStateLogic : MonoBehaviour
 
         if (resourceType == Resource.money)
         {
+            print("här");
             return moneyStored;
+            
         }
         return -1;
     }

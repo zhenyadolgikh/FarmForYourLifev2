@@ -11,7 +11,7 @@ public class FarmTileUI : MonoBehaviour
     public Button[] options;
 
     public UIManager manager;
-    public int currentMoney;
+    int currentMoney;
 
     public int farmTileIndex = -1;
 
@@ -49,7 +49,7 @@ public class FarmTileUI : MonoBehaviour
     void OnClickBuildWheat()
     {
         BuildAction buildAction = new BuildAction();
-        buildAction.farmTileIndex = 5;
+        buildAction.farmTileIndex = farmTileIndex;
         buildAction.resource = Resource.wheat;
     }
 
@@ -75,7 +75,7 @@ public class FarmTileUI : MonoBehaviour
     private void PopUp()
     {
         currentMoney = manager.gameStateLogic.GetStoredResourceAmount(Resource.money);
-        Debug.Log(currentMoney);
+        print(currentMoney);
 
         if (optionPanel != null)
         {
@@ -86,17 +86,18 @@ public class FarmTileUI : MonoBehaviour
            {
                Resource associateResource = GetAssociatedResource(button.name);
                int cost = manager.gameStateLogic.GetBuildingCost(associateResource);
-               Debug.Log("Success!");
-               button.interactable = currentMoney >= cost;
+               BuildAction buildAction = new BuildAction();
+               button.interactable = manager.IsActionValid(buildAction);
 
-                if(button.interactable)
+                if (button.interactable)
                 {
                     canClick = true;
-                    //manager.IsActionValid(buildAction) ??
+                    //bygg
+
                 }
            }
 
-            BuildAction buildAction = new BuildAction();
+            
 
         //   if (!manager.IsActionValid(buildAction))
         //   {

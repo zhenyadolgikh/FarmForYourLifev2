@@ -5,8 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
-public class FarmTileUI : MonoBehaviour
+public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 {
     public GameObject optionPanel;
     public Button[] options;
@@ -31,8 +32,11 @@ public class FarmTileUI : MonoBehaviour
 
         if (optionPanel != null)
         {
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
-            optionPanel.transform.position = new Vector2(mousePosition.x, mousePosition.y + 130);
+
+         //   print(Input.mousePosition);
+
+            Vector2 mousePosition = Input.mousePosition;
+            optionPanel.transform.position = new Vector3(mousePosition.x, mousePosition.y + 130);
             bool isActive = optionPanel.activeSelf;
             optionPanel.SetActive(!isActive);
         }
@@ -51,18 +55,17 @@ public class FarmTileUI : MonoBehaviour
         }
     }
 
+    public void OnPointerClick(PointerEventData pointerEventData)
+    {
+        //Output to console the clicked GameObject's name and the following message. You can replace this with your own actions for when clicking the GameObject.
+     //   Debug.Log(name + " Game Object Clicked!");
+        PopUp();
+    }
+
     void OnMouseDown()
     {
-        PopUp();
+   //     PopUp();
 
-    //    BuildAction buildAction = new BuildAction();
-    //    buildAction.farmTileIndex = 5;
-    //    buildAction.resource = Resource.wheat;
-    //
-    //    if(manager.IsActionValid(buildAction))
-    //    {
-    //        manager.DoAction(buildAction);
-    //    }
     }
 
     public void OnClickBuildWheat()

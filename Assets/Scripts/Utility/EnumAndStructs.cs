@@ -4,15 +4,15 @@ using UnityEngine;
 
 public enum Resource
 {
-    wheat, apple, cinnamon, pigMeat, money
+    wheat, apple, cinnamon, pigMeat, money, unassignedResource
 };
 public enum WorkType
 {
-    harvesting, building, slaughtering, unassigned
+    harvesting, building, slaughtering, unassigned, wrongWorkType
 };
 public enum HudState
 {
-    standard, buildPopup
+    standard, buildPopup, assignWorkers
 };
 public enum TypeOfCard
 {

@@ -9,11 +9,6 @@ using System.ComponentModel;
 
 public class DisplayCard : MonoBehaviour
 {
-    public List<Card> faceUpCard = new List<Card>();
-
-    public int displayId;
-
-    public int id;
     public string cardName;
     public string cardDescription;
 
@@ -35,15 +30,14 @@ public class DisplayCard : MonoBehaviour
 
     public void ResetCard()
     {
-        id = -1;
         cardName = "";
         cardDescription = "";
     }
 
     public void SetCardValue(Card card)
     {
-        nameText.SetText(card.cardName);
-        descriptionText.SetText(card.cardDescription);
+        nameText.SetText(card.getCardName());
+        descriptionText.SetText(card.getCardName());
     }
 
     // Update is called once per frame

@@ -19,6 +19,8 @@ public class TurnSystem : MonoBehaviour
     {
         isYourTurn = true;
         startTurn = false;
+
+        uiManager = UIManager.instance;
     }
 
     // Update is called once per frame
@@ -38,6 +40,8 @@ public class TurnSystem : MonoBehaviour
 
     public void ReShuffle()
     {
+
+        uiManager.TestString();
         //reShuffle = true;
         uiManager.Refresh();
     }

@@ -29,7 +29,7 @@ public class CardDeck : MonoBehaviour
 
     public void CreateDisplayCards()
     {
-        List<SpecialCard> specialCardsOnTable = uiManager.gameStateLogic.getSpecialCards();
+        List<SpecialCard> specialCardsOnTable = uiManager.gameStateLogic.getSpecialCardsOnTable();
 
         DisplayCard[] cardsToShow = SpecialCardsPanel.GetComponentsInChildren<DisplayCard>(true);
 

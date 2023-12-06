@@ -14,6 +14,10 @@ public enum HudState
 {
     standard, buildPopup
 };
+public enum TypeOfCard
+{
+    special, contract
+};
 public class EnumAndStructs 
 {
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-
+using UnityEditor;
 using UnityEngine;
 
 public class GameStateLogic : MonoBehaviour
@@ -33,11 +33,15 @@ public class GameStateLogic : MonoBehaviour
 
     private Dictionary<int, FarmTile> farmTileRegistry = new Dictionary<int, FarmTile>();
 
-    public List<SpecialCard> specialCardDeck = new List<SpecialCard>();  
-    private List<SpecialCard> specialCardsOnTable = new List<SpecialCard>();
 
-    [SerializeField] private List<ContractCard> contractCardDeck = new List<ContractCard>();
-    private List<SpecialCard> contractCardsOnTable = new List<SpecialCard>();
+    public List<SpecialCard> specialCardsForLevel = new List<SpecialCard>();
+    private Dictionary<string, SpecialCard> specialCardRegistry = new Dictionary<string, SpecialCard>();
+    private List<SpecialCard> specialCardDeck = new List<SpecialCard>();  
+    private List<SpecialCard> specialCardsOnTable = new List<SpecialCard>();
+    private int maxSpecialCardsOnTable = 3; 
+
+    private List<ContractCard> contractCardDeck = new List<ContractCard>();
+    private List<ContractCard> contractCardsOnTable = new List<ContractCard>();
 
     private List<Card> cardsOnHand = new List<Card>();
 
@@ -50,11 +54,17 @@ public class GameStateLogic : MonoBehaviour
             farmTileRegistry.Add(i, new FarmTile());
         }
 
-        specialCardDeck.Add(new MoneyPrinter(0,"Money printer", "Get 300 money"));
-        specialCardDeck.Add(new WheatSeason(1,"Wheat Season", "Double the wheat production in 3 turns"));
-        specialCardDeck.Add(new ExponentialAnimalGrowth(2,"Exponential Animal Growth", "Increase the animals an extra time"));
-        specialCardDeck.Add(new UnionCrackDown(3,"Union crackdown", "Pay nothing for workes in 3 turns"));
+        foreach(SpecialCard specialCardinEditor in specialCardsForLevel)
+        {   
 
+            SpecialCard specialCard = (SpecialCard)specialCardinEditor;
+            if (!specialCardRegistry.ContainsKey(specialCard.cardName))
+            {
+                specialCardRegistry.Add(specialCard.getCardName(), specialCard);
+            }
+
+            specialCardDeck.Add(specialCard);
+        }
 
         AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
@@ -64,6 +74,14 @@ public class GameStateLogic : MonoBehaviour
 
     void FillCardsOnTable()
     {
+        ShuffleSpecialCards(specialCardDeck);
+        print("Special card deck size" + specialCardDeck.Count);
+        for(int i = 0; i < maxSpecialCardsOnTable; i++)
+        {
+            SpecialCard cardToAdd = specialCardDeck[0];
+            specialCardsOnTable.Add(cardToAdd);
+            specialCardDeck.Remove(cardToAdd);
+        }
     }
 
     private System.Random rng = new System.Random();
@@ -108,22 +126,35 @@ public class GameStateLogic : MonoBehaviour
     void MoveCards()
     {
         List<SpecialCard> cardsToRemove = new List<SpecialCard>();
-        for(int i = 0; i < specialCardsOnTable.Count; i++)
+        List<SpecialCard> cardsToMoveLeft = new List<SpecialCard>();
+        for(int i = 0; i < maxSpecialCardsOnTable; i++)
         {
             if (specialCardsOnTable[i] != null && cardsToRemove.Count < 2)
             {
                 cardsToRemove.Add(specialCardsOnTable[i]);
+                specialCardsOnTable[i] = null;
+            }
+            if (specialCardsOnTable[i] != null && cardsToRemove.Count >= 2)
+            {
+                cardsToMoveLeft.Add(specialCardsOnTable[i]);
+                specialCardsOnTable[i] = null;
             }
         }
         specialCardDeck.AddRange(cardsToRemove);
 
-        ShuffleSpecialCards(specialCardDeck);
-        for(int i = 0; i < 3 ; i++) 
+        for (int i = 0; i < cardsToMoveLeft.Count; i++)
         {
-            specialCardsOnTable[i] = specialCardDeck[i];
-            specialCardDeck.RemoveAt(i);
+            specialCardsOnTable[i] = cardsToMoveLeft[i];
         }
-
+        ShuffleSpecialCards(specialCardDeck);
+        for(int i = 0; i < maxSpecialCardsOnTable; i++) 
+        {
+            if (specialCardsOnTable[i] == null)
+            {
+                specialCardsOnTable[i] = specialCardDeck[0];
+                specialCardDeck.RemoveAt(0);
+            }
+        }
     }
 
     void PlaySpecialCard( SpecialCard specialCard)
@@ -168,18 +199,14 @@ public class GameStateLogic : MonoBehaviour
         }
     }
 
-    public List<SpecialCard> getSpecialCards()
+    public List<SpecialCard> getSpecialCardsOnTable()
     {
-        List<SpecialCard> listToSend = new List<SpecialCard>();
+        //List<SpecialCard> listToSend = new List<SpecialCard>();
+        //
+        //
+        //ShuffleSpecialCards(listToSend);
 
-        listToSend.Add(new SpecialCard(0, "Labour Rush", "Hire 3 workers for 3 rounds"));
-        listToSend.Add(new SpecialCard(1, "Wheat Season", "Double the Wheat production for 2 rounds"));
-        listToSend.Add(new SpecialCard(2, "Wheat Alchemy", "Use Wheat to cover the difference of another resource to fulfill the next contract"));
-
-
-        ShuffleSpecialCards(listToSend);
-
-        return listToSend;
+        return specialCardsOnTable;
     }
 
     void AddWorker()

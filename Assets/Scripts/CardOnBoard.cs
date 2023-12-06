@@ -9,9 +9,12 @@ public class CardOnBoard : MonoBehaviour
     public GameObject DisplayedCard;
     public GameObject CardHand;
 
+    private UIManager uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        uiManager = UIManager.instance;
         SpecialCardsPanel = GameObject.Find("SpecialCardsPanel");
         DisplayedCard.transform.SetParent(SpecialCardsPanel.transform);
         //DisplayedCard.transform.localScale = Vector3.one;
@@ -27,13 +30,15 @@ public class CardOnBoard : MonoBehaviour
 
     public void SelectCard()
     {
-        CardHand = GameObject.Find("CardHand");
-        Vector3 worldPosition = DisplayedCard.transform.position;
+     //   CardHand = GameObject.Find("CardHand");
+     //   Vector3 worldPosition = DisplayedCard.transform.position;
+     //
+     //
+     //   DisplayedCard.transform.SetParent(CardHand.transform);
+     //
+     //   DisplayedCard.transform.localPosition = CardHand.transform.InverseTransformPoint(worldPosition);
 
 
-        DisplayedCard.transform.SetParent(CardHand.transform);
-
-        DisplayedCard.transform.localPosition = CardHand.transform.InverseTransformPoint(worldPosition);
 
 
     }

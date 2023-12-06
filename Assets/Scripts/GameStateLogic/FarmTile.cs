@@ -3,20 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmTile : MonoBehaviour
+public class FarmTile 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public bool buildingOnTile = false;
     public bool isBuilt = false;
 

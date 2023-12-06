@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting.ReorderableList;
-[System.Serializable]
 
-public class Card
+
+[CreateAssetMenu]
+public class Card : ScriptableObject
 {
-    public int id;
     public string cardName;
     public string cardDescription;
 
@@ -16,22 +16,14 @@ public class Card
 
     }
 
-    public Card(int Id, string CardName, string CardDescription)
+    public Card(string CardName, string CardDescription)
     {
-        id = Id;
         cardName = CardName;
         cardDescription = CardDescription;
     }
 
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string getCardName() { return cardName; }
+    public string getCardDescription() {  return cardDescription; }
+
 }

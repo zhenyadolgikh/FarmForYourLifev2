@@ -12,6 +12,24 @@ public class UIManager : MonoBehaviour
 
     public CardDeck cardDeck;
 
+    public static UIManager instance;
+
+    public string testString;
+
+    void Awake()
+    {
+        if (instance != null)
+            GameObject.Destroy(instance);
+        else
+            instance = this;
+
+        DontDestroyOnLoad(this);
+    }
+
+    public void TestString()
+    {
+        print(testString);
+    }
 
     public void DoAction(Action action)
     {

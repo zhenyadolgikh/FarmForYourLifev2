@@ -50,6 +50,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
             {
                 //canClick = true;
                 //bygg
+                //
 
             }
         }

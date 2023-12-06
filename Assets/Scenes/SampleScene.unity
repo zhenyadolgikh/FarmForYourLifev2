@@ -2347,7 +2347,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725589789}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 142.81}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3923,7 +3923,6 @@ GameObject:
   - component: {fileID: 1165016785}
   - component: {fileID: 1165016784}
   - component: {fileID: 1165016788}
-  - component: {fileID: 1165016789}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3947,7 +3946,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &1165016785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4044,19 +4043,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1165016789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165016783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4882afd451afcb42b8c7d6376d4a583, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  specialCardsForLevel: []
 --- !u!1001 &1165091925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4992,6 +4978,7 @@ GameObject:
   - component: {fileID: 1293844255}
   - component: {fileID: 1293844254}
   - component: {fileID: 1293844253}
+  - component: {fileID: 1293844256}
   m_Layer: 0
   m_Name: Camera1
   m_TagString: Untagged
@@ -5073,6 +5060,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 37.5, y: -126.426, z: 0}
+--- !u!114 &1293844256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293844252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1001 &1351239694
 PrefabInstance:
   m_ObjectHideFlags: 0

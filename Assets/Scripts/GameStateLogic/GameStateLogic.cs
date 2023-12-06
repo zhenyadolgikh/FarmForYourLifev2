@@ -243,6 +243,19 @@ public class GameStateLogic : MonoBehaviour
             print("Built!" + buildAction.resource);
         }
     }
+
+   // private bool IsValidToBuild(BuildAction buildAction)
+   // {
+   //     if()
+   //
+   //     return true;
+   // }
+
+    private void BuildOnFarmtile(BuildAction buildAction)
+    {
+
+
+    }
     public int GetStoredResourceAmount(Resource resourceType)
     {
         if (resourceType == Resource.wheat)

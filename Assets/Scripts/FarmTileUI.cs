@@ -53,6 +53,7 @@ public class FarmTileUI : MonoBehaviour
             {
                 //canClick = true;
                 //bygg
+                //
 
             }
         }

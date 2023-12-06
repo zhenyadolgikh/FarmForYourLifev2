@@ -5,9 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
-public class FarmTileUI : MonoBehaviour, IPointerClickHandler
+public class FarmTileUI : MonoBehaviour
 {
     public GameObject optionPanel;
     public Button[] options;
@@ -16,7 +15,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
     public int farmTileIndex = -1;
 
-    private Camera cam;
+    private CanvasGroup canvasGroup;
 
 
 
@@ -24,21 +23,25 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-
+        canvasGroup = optionPanel.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            // If CanvasGroup component is not present, add it.
+            canvasGroup = optionPanel.AddComponent<CanvasGroup>();
+        }
     }
 
     private void PopUp()
     {
-
+        
         if (optionPanel != null)
         {
-
-         //   print(Input.mousePosition);
-
-            Vector2 mousePosition = Input.mousePosition;
-            optionPanel.transform.position = new Vector3(mousePosition.x, mousePosition.y + 130);
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+            optionPanel.transform.position = new Vector2(mousePosition.x, mousePosition.y + 130);
             bool isActive = optionPanel.activeSelf;
             optionPanel.SetActive(!isActive);
+
+            canvasGroup.blocksRaycasts = !isActive;
         }
 
         foreach (Button button in options)
@@ -55,17 +58,18 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void OnPointerClick(PointerEventData pointerEventData)
-    {
-        //Output to console the clicked GameObject's name and the following message. You can replace this with your own actions for when clicking the GameObject.
-     //   Debug.Log(name + " Game Object Clicked!");
-        PopUp();
-    }
-
     void OnMouseDown()
     {
-   //     PopUp();
+        PopUp();
 
+    //    BuildAction buildAction = new BuildAction();
+    //    buildAction.farmTileIndex = 5;
+    //    buildAction.resource = Resource.wheat;
+    //
+    //    if(manager.IsActionValid(buildAction))
+    //    {
+    //        manager.DoAction(buildAction);
+    //    }
     }
 
     public void OnClickBuildWheat()

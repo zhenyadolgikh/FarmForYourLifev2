@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -15,8 +16,8 @@ public class GameStateLogic : MonoBehaviour
     }
     private int maxActions = 0;
     private int currentActions = 0;
-
     private int actionLevel = 0;
+
     private int storageLevel = 0;
     private int currentStorage = 0;
 
@@ -24,8 +25,11 @@ public class GameStateLogic : MonoBehaviour
 
     private int wheatStored = 0;
     private int appleStored = 0;
-    private int cottonStored = 0;
+    private int cinnamonStored = 0;
     private int pigMeatStored = 0;
+
+    private int currentTurn = 0;
+    public int maxTurn = 0;
 
     private int workersCreated = 0;
 
@@ -38,12 +42,16 @@ public class GameStateLogic : MonoBehaviour
     private Dictionary<string, SpecialCard> specialCardRegistry = new Dictionary<string, SpecialCard>();
     private List<SpecialCard> specialCardDeck = new List<SpecialCard>();  
     private List<SpecialCard> specialCardsOnTable = new List<SpecialCard>();
-    private int maxSpecialCardsOnTable = 3; 
+    private int maxSpecialCardsOnTable = 3;
+    private int maximumHandSize = 10;
 
     private List<ContractCard> contractCardDeck = new List<ContractCard>();
     private List<ContractCard> contractCardsOnTable = new List<ContractCard>();
 
-    private List<Card> cardsOnHand = new List<Card>();
+    private List<Card> cardsInHand = new List<Card>();
+
+
+    private List<EffectLifeTime> activeEffects = new List<EffectLifeTime>();    
 
     // Update is called once per frame
 
@@ -66,13 +74,22 @@ public class GameStateLogic : MonoBehaviour
             specialCardDeck.Add(specialCard);
         }
 
+
+        currentStorage = 120;
+        maxActions = 3;
+        currentActions = maxActions;
+        currentTurn = 1;
+        maxTurn = 12;
+
         AddWorker();
         AddWorker();
         AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
         AddResources(Resource.money,1500);
         FillCardsOnTable();
+
     }
+
 
     void FillCardsOnTable()
     {
@@ -119,10 +136,28 @@ public class GameStateLogic : MonoBehaviour
         ResetNumbers();
         MoveCards();
 
+        currentTurn += 1; 
     }
     void ResetNumbers()
     {
         currentActions = maxActions;
+
+        if(wheatStored > currentStorage)
+        {
+            wheatStored = currentStorage;
+        }
+        if(appleStored > currentStorage)
+        {
+            appleStored = currentStorage;
+        }
+        if(cinnamonStored > currentStorage)
+        {
+            cinnamonStored = currentStorage;
+        }
+        if(pigMeatStored > currentStorage/10)
+        {
+            pigMeatStored = currentStorage/10;
+        }
     }
 
     void MoveCards()
@@ -153,23 +188,71 @@ public class GameStateLogic : MonoBehaviour
         {
             if (specialCardsOnTable[i] == null)
             {
-                specialCardsOnTable[i] = specialCardDeck[0];
-                specialCardDeck.RemoveAt(0);
+
+                if(specialCardDeck.Count > 0)
+                {
+                    specialCardsOnTable[i] = specialCardDeck[0];
+
+                    specialCardDeck.RemoveAt(0);
+                }
             }
         }
     }
 
-    void PlaySpecialCard( SpecialCard specialCard)
+    void AddCardToHand(AddCardToHandAction action)
     {
-        cardsOnHand.Remove(specialCard);
-        specialCardDeck.Add(specialCard);
+
+        currentActions -= 1;
+        if(action.cardType == TypeOfCard.special)
+        {
+            string cardName = specialCardsOnTable[action.index].cardName;
+            specialCardsOnTable[action.index] = null;
+            cardsInHand.Add(specialCardRegistry[cardName]);
+        }
+    }
+
+    private void PlayCard( PlayCardAction playCardAction)
+    {
+
+        currentActions -= 1;
+
+        Card cardPLayed = cardsInHand[playCardAction.index];
+
+        cardsInHand.RemoveAt(playCardAction.index);
+
+        if(cardPLayed is SpecialCard)
+        {
+            specialCardDeck.Add((SpecialCard)cardPLayed);
+        }
+        else
+        {
+            contractCardDeck.Add((ContractCard)cardPLayed);
+        }
+
+        if(cardPLayed is MoneyPrinter)
+        {
+            AddResources(Resource.money, 300);
+
+            print("det money printades");
+        }
+
+        EffectLifeTime effectLifeTime = cardPLayed.PlayCard();
+
+        if(effectLifeTime != null)
+        {
+            activeEffects.Add(effectLifeTime);
+        }
+
     }
 
     void ProductionPhase()
     {
         foreach(KeyValuePair<int,FarmTile> farmTilePair in farmTileRegistry)
         {
-
+            if(farmTilePair.Value.isBuilt == false)
+            {
+                continue;
+            }
             farmTilePair.Value.storedResources += farmTilePair.Value.productionRate;
 
             if (farmTilePair.Value.storedResources > farmTilePair.Value.maxStoredResources)
@@ -197,6 +280,14 @@ public class GameStateLogic : MonoBehaviour
                         farmTilePair.Value.storedResources = farmTilePair.Value.storedResources - workerOnTile.workrate;
                     }
                 }
+
+                if(workerOnTile.workType == WorkType.building && farmTilePair.Value.buildingOnTile && farmTilePair.Value.isBuilt == false)
+                {
+                    farmTilePair.Value.isBuilt = true;
+
+                    print("worker har byggt en byggnad");
+                }
+                
             }
         }
     }
@@ -209,6 +300,11 @@ public class GameStateLogic : MonoBehaviour
         //ShuffleSpecialCards(listToSend);
 
         return specialCardsOnTable;
+    }
+
+    public List<Card> GetCardsInHand()
+    {
+        return cardsInHand;
     }
 
     void AddWorker()
@@ -225,23 +321,86 @@ public class GameStateLogic : MonoBehaviour
         {
             moneyStored += amount;
         }
+        if(resource == Resource.wheat)
+        {
+            wheatStored += amount;
+        }
+        if(resource == Resource.apple)
+        {
+            appleStored += amount;
+        }
+        if(resource == Resource.cinnamon)
+        {
+            cinnamonStored += amount;
+        }
     }
     // void AddMoney(int32 amount);
-    public bool IsActionValid(Action action)
-    {   
-        if(action is BuildAction)
+    public IsActionValidMessage IsActionValid(Action action)
+    {
+        IsActionValidMessage isActionValidMessage = new IsActionValidMessage();
+
+
+
+        if (action is BuildAction)
         {
-            return IsValidToBuild((BuildAction)action);
+            return IsValidToBuild((BuildAction)action, isActionValidMessage);
         }
 
-        return true;
+        if( action is AddCardToHandAction)
+        {
+            return IsValidToAdd((AddCardToHandAction)action, isActionValidMessage);
+        }
+        if( action is PlayCardAction)
+        {
+            return IsValidToPlay((PlayCardAction)action, isActionValidMessage);
+
+        }
+
+
+        isActionValidMessage.wasActionValid = true;
+        return isActionValidMessage;
     }
+
+    private IsActionValidMessage IsValidToAdd(AddCardToHandAction action, IsActionValidMessage message)
+    {
+        if(currentActions == 0)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough actions";
+            return message;
+        }
+
+        message.wasActionValid = true;
+        return message;
+    }
+    private IsActionValidMessage IsValidToPlay(PlayCardAction action, IsActionValidMessage message)
+    {
+        if (currentActions == 0)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough actions";
+            return message;
+        }
+
+        message.wasActionValid = true;
+        return message; 
+    }
+
+
 
     public void DoAction(Action action)
     {
-        if (IsActionValid(action) == false)
+        if (IsActionValid(action).wasActionValid == false)
         {
             print("skickade en invalid action");
+
+            IsActionValidMessage isActionValidMessage = IsActionValid(action);
+
+            if(isActionValidMessage.errorMessage != null)
+            {
+                print(isActionValidMessage.errorMessage);
+            }
+            
             return;
         }
         if (action is EndTurnAction)
@@ -254,11 +413,23 @@ public class GameStateLogic : MonoBehaviour
 
             BuildOnFarmtile(buildAction);
 
-            print("Built!" + buildAction.resource);
+            AddResources(Resource.money, GetBuildingCost(buildAction.resource) * -1);
+
+            currentActions -= 1;
+
+            //print("Built!" + buildAction.resource);
         }
         if(action is AssignWorkersAction)
         {
             AssignWorkers((AssignWorkersAction)action);
+        }
+        if(action is AddCardToHandAction)
+        {
+            AddCardToHand((AddCardToHandAction)action);
+        }
+        if(action is PlayCardAction)
+        {
+            PlayCard((PlayCardAction)action);
         }
     }
 
@@ -282,7 +453,7 @@ public class GameStateLogic : MonoBehaviour
             farmTileRegistry[workAssigned.Item1].workersOnTile.Add(workerToAdd);
             index += 1;
 
-            print("vilken ruta " + workAssigned.Item1 + " vilket arbete " + workAssigned.Item2);
+          //  print("vilken ruta " + workAssigned.Item1 + " vilket arbete " + workAssigned.Item2);
         }
 
     }
@@ -295,14 +466,29 @@ public class GameStateLogic : MonoBehaviour
         }
     }
 
-    private bool IsValidToBuild(BuildAction buildAction)
+    private IsActionValidMessage IsValidToBuild(BuildAction buildAction, IsActionValidMessage isActionValidMessage)
     {
         if (farmTileRegistry[buildAction.farmTileIndex].buildingOnTile)
         {
-            return false;
+            isActionValidMessage.wasActionValid = false;
+            isActionValidMessage.errorMessage = "Already a building on the tile";
+            return isActionValidMessage;
         }
-   
-        return true;
+        if(GetBuildingCost(buildAction.resource) > moneyStored)
+        {
+            isActionValidMessage.wasActionValid = false;
+            isActionValidMessage.errorMessage = "You do not have enough money";
+            return isActionValidMessage;
+        }
+        if(currentActions == 0)
+        {
+            isActionValidMessage.wasActionValid = false;
+            isActionValidMessage.errorMessage = "You do not have enough actions";
+            return isActionValidMessage;
+        }
+        isActionValidMessage.wasActionValid = true;
+
+        return isActionValidMessage;
     }
 
     private void BuildOnFarmtile(BuildAction buildAction)
@@ -326,7 +512,7 @@ public class GameStateLogic : MonoBehaviour
         }
         if (resourceType == Resource.cinnamon)
         {
-            return cottonStored;
+            return cinnamonStored;
         }
         if (resourceType == Resource.pigMeat)
         {
@@ -335,7 +521,6 @@ public class GameStateLogic : MonoBehaviour
 
         if (resourceType == Resource.money)
         {
-            print("här");
             return moneyStored;
             
         }
@@ -367,6 +552,31 @@ public class GameStateLogic : MonoBehaviour
     public SortedDictionary<int,Worker> GetWorkerRegistry()
     {
         return workerRegistry;
+    }
+
+    public int GetMaxStorage()
+    {
+        return currentStorage;
+    }
+
+    public int GetMaxActions()
+    {
+        return maxActions;
+    }
+
+    public int GetCurrentActions()
+    {
+        return currentActions;
+    }
+
+    public int GetCurrentTurn()
+    {
+        return currentTurn;
+    }
+
+    public int GetMaxTurn()
+    {
+        return maxTurn;
     }
 
     public Dictionary<int, FarmTile> GetFarmTiles()

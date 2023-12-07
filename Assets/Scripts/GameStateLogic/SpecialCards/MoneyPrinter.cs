@@ -13,4 +13,12 @@ public class MoneyPrinter : SpecialCard
     {
         
     }
+
+    override public EffectLifeTime PlayCard()
+    {
+
+        
+
+        return null;
+    }
 }

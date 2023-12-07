@@ -6,47 +6,99 @@ using UnityEngine.UI;
 public class CardDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
-    public static List<Card> staticDeck = new List<Card>();
  
-    public static int deckSize;
 
     public GameObject DisplayedCard;
     public GameObject[] Clones;
     public GameObject SpecialCardsPanel;
-    private HorizontalLayoutGroup horizontalLayoutGroup; 
+
+    public GameObject cardInHandPanel;
+
 
     public List<Card> shuffleContainer = new List<Card>();
-    private float waitTime = 0.2f;
 
     //Reference for the instatiated prefabs
-    private GameObject cardClone;
+
 
     //List to keep track of the instantiated prefabs
-    private List<GameObject> destroyCard = new List<GameObject>();
 
     public UIManager uiManager; 
 
 
-    public void CreateDisplayCards()
+    private void CreateDisplayCards()
     {
         List<SpecialCard> specialCardsOnTable = uiManager.gameStateLogic.getSpecialCardsOnTable();
 
         DisplayCard[] cardsToShow = SpecialCardsPanel.GetComponentsInChildren<DisplayCard>(true);
 
 
+        int amountOfNull = 0;
+
         for(int i = 0; i < specialCardsOnTable.Count; i++)
-        {
-            cardsToShow[i].gameObject.SetActive(true);
-            cardsToShow[i].SetCardValue(specialCardsOnTable[i]);
+        {   
+            if (specialCardsOnTable[i] == null) 
+            {
+                cardsToShow[i].gameObject.SetActive(false);
+                amountOfNull += 1;
+            }
+            else
+            {
+                cardsToShow[i].gameObject.SetActive(true);
+                cardsToShow[i].SetCardValue(specialCardsOnTable[i]);
+                cardsToShow[i].cardIndex = i;
+                cardsToShow[i].typeOfCard = TypeOfCard.special;
+                cardsToShow[i].inHand = false;
+
+            }
+
         }
 
+       // print("hur många kort i handen är null " + amountOfNull);
     }
 
-    public void ResetCards()
+    private void ShowCardsInHand()
+    {
+        List<Card> cardsInHand = uiManager.gameStateLogic.GetCardsInHand();
+
+        DisplayCard[] cardsToShowHand = cardInHandPanel.GetComponentsInChildren<DisplayCard>(true);
+
+        //print(cardsToShowHand.Length + "mängden grejer i handen");
+
+        for (int i = 0; i < cardsInHand.Count; i++)
+        {
+            
+            cardsToShowHand[i].gameObject.SetActive(true);
+            cardsToShowHand[i].SetCardValue(cardsInHand[i]);
+            cardsToShowHand[i].cardIndex = i;
+            cardsToShowHand[i].inHand = true;
+            if (cardsInHand[i] is SpecialCard)
+            {
+                cardsToShowHand[i].typeOfCard = TypeOfCard.special;
+            }
+            
+        }
+    }
+
+    public void Refresh()
+    {
+        ResetCards();
+        CreateDisplayCards();
+        ShowCardsInHand();
+    }
+
+    private void ResetCards()
     {
         DisplayCard[] cardsToReset = SpecialCardsPanel.GetComponentsInChildren<DisplayCard>();
 
-        foreach(DisplayCard card in cardsToReset)
+        DisplayCard[] cardsInHandToReset = cardInHandPanel.GetComponentsInChildren<DisplayCard>();
+
+        foreach(DisplayCard card in cardsInHandToReset)
+        {
+            card.ResetCard();
+            card.gameObject.SetActive(false);
+        }
+
+        foreach (DisplayCard card in cardsToReset)
         {
             card.ResetCard();
             card.gameObject.SetActive(false);
@@ -58,7 +110,6 @@ public class CardDeck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        horizontalLayoutGroup = SpecialCardsPanel.gameObject.GetComponent<HorizontalLayoutGroup>();
     //    deckSize = CardDatabase.cardList.Count;
     //
     //    GenerateSpecialDeck();

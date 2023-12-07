@@ -10,4 +10,9 @@ public class SpecialCard : Card
         cardName = CardName;
         cardDescription = CardDescription;
     }
+
+    override public EffectLifeTime PlayCard()
+    {
+        return null;
+    }
 }

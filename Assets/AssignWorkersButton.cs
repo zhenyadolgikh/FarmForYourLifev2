@@ -52,7 +52,7 @@ public class AssignWorkersButton : MonoBehaviour
                                         
             currentWorkAssigned.Clear();
 
-            print("den skickar actionen");
+           // print("den skickar actionen");
         }
     }
     

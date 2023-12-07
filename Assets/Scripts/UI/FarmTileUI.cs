@@ -54,19 +54,23 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
                 }
             }
-
             foreach (Button button in options)
             {
                 BuildAction buildAction = new BuildAction();
                 buildAction.farmTileIndex = farmTileIndex;
                 buildAction.resource = GetAssociatedResource(button.name);
-                button.interactable = manager.IsActionValid(buildAction);
-
-                if (button.interactable)
+                if(manager.IsActionValid(buildAction).wasActionValid)
                 {
-                    BuildOnClick buildOnClick = button.GetComponent<BuildOnClick>();
-                    buildOnClick.farmTileIndex = farmTileIndex;
+                    button.GetComponent<Image>().color = button.colors.normalColor;
                 }
+                else
+                {
+                    button.GetComponent<Image>().color = button.colors.disabledColor;
+                }
+
+                BuildOnClick buildOnClick = button.GetComponent<BuildOnClick>();
+                buildOnClick.farmTileIndex = farmTileIndex;
+                
             }
         }
         if (manager.hudState == HudState.assignWorkers)

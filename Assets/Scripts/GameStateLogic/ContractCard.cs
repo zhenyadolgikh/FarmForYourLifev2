@@ -5,5 +5,9 @@ using UnityEngine;
 
 public class ContractCard : Card
 {
- 
+    
+    override public EffectLifeTime PlayCard()
+    {
+        return null;
+    }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -20,6 +21,12 @@ public class UIManager : MonoBehaviour
     public string testString;
 
     public GameObject builtPigMesh;
+    public GameObject builtWeatMesh;
+    public GameObject builtAppleMesh;
+    public GameObject builtCinnamonMesh;
+
+
+
     public GameObject workerMesh;
 
     public HudState hudState;
@@ -27,6 +34,20 @@ public class UIManager : MonoBehaviour
     private Stack<AddedUIElement> addedUIElements = new Stack<AddedUIElement>();
 
     private SortedDictionary<int, GameObject> workerToBePlacedRegistry = new SortedDictionary<int, GameObject>();
+
+
+    public TextMeshProUGUI wheatText;
+    public TextMeshProUGUI appleText;
+    public TextMeshProUGUI cinnamonText;
+    public TextMeshProUGUI pigText;
+    public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI actionText;
+    public TextMeshProUGUI turnText;
+    public TextMeshProUGUI amountOfWorkersText;
+
+
+
+    public ErrorMessage errorMessage;
 
     public void AddUIElement(AddedUIElement uiElement)
     {
@@ -58,6 +79,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    public void SendErrorMessage(string message)
+    {
+        errorMessage.SetErrorMessage(message);
+    }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)) 
@@ -86,7 +112,7 @@ public class UIManager : MonoBehaviour
         gameStateLogic.DoAction(action);
         Refresh();
     }
-    public bool IsActionValid(Action action)
+    public IsActionValidMessage IsActionValid(Action action)
     {
         return gameStateLogic.IsActionValid(action);    
     }
@@ -98,14 +124,37 @@ public class UIManager : MonoBehaviour
         DoAction(endTurnAction);
     }
 
-    public void Refresh()
+    private void Refresh()
     {
         
-        cardDeck.ResetCards();
-        cardDeck.CreateDisplayCards();
+        cardDeck.Refresh();
         PlaceMeshes();
         PlaceWorkers();
+        UpdateResourceText();
 
+    }
+
+    private void UpdateResourceText()
+    {
+        moneyText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.money).ToString());
+        wheatText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.wheat) + "/" + gameStateLogic.GetMaxStorage());
+        appleText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.apple) + "/" + gameStateLogic.GetMaxStorage());
+        cinnamonText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.cinnamon) + "/" + gameStateLogic.GetMaxStorage());
+        pigText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.pigMeat) + "/" + (gameStateLogic.GetMaxStorage()/10));
+
+
+        //print("vilken turn är det " + gameStateLogic.GetCurrentTurn());
+
+        string turnTextString = gameStateLogic.GetCurrentTurn() + "/" + gameStateLogic.GetMaxTurn();
+
+        turnText.SetText(turnTextString);
+
+        print(turnTextString);
+
+        actionText.SetText(gameStateLogic.GetCurrentActions() + "/" + gameStateLogic.GetMaxActions());
+
+
+        amountOfWorkersText.SetText("Workers " + gameStateLogic.GetWorkerRegistry().Count);
     }
 
     void Start()
@@ -143,6 +192,7 @@ public class UIManager : MonoBehaviour
         }
 
 
+        Refresh();
         
 
     }
@@ -153,16 +203,13 @@ public class UIManager : MonoBehaviour
         foreach(KeyValuePair<int, FarmTile> farmTileValue in gameStateLogic.GetFarmTiles())
         {
             if(farmTileValue.Value.buildingOnTile && placedMeshes[farmTileValue.Key].meshToPlace == null)
-            { 
+            {
+                GameObject meshToPlace = GetMeshToPlace(farmTileValue.Value.resourceOnTile);
 
-                if(farmTileValue.Value.resourceOnTile == Resource.pigMeat)
-                {
-                    print("kommer den till grisarna");
+                placedMeshes[farmTileValue.Key].meshToPlace = Instantiate<GameObject>(meshToPlace);
 
-                    placedMeshes[farmTileValue.Key].meshToPlace = Instantiate<GameObject>(builtPigMesh);
-
-                    placedMeshes[farmTileValue.Key].meshToPlace.transform.position = farmTilePositions[farmTileValue.Key].transform.position;
-                }
+                placedMeshes[farmTileValue.Key].meshToPlace.transform.position = farmTilePositions[farmTileValue.Key].transform.position;
+                
 
         //      farmTileValue.Value.resourceOnTile lägg ut mesh
         //          farmtileposition för mesh
@@ -172,6 +219,28 @@ public class UIManager : MonoBehaviour
 
             }
         }
+    }
+
+    private GameObject GetMeshToPlace(Resource resource)
+    {
+        if(resource == Resource.wheat)
+        {
+            return builtWeatMesh;
+        }
+        if(resource == Resource.apple)
+        {
+            return builtAppleMesh;
+        }
+        if(resource == Resource.cinnamon)
+        {
+            return builtCinnamonMesh;
+        }
+        if(resource == Resource.pigMeat)
+        {
+            return builtPigMesh;
+        }
+
+        return builtWeatMesh;
     }
 
     void PlaceWorkers()

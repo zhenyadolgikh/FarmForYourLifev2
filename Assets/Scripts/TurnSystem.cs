@@ -41,8 +41,5 @@ public class TurnSystem : MonoBehaviour
     public void ReShuffle()
     {
 
-        uiManager.TestString();
-        //reShuffle = true;
-        uiManager.Refresh();
     }
 }

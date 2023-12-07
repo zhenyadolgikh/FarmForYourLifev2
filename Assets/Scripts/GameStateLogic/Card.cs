@@ -6,7 +6,7 @@ using Unity.VisualScripting.ReorderableList;
 
 
 [CreateAssetMenu]
-public class Card : ScriptableObject
+public abstract class Card : ScriptableObject
 {
     public string cardName;
     public string cardDescription;
@@ -22,6 +22,7 @@ public class Card : ScriptableObject
         cardDescription = CardDescription;
     }
 
+    public abstract EffectLifeTime PlayCard();
 
     public string getCardName() { return cardName; }
     public string getCardDescription() {  return cardDescription; }

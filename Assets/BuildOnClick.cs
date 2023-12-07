@@ -23,6 +23,8 @@ public class BuildOnClick : MonoBehaviour
         {
             UIManager.instance.DoAction(buildAction);
         }
+
+        UIManager.instance.PopUIElement();
     }
 
 

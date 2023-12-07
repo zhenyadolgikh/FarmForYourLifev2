@@ -19,7 +19,6 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
     public int farmTileIndex = -1;
 
-    private Camera cam;
 
 
 
@@ -34,26 +33,29 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     {
         if(manager.hudState != HudState.assignWorkers)
         {
-            if (optionPanel != null)
-            {
 
                 //   print(Input.mousePosition);
 
-                Vector2 mousePosition = Input.mousePosition;
-                optionPanel.transform.position = new Vector3(mousePosition.x, mousePosition.y + 130);
-                bool isActive = optionPanel.activeSelf;
-                optionPanel.SetActive(!isActive);
+            Vector2 mousePosition = Input.mousePosition;
+            optionPanel.transform.position = new Vector3(mousePosition.x, mousePosition.y + 130);
+            bool isActive = optionPanel.activeSelf;
+            //optionPanel.SetActive(!isActive);
 
-                List<GameObject> uiElementsToAdd = new List<GameObject>();
+            List<GameObject> uiElementsToAdd = new List<GameObject>();
 
-                uiElementsToAdd.Add(optionPanel);
+            uiElementsToAdd.Add(optionPanel);
 
-                if (optionPanel.activeSelf)
-                {
-                    manager.AddUIElement(new AddedUIElement(uiElementsToAdd, HudState.standard));
+            if (!isActive)
+            {
+                manager.AddUIElement(new AddedUIElement(uiElementsToAdd, HudState.standard));
+                optionPanel.SetActive(true);
 
-                }
             }
+            else
+            {
+                manager.PopUIElement();
+            }
+            
             foreach (Button button in options)
             {
                 BuildAction buildAction = new BuildAction();

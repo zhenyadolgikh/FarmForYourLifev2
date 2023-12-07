@@ -24,6 +24,23 @@ public class DisplayCard : MonoBehaviour
 
     private UIManager uiManager;
 
+    public Sprite specialCardSprite;
+    public Sprite contractCardSprite;
+
+    public Image borderImage;
+
+
+    [SerializeField] private ResourceIndicator wheatIndicator;
+    [SerializeField] private ResourceIndicator appleIndicator;
+    [SerializeField] private ResourceIndicator cinnamonIndicator;
+    [SerializeField] private ResourceIndicator pigMeatIndicator;
+    [SerializeField] private ResourceIndicator moneyIndicator;
+
+
+    public GameObject contractCardVariant;
+    public GameObject specialCardVariant;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +50,27 @@ public class DisplayCard : MonoBehaviour
      //  faceUpCard[0] = CardDatabase.cardList[displayId];
         
 
+    }
+
+
+    public void SetCardType(TypeOfCard cardType)
+    {
+        if(cardType == TypeOfCard.special)
+        {
+            typeOfCard=cardType;
+
+            contractCardVariant.SetActive(false);
+            specialCardVariant.SetActive(true);
+            borderImage.sprite = specialCardSprite;
+        }
+        else
+        {
+            typeOfCard = cardType;
+
+            contractCardVariant.SetActive(true);
+            specialCardVariant.SetActive(false);
+            borderImage.sprite = contractCardSprite;
+        }
     }
 
     public void OnCardClick()
@@ -77,13 +115,30 @@ public class DisplayCard : MonoBehaviour
         cardDescription = "";
     }
 
-    public void SetCardValue(Card card)
+    public void SetSpecialCardValue(Card card)
     {
 
-      // print("namn texten  " + nameText);
-      // print("kortet " + card);
+        // print("namn texten  " + nameText);
+        // print("kortet " + card);
+
+        borderImage.sprite = specialCardSprite;
         nameText.SetText(card.getCardName());
         descriptionText.SetText(card.getCardDescription());
+    }
+    public void SetContractCardValue(Card card)
+    {
+
+        // print("namn texten  " + nameText);
+        // print("kortet " + card);
+
+        borderImage.sprite = contractCardSprite;
+        nameText.SetText(card.getCardName());
+        descriptionText.SetText(card.getCardDescription());
+    }
+
+    public void SetContractCardValue()
+    {
+
     }
 
     // Update is called once per frame

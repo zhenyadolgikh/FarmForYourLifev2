@@ -25,7 +25,7 @@ public class CardDeck : MonoBehaviour
     public UIManager uiManager; 
 
 
-    private void CreateDisplayCards()
+    private void CreateSpecialCardsDisplay()
     {
         List<SpecialCard> specialCardsOnTable = uiManager.gameStateLogic.getSpecialCardsOnTable();
 
@@ -44,9 +44,9 @@ public class CardDeck : MonoBehaviour
             else
             {
                 cardsToShow[i].gameObject.SetActive(true);
-                cardsToShow[i].SetCardValue(specialCardsOnTable[i]);
+                cardsToShow[i].SetSpecialCardValue(specialCardsOnTable[i]);
                 cardsToShow[i].cardIndex = i;
-                cardsToShow[i].typeOfCard = TypeOfCard.special;
+                cardsToShow[i].SetCardType(TypeOfCard.special);
                 cardsToShow[i].inHand = false;
 
             }
@@ -68,7 +68,7 @@ public class CardDeck : MonoBehaviour
         {
             
             cardsToShowHand[i].gameObject.SetActive(true);
-            cardsToShowHand[i].SetCardValue(cardsInHand[i]);
+            cardsToShowHand[i].SetSpecialCardValue(cardsInHand[i]);
             cardsToShowHand[i].cardIndex = i;
             cardsToShowHand[i].inHand = true;
             if (cardsInHand[i] is SpecialCard)
@@ -82,7 +82,7 @@ public class CardDeck : MonoBehaviour
     public void Refresh()
     {
         ResetCards();
-        CreateDisplayCards();
+        CreateSpecialCardsDisplay();
         ShowCardsInHand();
     }
 

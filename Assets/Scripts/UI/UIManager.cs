@@ -293,7 +293,7 @@ public class UIManager : MonoBehaviour
         {
             if (ContainsForTArrayWorker(workersOnTiles, pair.Value) == false)
             {
-                workerToBePlacedRegistry[pair.Key].transform.position = new UnityEngine.Vector3(0,0+padding,0);
+                workerToBePlacedRegistry[pair.Key].transform.position = new UnityEngine.Vector3(0,300+padding,0);
                 padding += 30;
             }
         }

@@ -45,6 +45,8 @@ public class GameStateLogic : MonoBehaviour
     private int maxSpecialCardsOnTable = 3;
     private int maximumHandSize = 10;
 
+    public List<ContractCard> contractCardsForLevel = new List<ContractCard>();
+    private Dictionary<string, ContractCard> contractCardRegistry = new Dictionary<string, ContractCard>();
     private List<ContractCard> contractCardDeck = new List<ContractCard>();
     private List<ContractCard> contractCardsOnTable = new List<ContractCard>();
 

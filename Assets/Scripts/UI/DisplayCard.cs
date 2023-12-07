@@ -83,7 +83,7 @@ public class DisplayCard : MonoBehaviour
       // print("namn texten  " + nameText);
       // print("kortet " + card);
         nameText.SetText(card.getCardName());
-        descriptionText.SetText(card.getCardName());
+        descriptionText.SetText(card.getCardDescription());
     }
 
     // Update is called once per frame

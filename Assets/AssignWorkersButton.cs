@@ -19,6 +19,8 @@ public class AssignWorkersButton : MonoBehaviour
 
     public void AssignWorkersOnClick()
     {
+        currentWorkAssigned.Clear();
+
         textShowingWorkerCount.gameObject.SetActive(true);
 
         List<GameObject> uiElementsAdded = new List<GameObject>();
@@ -46,10 +48,10 @@ public class AssignWorkersButton : MonoBehaviour
             assignWorkersAction.workAssigned = currentWorkAssigned;
 
             uiManager.DoAction(assignWorkersAction);
-            //uiManager.PopUIElement();
-            textShowingWorkerCount.gameObject.SetActive(false);
-            uiManager.hudState = HudState.standard;
-                                        
+            uiManager.PopUIElement();
+           // textShowingWorkerCount.gameObject.SetActive(false);
+           // uiManager.hudState = HudState.standard;
+                                       
             currentWorkAssigned.Clear();
 
            // print("den skickar actionen");

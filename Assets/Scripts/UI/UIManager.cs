@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
 
             foreach (GameObject gameObject in addedUIElements.Peek().uiElementToInactivate)
             {
-                print(gameObject.name);
+                print("element poppades " + gameObject.name);
                 gameObject.SetActive(false);
             }
             //addedUIElements.Peek().uiElementToInactivate.SetActive(false);

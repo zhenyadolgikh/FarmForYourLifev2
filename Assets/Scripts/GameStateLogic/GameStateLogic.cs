@@ -67,6 +67,8 @@ public class GameStateLogic : MonoBehaviour
         }
 
         AddWorker();
+        AddWorker();
+        AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
         AddResources(Resource.money,1500);
         FillCardsOnTable();
@@ -226,13 +228,23 @@ public class GameStateLogic : MonoBehaviour
     }
     // void AddMoney(int32 amount);
     public bool IsActionValid(Action action)
-    {
+    {   
+        if(action is BuildAction)
+        {
+            return IsValidToBuild((BuildAction)action);
+        }
+
         return true;
     }
 
     public void DoAction(Action action)
     {
-        if(action is EndTurnAction)
+        if (IsActionValid(action) == false)
+        {
+            print("skickade en invalid action");
+            return;
+        }
+        if (action is EndTurnAction)
         {
             StartTurnUpkeep();
         }
@@ -240,21 +252,66 @@ public class GameStateLogic : MonoBehaviour
         {
             BuildAction buildAction = (BuildAction)action;
 
+            BuildOnFarmtile(buildAction);
+
             print("Built!" + buildAction.resource);
+        }
+        if(action is AssignWorkersAction)
+        {
+            AssignWorkers((AssignWorkersAction)action);
         }
     }
 
-   // private bool IsValidToBuild(BuildAction buildAction)
-   // {
-   //     if()
-   //
-   //     return true;
-   // }
+    private void AssignWorkers(AssignWorkersAction assignAction)
+    {
+        ClearWorkersFromFarms();
+
+        List<int> workerIds = new List<int>();
+        foreach(KeyValuePair<int,Worker> workerPair in workerRegistry)
+        {
+            workerIds.Add(workerPair.Key);
+        }
+
+
+        int index = 0;
+        foreach(Tuple<int,WorkType> workAssigned in assignAction.workAssigned )
+        {
+            Worker workerToAdd = workerRegistry[workerIds[index]];
+            workerToAdd.workType = workAssigned.Item2;
+
+            farmTileRegistry[workAssigned.Item1].workersOnTile.Add(workerToAdd);
+            index += 1;
+
+            print("vilken ruta " + workAssigned.Item1 + " vilket arbete " + workAssigned.Item2);
+        }
+
+    }
+
+    private void ClearWorkersFromFarms()
+    {
+        foreach(KeyValuePair<int, FarmTile> farmTileValue  in farmTileRegistry)
+        {
+            farmTileValue.Value.workersOnTile.Clear();
+        }
+    }
+
+    private bool IsValidToBuild(BuildAction buildAction)
+    {
+        if (farmTileRegistry[buildAction.farmTileIndex].buildingOnTile)
+        {
+            return false;
+        }
+   
+        return true;
+    }
 
     private void BuildOnFarmtile(BuildAction buildAction)
     {
 
+        print(buildAction.farmTileIndex);
 
+        farmTileRegistry[buildAction.farmTileIndex].buildingOnTile = true;
+        farmTileRegistry[buildAction.farmTileIndex].resourceOnTile = buildAction.resource;
     }
     public int GetStoredResourceAmount(Resource resourceType)
     {
@@ -305,6 +362,11 @@ public class GameStateLogic : MonoBehaviour
         }
 
         return -1; 
+    }
+
+    public SortedDictionary<int,Worker> GetWorkerRegistry()
+    {
+        return workerRegistry;
     }
 
     public Dictionary<int, FarmTile> GetFarmTiles()

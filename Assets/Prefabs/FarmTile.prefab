@@ -34,6 +34,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7673734320837523602}
+  - {fileID: 6096053520310847901}
+  - {fileID: 6941517996708697166}
+  - {fileID: 5673684080170607173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.28, y: 2.315, z: -0.002}
 --- !u!33 &113652745871390912
@@ -126,6 +129,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  assignWorkersPanel: {fileID: 0}
+  workOptions: []
   manager: {fileID: 8822800005208843794, guid: 3930054b057620e46b014af5c3f9b773, type: 3}
   farmTileIndex: -1
 --- !u!1 &3460063795751052933
@@ -172,3 +177,142 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cb5a0f89271fa458df1ce6b3046e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  farmTileIndex: -1
+--- !u!1 &4220798559784430199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6941517996708697166}
+  - component: {fileID: 3789548575819065506}
+  m_Layer: 0
+  m_Name: WorkerPosition1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6941517996708697166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220798559784430199}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0024426186, y: -0.020200828, z: 0.00006677111, w: 0.999793}
+  m_LocalPosition: {x: 0.18, y: -0.003, z: -4.5}
+  m_LocalScale: {x: 6.6871066, y: 1.0000204, z: 6.8010154}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4009419465036801066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3789548575819065506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220798559784430199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d6b42831128664fba083e1af434726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  farmTileIndex: -1
+  positionOrder: 1
+--- !u!1 &4471285475686267006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5673684080170607173}
+  - component: {fileID: 5959079105887267645}
+  m_Layer: 0
+  m_Name: WorkerPosition2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5673684080170607173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4471285475686267006}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0024426186, y: -0.020200828, z: 0.00006677111, w: 0.999793}
+  m_LocalPosition: {x: 2.18, y: 0, z: 0.09}
+  m_LocalScale: {x: 6.6871066, y: 1.0000204, z: 6.8010154}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4009419465036801066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5959079105887267645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4471285475686267006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d6b42831128664fba083e1af434726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  farmTileIndex: -1
+  positionOrder: 2
+--- !u!1 &6148013232220890084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6096053520310847901}
+  - component: {fileID: 3719468411740814657}
+  m_Layer: 0
+  m_Name: WorkerPosition0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6096053520310847901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148013232220890084}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0024426186, y: -0.020200828, z: 0.00006677111, w: 0.999793}
+  m_LocalPosition: {x: -0.00000026944838, y: -0.0000000023415343, z: -0.0000032572073}
+  m_LocalScale: {x: 6.6871066, y: 1.0000204, z: 6.8010154}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4009419465036801066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3719468411740814657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148013232220890084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d6b42831128664fba083e1af434726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  farmTileIndex: -1
+  positionOrder: 0

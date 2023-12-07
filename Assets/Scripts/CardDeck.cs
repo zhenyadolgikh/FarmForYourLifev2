@@ -33,7 +33,6 @@ public class CardDeck : MonoBehaviour
 
         DisplayCard[] cardsToShow = SpecialCardsPanel.GetComponentsInChildren<DisplayCard>(true);
 
-        print(cardsToShow.Length);
 
         for(int i = 0; i < specialCardsOnTable.Count; i++)
         {

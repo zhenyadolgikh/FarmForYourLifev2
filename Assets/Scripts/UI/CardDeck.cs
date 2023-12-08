@@ -11,6 +11,7 @@ public class CardDeck : MonoBehaviour
     public GameObject DisplayedCard;
     public GameObject[] Clones;
     public GameObject SpecialCardsPanel;
+    public GameObject contractCardsPanel;
 
     public GameObject cardInHandPanel;
 
@@ -25,7 +26,7 @@ public class CardDeck : MonoBehaviour
     public UIManager uiManager; 
 
 
-    private void CreateSpecialCardsDisplay()
+    private void CreateCardDisplays(TypeOfCard TypeOfCard)
     {
         List<SpecialCard> specialCardsOnTable = uiManager.gameStateLogic.getSpecialCardsOnTable();
 
@@ -73,16 +74,19 @@ public class CardDeck : MonoBehaviour
             cardsToShowHand[i].inHand = true;
             if (cardsInHand[i] is SpecialCard)
             {
-                cardsToShowHand[i].typeOfCard = TypeOfCard.special;
+                cardsToShowHand[i].SetCardType(TypeOfCard.special);
             }
-            
+            else
+            {
+                
+            }
         }
     }
 
     public void Refresh()
     {
         ResetCards();
-        CreateSpecialCardsDisplay();
+        CreateCardDisplays();
         ShowCardsInHand();
     }
 

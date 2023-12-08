@@ -6,6 +6,7 @@ public class PlayCardAction : Action
 {
 
     public int index = -1;
-
+    public TypeOfCard typeOfCard;
+    public string cardIdentifier;
 
 }

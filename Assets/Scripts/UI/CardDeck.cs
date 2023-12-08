@@ -82,7 +82,6 @@ public class CardDeck : MonoBehaviour
         {
             
             cardsToShowHand[i].gameObject.SetActive(true);
-            cardsToShowHand[i].SetSpecialCardValue(cardsInHand[i]);
             cardsToShowHand[i].cardIndex = i;
             cardsToShowHand[i].inHand = true;
             if (cardsInHand[i] is SpecialCard)
@@ -91,7 +90,7 @@ public class CardDeck : MonoBehaviour
             }
             else
             {
-                
+                cardsToShowHand[i].SetCardType(TypeOfCard.contract, cardsInHand[i]);
             }
         }
     }

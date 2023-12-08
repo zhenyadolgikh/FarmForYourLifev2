@@ -149,7 +149,7 @@ public class UIManager : MonoBehaviour
 
         turnText.SetText(turnTextString);
 
-        print(turnTextString);
+       // print(turnTextString);
 
         actionText.SetText(gameStateLogic.GetCurrentActions() + "/" + gameStateLogic.GetMaxActions());
 
@@ -167,7 +167,6 @@ public class UIManager : MonoBehaviour
             placedMeshes.Add(new BuildingOnTile());
         }
         FarmMeshPosition[] foundPositions = FindObjectsByType<FarmMeshPosition>(FindObjectsSortMode.None);
-        print(foundPositions.Length);
         foreach(FarmMeshPosition position in foundPositions)
         {
             farmTilePositions[position.farmTileIndex] = position.gameObject;

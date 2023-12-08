@@ -130,14 +130,14 @@ public class GameStateLogic : MonoBehaviour
     }
 
     private System.Random rng = new System.Random();
-    void ShuffleCards(List<Card> cards)
+    void ShuffleCards<CardType>(List<CardType> cards)
     {
         int n = cards.Count;
         while (n > 1)
         {
             n--;
             int k = rng.Next(n + 1);
-            Card value = cards[k];
+            CardType value = cards[k];
             cards[k] = cards[n];
             cards[n] = value;
         }
@@ -172,8 +172,10 @@ public class GameStateLogic : MonoBehaviour
         ProductionPhase();
         WorkPhase();
         ResetNumbers();
-        MoveCards();
-        MoveContractCards();
+        //MoveCards();
+        MoveCards<SpecialCard>(specialCardsOnTable, specialCardDeck);
+        MoveCards<ContractCard>(contractCardsOnTable, contractCardDeck);
+      //  MoveContractCards();
 
         currentTurn += 1; 
     }
@@ -238,18 +240,114 @@ public class GameStateLogic : MonoBehaviour
         }
     }
 
+    private void MoveCards<CardType>(List<CardType> cardsOnTable, List<CardType> cardsInDeck)
+    {
+        List<CardType> cardsToRemove = new List<CardType>();
+        List<CardType> cardsToMoveLeft = new List<CardType>();
+
+       // List<Card> cardsOnTable = GetWhichCardOnTable(typeOfCard);
+       // List<Card> cardDeck = GetWhichDeck(typeOfCard);
+
+        int maxCardsOnTable = MaxCardsOnTable<CardType>();
+
+        for (int i = 0; i < maxCardsOnTable; i++)
+        {
+            if (cardsOnTable[i] != null && cardsToRemove.Count < 2)
+            {
+                cardsToRemove.Add(cardsOnTable[i]);
+                cardsOnTable[i] = default(CardType);
+            }
+            if (cardsOnTable[i] != null && cardsToRemove.Count >= 2)
+            {
+                cardsToMoveLeft.Add(cardsOnTable[i]);
+                cardsOnTable[i] = default(CardType);
+            }
+        }
+
+        cardsInDeck.AddRange(cardsToRemove);
+        for (int i = 0; i < cardsToMoveLeft.Count; i++)
+        {
+            cardsOnTable[i] = cardsToMoveLeft[i];
+        }
+        ShuffleCards(cardsInDeck);
+        for (int i = 0; i < maxCardsOnTable; i++)
+        {
+            if (cardsOnTable[i] == null)
+            {
+
+                if (cardsInDeck.Count > 0)
+                {
+                    cardsOnTable[i] = cardsInDeck[0];
+
+                    cardsInDeck.RemoveAt(0);
+                }
+            }
+        }
+    }
+
+    private List<Card> GetWhichCardOnTable(TypeOfCard cardType)
+    {
+        List<Card> cardsToReturn = new List<Card>();
+        if(cardType == TypeOfCard.special)
+        {
+            foreach(Card card in specialCardsOnTable) 
+            {
+                cardsToReturn.Add(card);
+            } 
+        }
+        else
+        {
+            foreach (Card card in contractCardsOnTable)
+            {
+                cardsToReturn.Add(card);
+            }
+        }
+        return cardsToReturn;
+    }
+    private List<Card> GetWhichDeck(TypeOfCard cardType)
+    {
+        List<Card> cardsToReturn = new List<Card>();
+        if(cardType == TypeOfCard.special)
+        {
+            foreach(Card card in specialCardDeck) 
+            {
+                cardsToReturn.Add(card);
+            } 
+        }
+        else
+        {
+            foreach (Card card in contractCardDeck)
+            {
+                cardsToReturn.Add(card);
+            }
+        }
+        return cardsToReturn;
+    }
+
+    private int MaxCardsOnTable<CardType>()
+    {
+        if(typeof(CardType) == typeof(SpecialCard))
+        {
+            return maxSpecialCardsOnTable;
+        }
+        else
+        {
+            return maxContractCardsOnTable;
+        }
+    }
+
     private void MoveContractCards()
     {
         List<ContractCard> cardsToRemove = new List<ContractCard>();
         List<ContractCard> cardsToMoveLeft = new List<ContractCard>();
-        for (int i = 0; i < maxSpecialCardsOnTable; i++)
+        for (int i = 0; i < maxContractCardsOnTable; i++)
         {
-            if (specialCardsOnTable[i] != null && cardsToRemove.Count < 2)
+            if (contractCardsOnTable[i] != null && cardsToRemove.Count < 2)
             {
                 cardsToRemove.Add(contractCardsOnTable[i]);
                 contractCardsOnTable[i] = null;
             }
-            if (specialCardsOnTable[i] != null && cardsToRemove.Count >= 2)
+            if (contractCardsOnTable[i] != null && cardsToRemove.Count >= 2)
             {
                 cardsToMoveLeft.Add(contractCardsOnTable[i]);
                 contractCardsOnTable[i] = null;
@@ -287,6 +385,12 @@ public class GameStateLogic : MonoBehaviour
             specialCardsOnTable[action.index] = null;
             cardsInHand.Add(specialCardRegistry[cardName]);
         }
+        else
+        {
+            string cardName = contractCardsOnTable[action.index].cardName;
+            contractCardsOnTable[action.index] = null;
+            cardsInHand.Add(contractCardRegistry[cardName]);
+        }
     }
 
     private void PlayCard( PlayCardAction playCardAction)
@@ -305,8 +409,31 @@ public class GameStateLogic : MonoBehaviour
         else
         {
             contractCardDeck.Add((ContractCard)cardPLayed);
-        }
 
+            ContractCard contractCard = (ContractCard)cardPLayed;
+            if (contractCard.wheatNeeded != -1)
+            {
+                wheatStored -= contractCard.wheatNeeded; 
+            }
+            if (contractCard.applesNeeded != -1 )
+            {
+                appleStored -= contractCard.applesNeeded;
+
+            }
+            if (contractCard.cinnamonsNeeded != -1)
+            {
+                cinnamonStored -= contractCard.cinnamonsNeeded;
+
+            }
+            if (contractCard.pigMeatNeeded != -1)
+            {
+                pigMeatStored -= contractCard.pigMeatNeeded;
+            }
+
+            moneyStored += contractCard.moneyEarned;
+
+        }
+        //
         if(cardPLayed is MoneyPrinter)
         {
             AddResources(Resource.money, 300);
@@ -481,6 +608,37 @@ public class GameStateLogic : MonoBehaviour
             message.wasActionValid = false;
             message.errorMessage = "You do not have enough actions";
             return message;
+        }
+        if(action.typeOfCard == TypeOfCard.contract)
+        {   
+            ContractCard contractCard = contractCardRegistry[action.cardIdentifier];
+
+            if(contractCard.wheatNeeded > wheatStored)
+            {
+                message.wasActionValid = false;
+                message.errorMessage = "Not enough resources for contract";
+                return message;
+            }
+            if(contractCard.applesNeeded > appleStored)
+            {
+                message.wasActionValid = false;
+                message.errorMessage = "Not enough resources for contract";
+                return message;
+
+            }
+            if (contractCard.cinnamonsNeeded > cinnamonStored)
+            {
+                message.wasActionValid = false;
+                message.errorMessage = "Not enough resources for contract";
+                return message;
+
+            }
+            if (contractCard.pigMeatNeeded > pigMeatStored)
+            {
+                message.wasActionValid = false;
+                message.errorMessage = "Not enough resources for contract";
+                return message;
+            }
         }
 
         message.wasActionValid = true;

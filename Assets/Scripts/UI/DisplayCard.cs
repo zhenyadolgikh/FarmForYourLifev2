@@ -17,7 +17,8 @@ public class DisplayCard : MonoBehaviour
 
 
     public int cardIndex = -1;
-    public TypeOfCard typeOfCard; 
+    public TypeOfCard typeOfCard;
+    public string cardIdentifier;
 
     public bool inHand = false;
 
@@ -75,6 +76,8 @@ public class DisplayCard : MonoBehaviour
 
             SetContractCardValue(card);
         }
+
+        cardIdentifier = card.getCardName();
     }
 
     public void OnCardClick()
@@ -99,6 +102,8 @@ public class DisplayCard : MonoBehaviour
         {
             PlayCardAction playCardAction = new PlayCardAction();
             playCardAction.index = cardIndex;
+            playCardAction.typeOfCard = typeOfCard;
+            playCardAction.cardIdentifier = cardIdentifier;
 
             if(uiManager.IsActionValid(playCardAction).wasActionValid)
             {
@@ -142,7 +147,14 @@ public class DisplayCard : MonoBehaviour
 
         borderImage.sprite = contractCardSprite;
 
-        if(contractCard.wheatNeeded != -1)
+        wheatIndicator.gameObject.SetActive(false);
+        appleIndicator.gameObject.SetActive(false);
+        cinnamonIndicator.gameObject.SetActive(false);
+        pigMeatIndicator.gameObject.SetActive(false);
+        
+
+
+        if (contractCard.wheatNeeded != -1)
         {
             wheatIndicator.gameObject.SetActive(true);
             wheatIndicator.SetResourceIndicator(contractCard.wheatNeeded);

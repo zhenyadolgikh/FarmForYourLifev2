@@ -26,35 +26,48 @@ public class CardDeck : MonoBehaviour
     public UIManager uiManager; 
 
 
-    private void CreateCardDisplays(TypeOfCard TypeOfCard)
+    private void CreateCardDisplays(TypeOfCard cardType)
     {
-        List<SpecialCard> specialCardsOnTable = uiManager.gameStateLogic.getSpecialCardsOnTable();
+        List<Card> cardsOnTable = uiManager.gameStateLogic.getCardsOnTable(cardType);
 
-        DisplayCard[] cardsToShow = SpecialCardsPanel.GetComponentsInChildren<DisplayCard>(true);
+        GameObject panelToUse = GetPanelToUse(cardType);
+
+        DisplayCard[] cardsToShow = panelToUse.GetComponentsInChildren<DisplayCard>(true);
 
 
-        int amountOfNull = 0;
+        //int amountOfNull = 0;
 
-        for(int i = 0; i < specialCardsOnTable.Count; i++)
+        if(cardType == TypeOfCard.contract)
+        {
+            print(cardsOnTable.Count);
+        }
+
+        for(int i = 0; i < cardsOnTable.Count; i++)
         {   
-            if (specialCardsOnTable[i] == null) 
+            if (cardsOnTable[i] == null) 
             {
                 cardsToShow[i].gameObject.SetActive(false);
-                amountOfNull += 1;
             }
             else
             {
                 cardsToShow[i].gameObject.SetActive(true);
-                cardsToShow[i].SetSpecialCardValue(specialCardsOnTable[i]);
                 cardsToShow[i].cardIndex = i;
-                cardsToShow[i].SetCardType(TypeOfCard.special);
+                cardsToShow[i].SetCardType(cardType, cardsOnTable[i]);
                 cardsToShow[i].inHand = false;
-
             }
-
         }
+    }
 
-       // print("hur många kort i handen är null " + amountOfNull);
+    private GameObject GetPanelToUse(TypeOfCard cardType)
+    {
+        if(cardType == TypeOfCard.special)
+        {
+            return SpecialCardsPanel;
+        }
+        else
+        {
+            return contractCardsPanel;
+        }
     }
 
     private void ShowCardsInHand()
@@ -74,7 +87,7 @@ public class CardDeck : MonoBehaviour
             cardsToShowHand[i].inHand = true;
             if (cardsInHand[i] is SpecialCard)
             {
-                cardsToShowHand[i].SetCardType(TypeOfCard.special);
+                cardsToShowHand[i].SetCardType(TypeOfCard.special, cardsInHand[i]);
             }
             else
             {
@@ -86,13 +99,16 @@ public class CardDeck : MonoBehaviour
     public void Refresh()
     {
         ResetCards();
-        CreateCardDisplays();
+        CreateCardDisplays(TypeOfCard.special);
+        CreateCardDisplays(TypeOfCard.contract);
         ShowCardsInHand();
     }
 
     private void ResetCards()
     {
         DisplayCard[] cardsToReset = SpecialCardsPanel.GetComponentsInChildren<DisplayCard>();
+
+        DisplayCard[] contractCardsToReset = contractCardsPanel.GetComponentsInChildren<DisplayCard>();
 
         DisplayCard[] cardsInHandToReset = cardInHandPanel.GetComponentsInChildren<DisplayCard>();
 
@@ -103,6 +119,11 @@ public class CardDeck : MonoBehaviour
         }
 
         foreach (DisplayCard card in cardsToReset)
+        {
+            card.ResetCard();
+            card.gameObject.SetActive(false);
+        }
+        foreach (DisplayCard card in contractCardsToReset)
         {
             card.ResetCard();
             card.gameObject.SetActive(false);

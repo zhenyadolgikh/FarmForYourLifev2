@@ -14,7 +14,7 @@ public class ResourceIndicator : MonoBehaviour
     public void SetResourceIndicator(int ResourceAmount)
     {
         //resourceImage.sprite = sprite;
-        resourceAmount.SetText(resourceAmount.ToString());
+        resourceAmount.SetText(ResourceAmount.ToString());
     }
 
 

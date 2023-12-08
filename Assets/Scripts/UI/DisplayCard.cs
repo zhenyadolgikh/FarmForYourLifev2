@@ -53,7 +53,7 @@ public class DisplayCard : MonoBehaviour
     }
 
 
-    public void SetCardType(TypeOfCard cardType)
+    public void SetCardType(TypeOfCard cardType, Card card)
     {
         if(cardType == TypeOfCard.special)
         {
@@ -62,14 +62,18 @@ public class DisplayCard : MonoBehaviour
             contractCardVariant.SetActive(false);
             specialCardVariant.SetActive(true);
             borderImage.sprite = specialCardSprite;
+
+            SetSpecialCardValue(card);
         }
         else
         {
             typeOfCard = cardType;
-
+            //
             contractCardVariant.SetActive(true);
             specialCardVariant.SetActive(false);
             borderImage.sprite = contractCardSprite;
+
+            SetContractCardValue(card);
         }
     }
 
@@ -113,6 +117,11 @@ public class DisplayCard : MonoBehaviour
     {
         cardName = "";
         cardDescription = "";
+        wheatIndicator.gameObject.SetActive(false);
+        appleIndicator.gameObject.SetActive(false);
+        cinnamonIndicator.gameObject.SetActive(false);
+        pigMeatIndicator.gameObject.SetActive(false);
+        moneyIndicator.gameObject.SetActive(false);
     }
 
     public void SetSpecialCardValue(Card card)
@@ -127,19 +136,39 @@ public class DisplayCard : MonoBehaviour
     }
     public void SetContractCardValue(Card card)
     {
-
+        ContractCard contractCard = (ContractCard)card;
         // print("namn texten  " + nameText);
         // print("kortet " + card);
 
         borderImage.sprite = contractCardSprite;
-        nameText.SetText(card.getCardName());
-        descriptionText.SetText(card.getCardDescription());
+
+        if(contractCard.wheatNeeded != -1)
+        {
+            wheatIndicator.gameObject.SetActive(true);
+            wheatIndicator.SetResourceIndicator(contractCard.wheatNeeded);
+        }
+        if(contractCard.applesNeeded != -1)
+        {
+            appleIndicator.gameObject.SetActive(true);
+            appleIndicator.SetResourceIndicator(contractCard.applesNeeded);
+        }
+        if(contractCard.cinnamonsNeeded != -1)
+        {
+            cinnamonIndicator.gameObject.SetActive(true);
+            cinnamonIndicator.SetResourceIndicator(contractCard.cinnamonsNeeded);
+        }
+        if(contractCard.pigMeatNeeded != -1)
+        {
+            pigMeatIndicator.gameObject.SetActive(true);
+            pigMeatIndicator.SetResourceIndicator(contractCard.pigMeatNeeded);
+        }
+
+        moneyIndicator.gameObject.SetActive(true);
+        moneyIndicator.SetResourceIndicator(contractCard.moneyEarned);
+        //nameText.SetText(card.getCardName());
+        //descriptionText.SetText(card.getCardDescription());
     }
 
-    public void SetContractCardValue()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

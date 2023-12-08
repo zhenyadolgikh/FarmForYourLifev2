@@ -79,12 +79,11 @@ public class GameStateLogic : MonoBehaviour
         foreach(ContractCard contractCardinEditor in contractCardsForLevel)
         {   
 
-            ContractCard contractCard = (ContractCard)contractCardinEditor;
-            if (!specialCardRegistry.ContainsKey(contractCard.cardName))
+            if (!contractCardRegistry.ContainsKey(contractCardinEditor.getCardName()))
             {
-                contractCardRegistry.Add(contractCard.getCardName(), contractCard);
+                contractCardRegistry.Add(contractCardinEditor.getCardName(), contractCardinEditor);
             }
-            contractCardDeck.Add(contractCard);
+            contractCardDeck.Add(contractCardinEditor);
         }
 
 
@@ -379,6 +378,29 @@ public class GameStateLogic : MonoBehaviour
         //ShuffleSpecialCards(listToSend);
 
         return specialCardsOnTable;
+    }
+
+    public List<Card> getCardsOnTable(TypeOfCard typeOfCard)
+    {
+        List<Card> listToReturn = new List<Card> ();
+        
+        if(typeOfCard == TypeOfCard.special)
+        {
+            foreach(SpecialCard card in  specialCardsOnTable)
+            {
+                listToReturn.Add(card);
+            }
+        }
+                
+        if(typeOfCard == TypeOfCard.contract)
+        {
+            foreach(ContractCard card in  contractCardsOnTable)
+            {
+                listToReturn.Add(card);
+            }
+        }
+
+        return listToReturn;
     }
 
     public List<Card> GetCardsInHand()

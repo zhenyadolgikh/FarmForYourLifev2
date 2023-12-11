@@ -22,7 +22,7 @@ public abstract class Card : ScriptableObject
         cardDescription = CardDescription;
     }
 
-    public abstract EffectLifeTime PlayCard();
+    public abstract EffectLifeTime PlayCard(GameStateLogic.EffectInterface effectInterface);
 
     public string getCardName() { return cardName; }
     public string getCardDescription() {  return cardDescription; }

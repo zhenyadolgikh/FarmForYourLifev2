@@ -18,6 +18,20 @@ public enum TypeOfCard
 {
     special, contract
 };
+public enum ActionCostingType
+{
+    build,assignWorkers
+}
+
+public struct ResourcesAmount
+{
+    public int wheatCost; 
+    public int appleCost;
+    public int cinnamonCost;
+    public int pigMeatCost;
+    public int moneyGained;
+}
+
 public class EnumAndStructs 
 {
 

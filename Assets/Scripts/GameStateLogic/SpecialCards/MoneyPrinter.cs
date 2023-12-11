@@ -14,10 +14,10 @@ public class MoneyPrinter : SpecialCard
         
     }
 
-    override public EffectLifeTime PlayCard()
+    override public EffectLifeTime PlayCard(GameStateLogic.EffectInterface effectInterface)
     {
 
-        
+        effectInterface.AddResource(Resource.money, 300);
 
         return null;
     }

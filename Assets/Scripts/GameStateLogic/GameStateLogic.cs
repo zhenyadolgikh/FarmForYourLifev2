@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ public class GameStateLogic : MonoBehaviour
     public int maxTurn = 0;
 
     private int workersCreated = 0;
+    private int workerPay = 100; 
 
     private SortedDictionary<int, Worker> workerRegistry = new SortedDictionary<int, Worker>();
 
@@ -56,10 +58,32 @@ public class GameStateLogic : MonoBehaviour
 
     private List<EffectLifeTime> activeEffects = new List<EffectLifeTime>();    
 
+
+    private EffectInterface effectInterface;
+
     // Update is called once per frame
+
+    public class EffectInterface
+    {
+        private GameStateLogic gameStateLogic;
+
+
+        public EffectInterface(GameStateLogic GameStateLogic)
+        {
+            gameStateLogic = GameStateLogic;
+        }
+        public void AddResource(Resource resource, int amount)
+        {
+            gameStateLogic.AddResources(resource, amount);
+        }
+
+    }
 
     public void Setup()
     {
+
+        effectInterface = new EffectInterface(this);
+
         for (int i = 0; i < 9; i++)
         {
             farmTileRegistry.Add(i, new FarmTile());
@@ -169,15 +193,44 @@ public class GameStateLogic : MonoBehaviour
 
     void StartTurnUpkeep()
     {
+
+
+        UpdateEffectLifeTimes();
         ProductionPhase();
         WorkPhase();
         ResetNumbers();
         //MoveCards();
         MoveCards<SpecialCard>(specialCardsOnTable, specialCardDeck);
         MoveCards<ContractCard>(contractCardsOnTable, contractCardDeck);
-      //  MoveContractCards();
+        //  MoveContractCards();
+
+        PayWorkers();
 
         currentTurn += 1; 
+    }
+
+    private void PayWorkers()
+    {
+        int amountToPay = workerRegistry.Count() * workerPay;
+
+        moneyStored -= amountToPay;
+    }
+
+    private void UpdateEffectLifeTimes()
+    {
+        foreach(EffectLifeTime effectLifeTime in activeEffects)
+        {
+            effectLifeTime.UpdateLifeTime();
+
+            if(effectLifeTime.lifeTimeEnded)
+            {
+                if(effectLifeTime.typeOfCard == TypeOfCard.special)
+                {
+                    specialCardDeck.Add(specialCardRegistry[effectLifeTime.cardIdentifier]);
+                }
+            }
+        }
+
     }
     void ResetNumbers()
     {
@@ -244,9 +297,6 @@ public class GameStateLogic : MonoBehaviour
     {
         List<CardType> cardsToRemove = new List<CardType>();
         List<CardType> cardsToMoveLeft = new List<CardType>();
-
-       // List<Card> cardsOnTable = GetWhichCardOnTable(typeOfCard);
-       // List<Card> cardDeck = GetWhichDeck(typeOfCard);
 
         int maxCardsOnTable = MaxCardsOnTable<CardType>();
 
@@ -336,44 +386,6 @@ public class GameStateLogic : MonoBehaviour
         }
     }
 
-    private void MoveContractCards()
-    {
-        List<ContractCard> cardsToRemove = new List<ContractCard>();
-        List<ContractCard> cardsToMoveLeft = new List<ContractCard>();
-        for (int i = 0; i < maxContractCardsOnTable; i++)
-        {
-            if (contractCardsOnTable[i] != null && cardsToRemove.Count < 2)
-            {
-                cardsToRemove.Add(contractCardsOnTable[i]);
-                contractCardsOnTable[i] = null;
-            }
-            if (contractCardsOnTable[i] != null && cardsToRemove.Count >= 2)
-            {
-                cardsToMoveLeft.Add(contractCardsOnTable[i]);
-                contractCardsOnTable[i] = null;
-            }
-        }
-        contractCardsOnTable.AddRange(cardsToRemove);
-
-        for (int i = 0; i < cardsToMoveLeft.Count; i++)
-        {
-            contractCardsOnTable[i] = cardsToMoveLeft[i];
-        }
-        ShuffleContractCards(contractCardsOnTable);
-        for (int i = 0; i < maxContractCardsOnTable; i++)
-        {
-            if (contractCardsOnTable[i] == null)
-            {
-
-                if (contractCardDeck.Count > 0)
-                {
-                    contractCardsOnTable[i] = contractCardDeck[0];
-
-                    contractCardDeck.RemoveAt(0);
-                }
-            }
-        }
-    }
 
     void AddCardToHand(AddCardToHandAction action)
     {
@@ -404,7 +416,17 @@ public class GameStateLogic : MonoBehaviour
 
         if(cardPLayed is SpecialCard)
         {
-            specialCardDeck.Add((SpecialCard)cardPLayed);
+            //specialCardDeck.Add((SpecialCard)cardPLayed);
+            EffectLifeTime effectLifeTime = cardPLayed.PlayCard(effectInterface);
+
+            if (effectLifeTime != null)
+            {
+                activeEffects.Add(effectLifeTime);
+            }
+            else
+            {
+                specialCardDeck.Add((SpecialCard)cardPLayed);
+            }
         }
         else
         {
@@ -434,19 +456,9 @@ public class GameStateLogic : MonoBehaviour
 
         }
         //
-        if(cardPLayed is MoneyPrinter)
-        {
-            AddResources(Resource.money, 300);
 
-            print("det money printades");
-        }
 
-        EffectLifeTime effectLifeTime = cardPLayed.PlayCard();
 
-        if(effectLifeTime != null)
-        {
-            activeEffects.Add(effectLifeTime);
-        }
 
     }
 
@@ -458,11 +470,25 @@ public class GameStateLogic : MonoBehaviour
             {
                 continue;
             }
-            farmTilePair.Value.storedResources += farmTilePair.Value.productionRate;
 
-            if (farmTilePair.Value.storedResources > farmTilePair.Value.maxStoredResources)
+            FarmTile farmTile = farmTilePair.Value;
+
+            int amountProduced = farmTile.productionRate;
+            int modifiedProduced = farmTile.productionRate;
+            foreach (EffectLifeTime effectLifeTime in activeEffects)
             {
-                farmTilePair.Value.storedResources = farmTilePair.Value.maxStoredResources;
+                modifiedProduced = effectLifeTime.ModifyResourcesGenerated(farmTile.resourceOnTile, farmTile.productionRate);
+            }
+            if(modifiedProduced > amountProduced)
+            {
+                amountProduced = modifiedProduced;
+            }
+
+            farmTile.storedResources += amountProduced;
+
+            if (farmTile.storedResources > farmTile.maxStoredResources)
+            {
+                farmTile.storedResources = farmTile.maxStoredResources;
             }
         }
     }

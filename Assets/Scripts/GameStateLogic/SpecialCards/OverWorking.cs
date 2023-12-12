@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverWorking : MonoBehaviour
+public class OverWorking : SpecialCard
 {
-    // Start is called before the first frame update
-    void Start()
+    public OverWorking(string CardName, string CardDescription) : base(CardName, CardDescription)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    override public EffectLifeTime PlayCard(GameStateLogic.EffectInterface effectInterface)
     {
-        
+        effectInterface.IncreaseActions(1);
+
+        return new ActionCostLifeTime(cardName,TypeOfCard.special,ActionCostingType.assignWorkers);
     }
+
 }

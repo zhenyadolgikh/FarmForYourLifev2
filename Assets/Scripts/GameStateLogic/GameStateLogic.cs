@@ -77,6 +77,11 @@ public class GameStateLogic : MonoBehaviour
             gameStateLogic.AddResources(resource, amount);
         }
 
+        public void IncreaseActions(int amount)
+        {
+            gameStateLogic.currentActions += amount;
+        }
+
     }
 
     public void Setup()

@@ -10,8 +10,6 @@ public class WheatAlchemyLifeTime : EffectLifeTime
 
     public override ResourcesAmount ModifyContract(ResourcesAmount contractCost, ResourcesAmount storedResources)
     {   
-        
-
         return base.ModifyContract(contractCost, storedResources);
     }
 }

@@ -11,7 +11,7 @@ public class SpecialCard : Card
         cardDescription = CardDescription;
     }
 
-    override public EffectLifeTime PlayCard(GameStateLogic.EffectInterface effectInterface)
+    virtual public EffectLifeTime PlayCard(GameStateLogic.EffectInterface effectInterface)
     {
         return null;
     }

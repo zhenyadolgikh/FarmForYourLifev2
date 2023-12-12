@@ -6,13 +6,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+//using UnityEngine.UIElements;
 
 public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 {
     //public GameStateLogic gameStateLogic;
 
     //public TextMeshProUGUI farmTileText;
-
+    public GameObject farmTile;
     public GameObject optionPanel;
     public Button[] options;
 
@@ -23,6 +24,12 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
     public int farmTileIndex = -1;
 
+    public Color normalColor;
+    public Color hoverOverColor;
+
+    bool mouseOver = false;
+
+
 
 
 
@@ -31,6 +38,27 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     void Start()
     {
 
+    }
+
+//   public void OnPointerEnter(PointerEventData eventData)
+//   {
+//       farmTile = GetComponent<Renderer>().material.SetColor("_Color", hoverOverColor);
+//   }
+//
+//   public void OnPointerExit(PointerEventData eventData)
+//   {
+//       
+//   }
+
+    void OnMouseEnter()
+    {
+        mouseOver = true;
+        GetComponent<Renderer>().material.SetColor("_Color", hoverOverColor);
+    }
+    void OnMouseExit()
+    {
+        mouseOver = false;
+        GetComponent<Renderer>().material.SetColor("_Color", normalColor);
     }
 
     private void PopUp()
@@ -65,17 +93,19 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 BuildAction buildAction = new BuildAction();
                 buildAction.farmTileIndex = farmTileIndex;
                 buildAction.resource = GetAssociatedResource(button.name);
-                if(manager.IsActionValid(buildAction).wasActionValid)
+                if(!manager.IsActionValid(buildAction).wasActionValid)
                 {
-                    button.GetComponent<Image>().color = button.colors.normalColor;
-                }
-                else
-                {
-                    button.GetComponent<Image>().color = button.colors.disabledColor;
+                    button.interactable = false;
+
                 }
 
                 BuildOnClick buildOnClick = button.GetComponent<BuildOnClick>();
                 buildOnClick.farmTileIndex = farmTileIndex;
+                buildOnClick.SetCostText(manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)));
+                if(button.interactable == false)
+                {
+                    buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = Color.red;
+                }
                 
             }
         }
@@ -167,5 +197,5 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 throw new ArgumentException($"Unknown buttonName: {buttonName}");
         }
     }
-    
+
 }

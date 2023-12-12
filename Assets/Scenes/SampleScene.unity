@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10956,7 +10956,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 8782f47fdec70fc46b4fa278447182e9, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: specialCardsForLevel.Array.size
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.size
@@ -10981,19 +10981,19 @@ PrefabInstance:
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: specialCardsForLevel.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 437da5ebd86b3854e8190e98630b6ff8, type: 2}
+      objectReference: {fileID: 11400000, guid: 5ccfe388a1782b44e8b6631ad0a5ff9f, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: specialCardsForLevel.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: bd36432b3b3fd934fabc675f6337d12a, type: 2}
+      objectReference: {fileID: 11400000, guid: 2f4cfbc21cafb3d42b26a327e8257975, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: specialCardsForLevel.Array.data[6]
       value: 
-      objectReference: {fileID: 11400000, guid: ad56af7c696b3234eb2ccb4a299b55d8, type: 2}
+      objectReference: {fileID: 11400000, guid: ebc0d694788a4bc43ab4240511629d7e, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: specialCardsForLevel.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 3ba6b4110463a164288c1c295431244c, type: 2}
+      objectReference: {fileID: 11400000, guid: 964ceb290d0581b448bdc957699965e8, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[0]
       value: 

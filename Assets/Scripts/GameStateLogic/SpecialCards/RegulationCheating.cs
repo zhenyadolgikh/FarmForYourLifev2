@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[CreateAssetMenu(menuName = "Special cards/Regulation cheating")]
 public class RegulationCheating : SpecialCard
 {
 

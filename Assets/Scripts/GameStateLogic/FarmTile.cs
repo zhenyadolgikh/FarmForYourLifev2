@@ -16,5 +16,9 @@ public class FarmTile
      
     public int productionRate = 40;
 
+    public int maxAmountOfAnimals = 24;
+    public int amountOfAnimals;
+    public bool firstTurnBuilt = false;
+
     public List<Worker> workersOnTile = new List<Worker>();
 }

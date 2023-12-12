@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[CreateAssetMenu(menuName = "Special cards/Wheat alchemy")]
 
 public class WheatAlchemy : SpecialCard
 {
@@ -11,7 +12,7 @@ public class WheatAlchemy : SpecialCard
 
     override public EffectLifeTime PlayCard(GameStateLogic.EffectInterface effectInterface)
     {
-        return null;
+        return new WheatAlchemyLifeTime(cardName, TypeOfCard.special);
     }
 
 }

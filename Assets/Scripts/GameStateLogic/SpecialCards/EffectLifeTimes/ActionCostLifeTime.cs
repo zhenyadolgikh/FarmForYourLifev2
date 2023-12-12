@@ -13,7 +13,7 @@ public class ActionCostLifeTime : EffectLifeTime
 
     public override void UpdateLifeTime()
     {
-        throw new System.NotImplementedException();
+        lifeTimeEnded = true;
     }
 
     public override int ModifyActionCost(ActionCostingType typeOfAction, int actionCost)

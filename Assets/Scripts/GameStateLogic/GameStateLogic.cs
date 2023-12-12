@@ -62,6 +62,14 @@ public class GameStateLogic : MonoBehaviour
     private EffectInterface effectInterface;
 
     // Update is called once per frame
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            AddResources(Resource.money, 1000);
+        }
+    }
+
 
     public class EffectInterface
     {
@@ -80,6 +88,36 @@ public class GameStateLogic : MonoBehaviour
         public void IncreaseActions(int amount)
         {
             gameStateLogic.currentActions += amount;
+        }
+
+        public void AddWorker()
+        {
+            gameStateLogic.AddWorker();
+        }
+
+        public void DoubleAnimals()
+        {
+            foreach (KeyValuePair<int, FarmTile> farmTilePair in gameStateLogic.farmTileRegistry)
+            {
+                FarmTile farmTile = farmTilePair.Value;
+
+                if (farmTile.isBuilt == false || farmTile.resourceOnTile != Resource.pigMeat)
+                {
+                    continue;
+                }
+                if (farmTile.firstTurnBuilt)
+                {
+                    farmTile.firstTurnBuilt = false;
+                    continue;
+                }
+
+                farmTile.amountOfAnimals *= 2;
+                if (farmTile.amountOfAnimals > farmTile.maxAmountOfAnimals)
+                {
+                    farmTile.amountOfAnimals = farmTile.maxAmountOfAnimals;
+                }
+                print(farmTile.amountOfAnimals);
+            }
         }
 
     }
@@ -203,6 +241,7 @@ public class GameStateLogic : MonoBehaviour
         UpdateEffectLifeTimes();
         ProductionPhase();
         WorkPhase();
+        AnimalProductionPhase();
         ResetNumbers();
         //MoveCards();
         MoveCards<SpecialCard>(specialCardsOnTable, specialCardDeck);
@@ -216,13 +255,21 @@ public class GameStateLogic : MonoBehaviour
 
     private void PayWorkers()
     {
-        int amountToPay = workerRegistry.Count() * workerPay;
+        int amountToPayCoefficient = 100;
 
+        foreach(EffectLifeTime effect in activeEffects)
+        {
+            amountToPayCoefficient = effect.ModifyWorkerPay(amountToPayCoefficient);
+        }
+
+        int amountToPay = amountToPayCoefficient * workerRegistry.Count;
         moneyStored -= amountToPay;
     }
 
     private void UpdateEffectLifeTimes()
     {
+        List<EffectLifeTime> effectsToPreserve = new List<EffectLifeTime>();
+
         foreach(EffectLifeTime effectLifeTime in activeEffects)
         {
             effectLifeTime.UpdateLifeTime();
@@ -231,10 +278,20 @@ public class GameStateLogic : MonoBehaviour
             {
                 if(effectLifeTime.typeOfCard == TypeOfCard.special)
                 {
+                    print("vilken kort typ är det " + effectLifeTime.typeOfCard);
+
                     specialCardDeck.Add(specialCardRegistry[effectLifeTime.cardIdentifier]);
                 }
             }
+            else
+            {
+                effectsToPreserve.Add(effectLifeTime);
+            }
         }
+
+        activeEffects = effectsToPreserve; 
+
+        print("hur manga effekter ar aktiva " + activeEffects.Count);
 
     }
     void ResetNumbers()
@@ -467,34 +524,100 @@ public class GameStateLogic : MonoBehaviour
 
     }
 
+    private void AnimalProductionPhase()
+    {
+        foreach (KeyValuePair<int, FarmTile> farmTilePair in farmTileRegistry)
+        {
+            FarmTile farmTile = farmTilePair.Value;
+
+            if (farmTile.isBuilt == false || farmTile.resourceOnTile != Resource.pigMeat)
+            {
+                continue;
+            }
+            if (farmTile.firstTurnBuilt)
+            {
+                farmTile.firstTurnBuilt = false;
+                continue;
+            }
+
+            farmTile.amountOfAnimals *= 2;
+            if (farmTile.amountOfAnimals > farmTile.maxAmountOfAnimals)
+            {
+                farmTile.amountOfAnimals = farmTile.maxAmountOfAnimals;
+            }
+
+            int amountToBeEatenCoefficient = 10;
+            foreach (EffectLifeTime effectLifeTime in activeEffects)
+            {
+                amountToBeEatenCoefficient = effectLifeTime.ModifyAmountToBeEaten(amountToBeEatenCoefficient);
+            }
+
+            int amountToBeEaten = (farmTile.amountOfAnimals / 4) * amountToBeEatenCoefficient;
+
+            print("mängden som ska ätas " + amountToBeEaten);
+
+            if (amountToBeEaten < wheatStored)
+            {
+                wheatStored -= amountToBeEaten;
+
+
+            }
+            else
+            {
+
+                int foodDifference = amountToBeEaten - wheatStored;
+
+                int amountToDie = foodDifference / 10;
+
+                farmTile.amountOfAnimals -= amountToDie * 4;
+
+                if (farmTile.amountOfAnimals < 1)
+                {
+                    farmTile.amountOfAnimals = 1;
+                }
+
+                wheatStored = 0;
+            }
+
+
+            print("mangden djur " + farmTile.amountOfAnimals);
+           
+        }
+    }
+
     void ProductionPhase()
     {
         foreach(KeyValuePair<int,FarmTile> farmTilePair in farmTileRegistry)
-        {
-            if(farmTilePair.Value.isBuilt == false)
+        {   
+            
+            if(farmTilePair.Value.isBuilt == false || farmTilePair.Value.resourceOnTile == Resource.pigMeat)
             {
                 continue;
             }
 
             FarmTile farmTile = farmTilePair.Value;
-
-            int amountProduced = farmTile.productionRate;
-            int modifiedProduced = farmTile.productionRate;
-            foreach (EffectLifeTime effectLifeTime in activeEffects)
+            if(farmTile.resourceOnTile != Resource.pigMeat)
             {
-                modifiedProduced = effectLifeTime.ModifyResourcesGenerated(farmTile.resourceOnTile, farmTile.productionRate);
-            }
-            if(modifiedProduced > amountProduced)
-            {
-                amountProduced = modifiedProduced;
+                int amountProduced = farmTile.productionRate;
+                int modifiedProduced = farmTile.productionRate;
+                foreach (EffectLifeTime effectLifeTime in activeEffects)
+                {
+                    modifiedProduced = effectLifeTime.ModifyResourcesGenerated(farmTile.resourceOnTile, farmTile.productionRate);
+                }
+                if (modifiedProduced > amountProduced)
+                {
+                    amountProduced = modifiedProduced;
+                }
+
+                farmTile.storedResources += amountProduced;
+
+                if (farmTile.storedResources > farmTile.maxStoredResources)
+                {
+                    farmTile.storedResources = farmTile.maxStoredResources;
+                }
             }
 
-            farmTile.storedResources += amountProduced;
 
-            if (farmTile.storedResources > farmTile.maxStoredResources)
-            {
-                farmTile.storedResources = farmTile.maxStoredResources;
-            }
         }
     }
     void WorkPhase()
@@ -614,10 +737,34 @@ public class GameStateLogic : MonoBehaviour
             return IsValidToPlay((PlayCardAction)action, isActionValidMessage);
 
         }
+        if(action is AssignWorkersAction)
+        {
+            return IsValidToAssign((AssignWorkersAction)action, isActionValidMessage);
+        }
 
 
         isActionValidMessage.wasActionValid = true;
         return isActionValidMessage;
+    }
+
+    private IsActionValidMessage IsValidToAssign(AssignWorkersAction action, IsActionValidMessage message)
+    {
+        int actionCost = 1;
+
+        foreach(EffectLifeTime effectLifeTime in activeEffects)
+        {
+            actionCost = effectLifeTime.ModifyActionCost(ActionCostingType.assignWorkers, actionCost);
+        }
+
+        if (currentActions < actionCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough actions";
+            return message;
+        }
+
+        message.wasActionValid = true;
+        return message;
     }
 
     private IsActionValidMessage IsValidToAdd(AddCardToHandAction action, IsActionValidMessage message)
@@ -643,6 +790,9 @@ public class GameStateLogic : MonoBehaviour
         if(action.typeOfCard == TypeOfCard.contract)
         {   
             ContractCard contractCard = contractCardRegistry[action.cardIdentifier];
+
+            
+
 
             if(contractCard.wheatNeeded > wheatStored)
             {
@@ -705,7 +855,6 @@ public class GameStateLogic : MonoBehaviour
 
             AddResources(Resource.money, GetBuildingCost(buildAction.resource) * -1);
 
-            currentActions -= 1;
 
             //print("Built!" + buildAction.resource);
         }
@@ -727,6 +876,16 @@ public class GameStateLogic : MonoBehaviour
     {
         ClearWorkersFromFarms();
 
+        int actionCost = 1;
+
+        foreach(EffectLifeTime effect in activeEffects)
+        {
+            actionCost = effect.ModifyActionCost(ActionCostingType.assignWorkers, actionCost);
+        }
+
+        currentActions -= actionCost; 
+
+        
         List<int> workerIds = new List<int>();
         foreach(KeyValuePair<int,Worker> workerPair in workerRegistry)
         {
@@ -738,13 +897,45 @@ public class GameStateLogic : MonoBehaviour
         foreach(Tuple<int,WorkType> workAssigned in assignAction.workAssigned )
         {
             Worker workerToAdd = workerRegistry[workerIds[index]];
+            FarmTile farmTile = farmTileRegistry[workAssigned.Item1];
             workerToAdd.workType = workAssigned.Item2;
 
-            farmTileRegistry[workAssigned.Item1].workersOnTile.Add(workerToAdd);
+            farmTile.workersOnTile.Add(workerToAdd);
             index += 1;
+            if(workAssigned.Item2 == WorkType.slaughtering && farmTile.resourceOnTile == Resource.pigMeat)
+            {
+                if(farmTile.amountOfAnimals > 1)
+                {   
+                    int amountSlaughtered = farmTile.amountOfAnimals / 2;
+                    farmTile.amountOfAnimals = farmTile.amountOfAnimals / 2;
 
+                    pigMeatStored += amountSlaughtered;
+                    if(pigMeatStored > currentStorage / 10)
+                    {
+                        pigMeatStored = currentStorage / 10;
+                    }
+
+                    workerToAdd.workType = WorkType.unassigned;
+                }
+            }
           //  print("vilken ruta " + workAssigned.Item1 + " vilket arbete " + workAssigned.Item2);
         }
+
+    }
+
+    private ResourcesAmount ResourceAmountFromContract(ContractCard card)
+    {
+        ResourcesAmount resourcesAmountToReturn = new ResourcesAmount();
+
+        resourcesAmountToReturn.wheatCost = card.wheatNeeded;
+        resourcesAmountToReturn.appleCost = card.applesNeeded;
+        resourcesAmountToReturn.cinnamonCost = card.applesNeeded;
+        resourcesAmountToReturn.pigMeatCost = card.applesNeeded;
+        resourcesAmountToReturn.moneyGained = card.moneyEarned;
+
+        return resourcesAmountToReturn;
+
+
 
     }
 
@@ -770,7 +961,15 @@ public class GameStateLogic : MonoBehaviour
             isActionValidMessage.errorMessage = "You do not have enough money";
             return isActionValidMessage;
         }
-        if(currentActions == 0)
+        int actionCost = 1; 
+
+        foreach(EffectLifeTime effect in activeEffects)
+        {
+            actionCost = effect.ModifyActionCost(ActionCostingType.build, actionCost);
+        }
+
+
+        if(currentActions < actionCost)
         {
             isActionValidMessage.wasActionValid = false;
             isActionValidMessage.errorMessage = "You do not have enough actions";
@@ -784,10 +983,23 @@ public class GameStateLogic : MonoBehaviour
     private void BuildOnFarmtile(BuildAction buildAction)
     {
 
-        print(buildAction.farmTileIndex);
+        int actionCost = 1;
+
+        foreach(EffectLifeTime effect in activeEffects)
+        {
+            actionCost = effect.ModifyActionCost(ActionCostingType.build, actionCost);
+        }
+
+        currentActions -= actionCost;
+
 
         farmTileRegistry[buildAction.farmTileIndex].buildingOnTile = true;
         farmTileRegistry[buildAction.farmTileIndex].resourceOnTile = buildAction.resource;
+        if(buildAction.resource == Resource.pigMeat)
+        {
+            farmTileRegistry[buildAction.farmTileIndex].amountOfAnimals = 4;
+            farmTileRegistry[buildAction.farmTileIndex].firstTurnBuilt = true ;
+        }
     }
     public int GetStoredResourceAmount(Resource resourceType)
     {

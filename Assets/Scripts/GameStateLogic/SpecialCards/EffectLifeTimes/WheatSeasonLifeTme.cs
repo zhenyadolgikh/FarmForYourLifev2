@@ -9,11 +9,9 @@ public class WheatSeasonLifeTme : EffectLifeTime
 
 
 
-    public WheatSeasonLifeTme(string cardId, TypeOfCard type)
+    public WheatSeasonLifeTme(string cardId, TypeOfCard type): base(cardId, type)
     {
-        cardIdentifier = cardId;
 
-        typeOfCard = type;
     }
 
 
@@ -36,7 +34,7 @@ public class WheatSeasonLifeTme : EffectLifeTime
     {
         turnCount -= 1;
 
-        if(turnCount == 0)
+        if(turnCount < 0)
         {
             lifeTimeEnded = true;
         }

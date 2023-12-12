@@ -39,7 +39,7 @@ public class CardDeck : MonoBehaviour
 
         if(cardType == TypeOfCard.contract)
         {
-            print(cardsOnTable.Count);
+           
         }
 
         for(int i = 0; i < cardsOnTable.Count; i++)

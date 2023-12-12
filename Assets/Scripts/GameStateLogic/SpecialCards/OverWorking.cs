@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Special cards/Over Working")]
+
 public class OverWorking : SpecialCard
 {
     public OverWorking(string CardName, string CardDescription) : base(CardName, CardDescription)

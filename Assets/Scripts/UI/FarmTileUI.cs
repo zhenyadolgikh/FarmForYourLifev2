@@ -9,6 +9,10 @@ using UnityEngine.EventSystems;
 
 public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 {
+    //public GameStateLogic gameStateLogic;
+
+    //public TextMeshProUGUI farmTileText;
+
     public GameObject optionPanel;
     public Button[] options;
 
@@ -122,12 +126,28 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
         PopUp();
     }
 
-    void OnMouseDown()
-    {
-   //     PopUp();
-
-    }
-
+//   public void ResourceTextOnTile()
+//   {
+//       foreach (KeyValuePair<int, FarmTile> farmTileRef in gameStateLogic.GetFarmTiles())
+//       {
+//           int farmTileIndex = farmTileRef.Key;
+//
+//           if (farmTileIndex == this.farmTileIndex) // Check if it's the same farm tile as FarmTileUI
+//           {
+//               FarmTile farmTile = farmTileRef.Value;
+//
+//               if (farmTile.buildingOnTile || farmTile.isBuilt)
+//               {
+//                   TextMeshProUGUI farmTileText = GetComponentInChildren<TextMeshProUGUI>();
+//
+//                   if (farmTileText != null)
+//                   {
+//                       farmTileText.SetText(farmTileRef.Value.storedResources + " / " + farmTileRef.Value.maxStoredResources);
+//                   }
+//               }
+//           }
+//       }
+//   }
 
     private Resource GetAssociatedResource(string buttonName)
     {

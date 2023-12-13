@@ -587,6 +587,7 @@ public class GameStateLogic : MonoBehaviour
         {
             foreach(Worker workerOnTile in farmTilePair.Value.workersOnTile)
             {
+                print(workerOnTile.workType);
                 if (workerOnTile.workType == WorkType.harvesting)
                 {
                     if (farmTilePair.Value.storedResources < workerOnTile.workrate)

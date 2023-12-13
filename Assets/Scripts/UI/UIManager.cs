@@ -10,7 +10,9 @@ public class UIManager : MonoBehaviour
 
     public GameStateLogic gameStateLogic;
     public List<GameObject> farmTilePositions = new List<GameObject>();
-    public List<BuildingOnTile> placedMeshes = new List<BuildingOnTile>();  
+    public List<BuildingOnTile> placedMeshes = new List<BuildingOnTile>();
+
+    public List<TextMeshProUGUI> farmTileTexts = new List<TextMeshProUGUI>();
 
     private List<List<WorkerPosition>> workerPositions = new List<List<WorkerPosition>>();
 
@@ -25,9 +27,9 @@ public class UIManager : MonoBehaviour
     public GameObject builtAppleMesh;
     public GameObject builtCinnamonMesh;
 
-
-
     public GameObject workerMesh;
+
+    public GameObject farmTextPrefab;
 
     public HudState hudState;
 
@@ -131,6 +133,7 @@ public class UIManager : MonoBehaviour
         PlaceMeshes();
         PlaceWorkers();
         UpdateResourceText();
+        ResourceTextOnTile();
 
     }
 
@@ -157,6 +160,34 @@ public class UIManager : MonoBehaviour
         amountOfWorkersText.SetText("Workers " + gameStateLogic.GetWorkerRegistry().Count);
     }
 
+
+  private void ResourceTextOnTile()
+   {
+       foreach (KeyValuePair<int, FarmTile> farmTileRef in gameStateLogic.GetFarmTiles())
+       {
+           int farmTileIndex = farmTileRef.Key;
+
+           GameObject farmMeshPosition = farmTilePositions[farmTileIndex];
+
+           if (farmMeshPosition != null)
+           {
+               FarmTile farmTile = farmTileRef.Value;
+
+               if (farmTile.buildingOnTile || farmTile.isBuilt)
+               {
+                   TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>();
+
+                   if (farmTileText != null)
+                   {
+                       farmTileText.SetText(farmTileRef.Value.storedResources + " / " + farmTileRef.Value.maxStoredResources);
+                   }
+               }
+           }
+       }
+   }
+
+
+
     void Start()
     {
         gameStateLogic.Setup();
@@ -167,7 +198,7 @@ public class UIManager : MonoBehaviour
             placedMeshes.Add(new BuildingOnTile());
         }
         FarmMeshPosition[] foundPositions = FindObjectsByType<FarmMeshPosition>(FindObjectsSortMode.None);
-        foreach(FarmMeshPosition position in foundPositions)
+        foreach (FarmMeshPosition position in foundPositions)
         {
             farmTilePositions[position.farmTileIndex] = position.gameObject;
         }

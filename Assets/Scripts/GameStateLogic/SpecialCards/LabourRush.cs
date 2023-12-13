@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(menuName = "Special cards/Labour rush")]
 public class LabourRush : SpecialCard
 {
     public LabourRush(string CardName, string CardDescription) : base(CardName, CardDescription)

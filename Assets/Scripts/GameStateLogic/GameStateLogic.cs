@@ -19,7 +19,9 @@ public class GameStateLogic : MonoBehaviour
     private int currentActions = 0;
     private int actionLevel = 0;
 
-    private int storageLevel = 0;
+
+    private int increaseStorageCost = 500;
+    private int storageLevel = 1;
     private int currentStorage = 0;
 
     private int moneyStored = 0;
@@ -93,6 +95,32 @@ public class GameStateLogic : MonoBehaviour
         public void AddWorker()
         {
             gameStateLogic.AddWorker();
+        }
+
+        public void BrainStormShuffleCards()
+        {
+            List<SpecialCard> specialCardsToAdd = new List<SpecialCard>();
+            for(int i = 0; i < gameStateLogic.maxSpecialCardsOnTable; i++)
+            {
+                if (gameStateLogic.specialCardsOnTable[i] != null)
+                {
+                    specialCardsToAdd.Add(gameStateLogic.specialCardsOnTable[i]);
+                }
+            }
+
+            gameStateLogic.specialCardDeck.AddRange(specialCardsToAdd);
+
+            gameStateLogic.ShuffleCards<SpecialCard>(gameStateLogic.specialCardDeck);
+
+            for(int i = 0; i < gameStateLogic.maxSpecialCardsOnTable; i++)
+            {
+                if(gameStateLogic.specialCardDeck.Count  > 0)
+                {
+                    gameStateLogic.specialCardsOnTable[i] = gameStateLogic.specialCardDeck[0];
+
+                    gameStateLogic.specialCardDeck.RemoveAt(0);
+                }
+            }
         }
 
         public void DoubleAnimals()
@@ -316,45 +344,6 @@ public class GameStateLogic : MonoBehaviour
         }
     }
 
-    private void MoveCards()
-    {
-        List<SpecialCard> cardsToRemove = new List<SpecialCard>();
-        List<SpecialCard> cardsToMoveLeft = new List<SpecialCard>();
-        for(int i = 0; i < maxSpecialCardsOnTable; i++)
-        {
-            if (specialCardsOnTable[i] != null && cardsToRemove.Count < 2)
-            {
-                cardsToRemove.Add(specialCardsOnTable[i]);
-                specialCardsOnTable[i] = null;
-            }
-            if (specialCardsOnTable[i] != null && cardsToRemove.Count >= 2)
-            {
-                cardsToMoveLeft.Add(specialCardsOnTable[i]);
-                specialCardsOnTable[i] = null;
-            }
-        }
-        specialCardDeck.AddRange(cardsToRemove);
-
-        for (int i = 0; i < cardsToMoveLeft.Count; i++)
-        {
-            specialCardsOnTable[i] = cardsToMoveLeft[i];
-        }
-        ShuffleSpecialCards(specialCardDeck);
-        for(int i = 0; i < maxSpecialCardsOnTable; i++) 
-        {
-            if (specialCardsOnTable[i] == null)
-            {
-
-                if(specialCardDeck.Count > 0)
-                {
-                    specialCardsOnTable[i] = specialCardDeck[0];
-
-                    specialCardDeck.RemoveAt(0);
-                }
-            }
-        }
-    }
-
     private void MoveCards<CardType>(List<CardType> cardsOnTable, List<CardType> cardsInDeck)
     {
         List<CardType> cardsToRemove = new List<CardType>();
@@ -397,44 +386,7 @@ public class GameStateLogic : MonoBehaviour
         }
     }
 
-    private List<Card> GetWhichCardOnTable(TypeOfCard cardType)
-    {
-        List<Card> cardsToReturn = new List<Card>();
-        if(cardType == TypeOfCard.special)
-        {
-            foreach(Card card in specialCardsOnTable) 
-            {
-                cardsToReturn.Add(card);
-            } 
-        }
-        else
-        {
-            foreach (Card card in contractCardsOnTable)
-            {
-                cardsToReturn.Add(card);
-            }
-        }
-        return cardsToReturn;
-    }
-    private List<Card> GetWhichDeck(TypeOfCard cardType)
-    {
-        List<Card> cardsToReturn = new List<Card>();
-        if(cardType == TypeOfCard.special)
-        {
-            foreach(Card card in specialCardDeck) 
-            {
-                cardsToReturn.Add(card);
-            } 
-        }
-        else
-        {
-            foreach (Card card in contractCardDeck)
-            {
-                cardsToReturn.Add(card);
-            }
-        }
-        return cardsToReturn;
-    }
+
 
     private int MaxCardsOnTable<CardType>()
     {
@@ -495,26 +447,35 @@ public class GameStateLogic : MonoBehaviour
             contractCardDeck.Add((ContractCard)cardPLayed);
 
             ContractCard contractCard = (ContractCard)cardPLayed;
-            if (contractCard.wheatNeeded != -1)
-            {
-                wheatStored -= contractCard.wheatNeeded; 
-            }
-            if (contractCard.applesNeeded != -1 )
-            {
-                appleStored -= contractCard.applesNeeded;
 
-            }
-            if (contractCard.cinnamonsNeeded != -1)
-            {
-                cinnamonStored -= contractCard.cinnamonsNeeded;
+            ResourcesAmount resourcesAmount = ResourceAmountFromContract(contractCard);
 
-            }
-            if (contractCard.pigMeatNeeded != -1)
+            foreach(EffectLifeTime effect in activeEffects)
             {
-                pigMeatStored -= contractCard.pigMeatNeeded;
+                resourcesAmount = effect.ModifyContract(resourcesAmount,ResourceAmountFromStored());
             }
 
-            moneyStored += contractCard.moneyEarned;
+
+            if (resourcesAmount.wheatCost != -1)
+            {
+                wheatStored -= resourcesAmount.wheatCost; 
+            }
+            if (resourcesAmount.appleCost != -1 )
+            {
+                appleStored -= resourcesAmount.appleCost;
+
+            }
+            if (resourcesAmount.cinnamonCost != -1)
+            {
+                cinnamonStored -= resourcesAmount.cinnamonCost;
+
+            }
+            if (resourcesAmount.pigMeatCost != -1)
+            {
+                pigMeatStored -= resourcesAmount.pigMeatCost;
+            }
+
+            moneyStored += resourcesAmount.moneyGained;
 
         }
         //
@@ -741,10 +702,41 @@ public class GameStateLogic : MonoBehaviour
         {
             return IsValidToAssign((AssignWorkersAction)action, isActionValidMessage);
         }
-
+        if(action is IncreaseStorageAction)
+        {
+            return IsValidToIncreaseStorage((IncreaseStorageAction)action, isActionValidMessage);
+        }
 
         isActionValidMessage.wasActionValid = true;
         return isActionValidMessage;
+    }
+
+    private IsActionValidMessage IsValidToIncreaseStorage(IncreaseStorageAction action, IsActionValidMessage message)
+    {
+        if(storageLevel == 3)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "Your storage is already at max level";
+            return message;
+        }
+        if(moneyStored < increaseStorageCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You have to little money";
+            return message;
+        }
+        int actionCost = 1;
+        if (currentActions < actionCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough actions";
+            return message;
+        }
+
+
+
+        message.wasActionValid = true;
+        return message;
     }
 
     private IsActionValidMessage IsValidToAssign(AssignWorkersAction action, IsActionValidMessage message)
@@ -791,30 +783,35 @@ public class GameStateLogic : MonoBehaviour
         {   
             ContractCard contractCard = contractCardRegistry[action.cardIdentifier];
 
-            
+            ResourcesAmount contractResources = ResourceAmountFromContract(contractCard);
+
+            foreach(EffectLifeTime effect in activeEffects)
+            {
+                contractResources = effect.ModifyContract(contractResources, ResourceAmountFromStored());
+            }
 
 
-            if(contractCard.wheatNeeded > wheatStored)
+            if(contractResources.wheatCost > wheatStored)
             {
                 message.wasActionValid = false;
                 message.errorMessage = "Not enough resources for contract";
                 return message;
             }
-            if(contractCard.applesNeeded > appleStored)
-            {
-                message.wasActionValid = false;
-                message.errorMessage = "Not enough resources for contract";
-                return message;
-
-            }
-            if (contractCard.cinnamonsNeeded > cinnamonStored)
+            if(contractResources.appleCost > appleStored)
             {
                 message.wasActionValid = false;
                 message.errorMessage = "Not enough resources for contract";
                 return message;
 
             }
-            if (contractCard.pigMeatNeeded > pigMeatStored)
+            if (contractResources.cinnamonCost > cinnamonStored)
+            {
+                message.wasActionValid = false;
+                message.errorMessage = "Not enough resources for contract";
+                return message;
+
+            }
+            if (contractResources.pigMeatCost > pigMeatStored)
             {
                 message.wasActionValid = false;
                 message.errorMessage = "Not enough resources for contract";
@@ -870,6 +867,22 @@ public class GameStateLogic : MonoBehaviour
         {
             PlayCard((PlayCardAction)action);
         }
+        if(action is IncreaseStorageAction)
+        {
+            IncreaseStorage((IncreaseStorageAction)action);
+        }
+    }
+
+    private void IncreaseStorage(IncreaseStorageAction action)
+    {
+        storageLevel += 1;
+
+        currentStorage = storageLevel * 120;
+
+        moneyStored -= increaseStorageCost;
+        currentActions -= 1;
+
+
     }
 
     private void AssignWorkers(AssignWorkersAction assignAction)
@@ -929,14 +942,23 @@ public class GameStateLogic : MonoBehaviour
 
         resourcesAmountToReturn.wheatCost = card.wheatNeeded;
         resourcesAmountToReturn.appleCost = card.applesNeeded;
-        resourcesAmountToReturn.cinnamonCost = card.applesNeeded;
-        resourcesAmountToReturn.pigMeatCost = card.applesNeeded;
+        resourcesAmountToReturn.cinnamonCost = card.cinnamonsNeeded;
+        resourcesAmountToReturn.pigMeatCost = card.pigMeatNeeded;
         resourcesAmountToReturn.moneyGained = card.moneyEarned;
 
         return resourcesAmountToReturn;
+    }
+    private ResourcesAmount ResourceAmountFromStored()
+    {
+        ResourcesAmount resourcesAmountToReturn = new ResourcesAmount();
 
+        resourcesAmountToReturn.wheatCost = wheatStored;
+        resourcesAmountToReturn.appleCost = appleStored;
+        resourcesAmountToReturn.cinnamonCost = cinnamonStored;
+        resourcesAmountToReturn.pigMeatCost = pigMeatStored;
+        resourcesAmountToReturn.moneyGained = moneyStored;
 
-
+        return resourcesAmountToReturn;
     }
 
     private void ClearWorkersFromFarms()

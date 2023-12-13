@@ -10956,7 +10956,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 8782f47fdec70fc46b4fa278447182e9, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: specialCardsForLevel.Array.size
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.size
@@ -10994,6 +10994,14 @@ PrefabInstance:
       propertyPath: specialCardsForLevel.Array.data[7]
       value: 
       objectReference: {fileID: 11400000, guid: 964ceb290d0581b448bdc957699965e8, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: specialCardsForLevel.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: cedacd21fbe54ed4486aeff2097183d9, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: specialCardsForLevel.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 48982f8fe61fe9347b54b2b4ae61480e, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[0]
       value: 

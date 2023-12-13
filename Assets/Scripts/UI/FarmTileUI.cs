@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEditor.Experimental.GraphView;
 //using UnityEngine.UIElements;
 
 public class FarmTileUI : MonoBehaviour, IPointerClickHandler
@@ -90,6 +91,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
             
             foreach (Button button in options)
             {
+                BuildOnClick buildOnClick = button.GetComponent<BuildOnClick>();
                 BuildAction buildAction = new BuildAction();
                 buildAction.farmTileIndex = farmTileIndex;
                 buildAction.resource = GetAssociatedResource(button.name);
@@ -97,15 +99,21 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 {
                     button.interactable = false;
 
+                    if (manager.gameStateLogic.GetStoredResourceAmount(Resource.money) < manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)))
+                    {
+                        buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = Color.red;
+                    }
+                //   if (manager.gameStateLogic.GetStoredResourceAmount(Resource.money) < manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)) == false)
+                //   {
+                //       
+                //   }
+
                 }
 
-                BuildOnClick buildOnClick = button.GetComponent<BuildOnClick>();
+
                 buildOnClick.farmTileIndex = farmTileIndex;
                 buildOnClick.SetCostText(manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)));
-                if(button.interactable == false)
-                {
-                    buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = Color.red;
-                }
+
                 
             }
         }

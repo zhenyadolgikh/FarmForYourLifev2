@@ -774,7 +774,7 @@ public class GameStateLogic : MonoBehaviour
         if(actionLevel == 3)
         {
             message.wasActionValid = false;
-            message.errorMessage = "Your storage is already at max level";
+            message.errorMessage = "Your actions are already at max level";
             return message;
         }
         if(moneyStored < increaseActionsCost)
@@ -822,7 +822,12 @@ public class GameStateLogic : MonoBehaviour
             message.errorMessage = "You do not have enough actions";
             return message;
         }
-
+        if(cardsInHand.Count >= maximumHandSize)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You have the maximum amount of cards in hand";
+            return message;
+        }
         message.wasActionValid = true;
         return message;
     }

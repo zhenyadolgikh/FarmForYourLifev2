@@ -10926,6 +10926,11 @@ MonoBehaviour:
     stage1: {fileID: 4851409901082054203, guid: d74cef0f75cac954e9ce02c7bc7e065f, type: 3}
     stage2: {fileID: 4851409901082054203, guid: 716cce648e2a536418458437d320a2a4, type: 3}
     stage3: {fileID: 4851409901082054203, guid: d22e481254326c2488043e3fc5831a03, type: 3}
+  pigStages:
+    stage0: {fileID: 5009780488372480767, guid: 8d5141ab80de57e4c9152b4248a86bda, type: 3}
+    stage1: {fileID: 5009780488372480767, guid: 5b3c5efbac095a64eb288bc46f2f2a35, type: 3}
+    stage2: {fileID: 5009780488372480767, guid: 3a9e2e501efb28d4b99e24ba23106249, type: 3}
+    stage3: {fileID: 5009780488372480767, guid: 43a2b3ca80992074395bcc645a45ad56, type: 3}
   errorMessage: {fileID: 1292087210}
 --- !u!114 &1751021646 stripped
 MonoBehaviour:

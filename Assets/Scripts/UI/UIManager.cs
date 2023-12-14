@@ -266,20 +266,38 @@ public class UIManager : MonoBehaviour
             int index = farmTileValue.Key;
             if (farmTile.isBuilt)
             {
-
-                if(farmTile.storedResources == placedMeshes[index].previousAmount)
+                if(farmTile.resourceOnTile != Resource.pigMeat)
                 {
-                    continue;
+                    if (farmTile.storedResources == placedMeshes[index].previousAmount)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        Destroy(placedMeshes[index].meshToPlace);
+                        placedMeshes[index].previousAmount = farmTile.storedResources;
+                        GameObject meshToPlace = Instantiate<GameObject>(GetMeshToPlaceBuilt(farmTile.resourceOnTile, farmTile.storedResources));
+                        placedMeshes[index].meshToPlace = meshToPlace;
+                        placedMeshes[index].meshToPlace.transform.position = farmTilePositions[index].transform.position;
+                    }
                 }
                 else
                 {
-                    Destroy(placedMeshes[index].meshToPlace);
-                    placedMeshes[index].previousAmount = farmTile.storedResources;
-                    GameObject meshToPlace = Instantiate<GameObject>(GetMeshToPlaceBuilt(farmTile.resourceOnTile,farmTile.storedResources));
-                    placedMeshes[index].meshToPlace = meshToPlace;
-                    placedMeshes[index].meshToPlace.transform.position = farmTilePositions[index].transform.position;
-
+                    if (farmTile.amountOfAnimals == placedMeshes[index].previousAmount)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        Destroy(placedMeshes[index].meshToPlace);
+                        placedMeshes[index].previousAmount = farmTile.amountOfAnimals;
+                        GameObject meshToPlace = Instantiate<GameObject>(GetMeshToPlaceBuilt(farmTile.resourceOnTile, farmTile.amountOfAnimals));
+                        placedMeshes[index].meshToPlace = meshToPlace;
+                        placedMeshes[index].meshToPlace.transform.position = farmTilePositions[index].transform.position;
+                    }
                 }
+
+
                 
             }
         }
@@ -349,7 +367,6 @@ public class UIManager : MonoBehaviour
         }
         if(resource == Resource.cinnamon)
         {
-            print("kommer den hit ");
             if (amount == 0)
             {
                 return cinnamonStages.stage0;
@@ -369,7 +386,23 @@ public class UIManager : MonoBehaviour
         }
         if(resource == Resource.pigMeat)
         {
-            return pigStages.stage0;
+
+            if(amount <= 4)
+            {
+                return pigStages.stage0;
+            }
+            if( 7 < amount && amount < 12)
+            {
+                return pigStages.stage1;
+            }
+            if( 11 < amount && amount < 17)
+            {
+                return pigStages.stage2;
+            }
+            if( 16 < amount )
+            {
+                return pigStages.stage3;
+            }
         }
 
         return builtWeatMesh;

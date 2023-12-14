@@ -31,6 +31,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     bool mouseOver = false;
 
 
+    public Color defaultTextColor;
 
 
 
@@ -98,6 +99,8 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 buildAction.resource = GetAssociatedResource(button.name);
                 button.interactable = true;
 
+
+
                 if (!manager.IsActionValid(buildAction).wasActionValid)
                 {
                     button.interactable = false;
@@ -106,6 +109,10 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                     {
                         buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = Color.red;
                     }
+                }
+                else
+                {
+                    buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = defaultTextColor;
                 }
 
                 buildOnClick.farmTileIndex = farmTileIndex;

@@ -349,6 +349,7 @@ MonoBehaviour:
   farmTileIndex: -1
   normalColor: {r: 0, g: 0, b: 0, a: 0}
   hoverOverColor: {r: 0.6226415, g: 0.5058962, b: 0.4669811, a: 0.5529412}
+  defaultTextColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
 --- !u!1 &3460063795751052933
 GameObject:
   m_ObjectHideFlags: 0

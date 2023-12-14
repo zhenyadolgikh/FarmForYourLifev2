@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10860,7 +10860,7 @@ MonoBehaviour:
   builtWeatMesh: {fileID: 3896802615584217673, guid: fe975d32e34ccfe4ebbddd4d269ed82f, type: 3}
   builtAppleMesh: {fileID: 8822082771687537059, guid: fbdbe657aa11c1b4c8d61d01da83ed50, type: 3}
   builtCinnamonMesh: {fileID: 8511534797816126092, guid: e05b81c96c96e724784cb735b744e592, type: 3}
-  workerMesh: {fileID: 919132149155446097, guid: 6a38766c867f54e659a483a3135b70d8, type: 3}
+  workerMesh: {fileID: 9044434817311573367, guid: 68969cfa6e5068a4c96ab4e68f311581, type: 3}
   farmTextPrefab: {fileID: 0}
   hudState: 0
   wheatText: {fileID: 1957693003}
@@ -10876,6 +10876,16 @@ MonoBehaviour:
     stage1: {fileID: 4559146449061823191, guid: 9a2497d23b5106749b3bdf4f68741062, type: 3}
     stage2: {fileID: 4559146449061823191, guid: 7bbf8478a9c03f9418dbdfb3c866bb4f, type: 3}
     stage3: {fileID: 4559146449061823191, guid: 2c4d1d5503ff5324ca2c9d8191c8c3dd, type: 3}
+  appleStages:
+    stage0: {fileID: 2781399384096981458, guid: 84f6315b410820e4c8aaaf27923f2a80, type: 3}
+    stage1: {fileID: 2781399384096981458, guid: 0548110f7cf38294cbbf8197491daa49, type: 3}
+    stage2: {fileID: 2781399384096981458, guid: 78d6af648e4d3ce44bbe9610f912aa8e, type: 3}
+    stage3: {fileID: 2781399384096981458, guid: c16f880b31f0ec043b1683aa731d0690, type: 3}
+  cinnamonStages:
+    stage0: {fileID: 4851409901082054203, guid: 184d3e492e7a535409e3e76172cf3401, type: 3}
+    stage1: {fileID: 4851409901082054203, guid: d74cef0f75cac954e9ce02c7bc7e065f, type: 3}
+    stage2: {fileID: 4851409901082054203, guid: 716cce648e2a536418458437d320a2a4, type: 3}
+    stage3: {fileID: 4851409901082054203, guid: d22e481254326c2488043e3fc5831a03, type: 3}
   errorMessage: {fileID: 1292087210}
 --- !u!114 &1751021646 stripped
 MonoBehaviour:

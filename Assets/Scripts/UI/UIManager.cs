@@ -49,6 +49,8 @@ public class UIManager : MonoBehaviour
 
     public FarmMeshStages wheatStages;
     public FarmMeshStages appleStages;
+    public FarmMeshStages cinnamonStages;
+    public FarmMeshStages pigStages;
 
     public ErrorMessage errorMessage;
 
@@ -264,22 +266,21 @@ public class UIManager : MonoBehaviour
             int index = farmTileValue.Key;
             if (farmTile.isBuilt)
             {
-                if(farmTile.resourceOnTile != Resource.pigMeat)
-                {   
-                    if(farmTile.storedResources == placedMeshes[index].previousAmount)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        Destroy(placedMeshes[index].meshToPlace);
-                        placedMeshes[index].previousAmount = farmTile.storedResources;
-                        GameObject meshToPlace = Instantiate<GameObject>(GetMeshToPlaceBuilt(farmTile.resourceOnTile,farmTile.storedResources));
-                        placedMeshes[index].meshToPlace = meshToPlace;
-                        placedMeshes[index].meshToPlace.transform.position = farmTilePositions[index].transform.position;
 
-                    }
+                if(farmTile.storedResources == placedMeshes[index].previousAmount)
+                {
+                    continue;
                 }
+                else
+                {
+                    Destroy(placedMeshes[index].meshToPlace);
+                    placedMeshes[index].previousAmount = farmTile.storedResources;
+                    GameObject meshToPlace = Instantiate<GameObject>(GetMeshToPlaceBuilt(farmTile.resourceOnTile,farmTile.storedResources));
+                    placedMeshes[index].meshToPlace = meshToPlace;
+                    placedMeshes[index].meshToPlace.transform.position = farmTilePositions[index].transform.position;
+
+                }
+                
             }
         }
     }
@@ -348,11 +349,27 @@ public class UIManager : MonoBehaviour
         }
         if(resource == Resource.cinnamon)
         {
-            return builtCinnamonMesh;
+            print("kommer den hit ");
+            if (amount == 0)
+            {
+                return cinnamonStages.stage0;
+            }
+            if (amount == 40)
+            {
+                return cinnamonStages.stage1;
+            }
+            if (amount == 80)
+            {
+                return cinnamonStages.stage2;
+            }
+            if (amount == 120)
+            {
+                return cinnamonStages.stage3;
+            }
         }
         if(resource == Resource.pigMeat)
         {
-            return builtPigMesh;
+            return pigStages.stage0;
         }
 
         return builtWeatMesh;

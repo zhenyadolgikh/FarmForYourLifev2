@@ -17,7 +17,9 @@ public class GameStateLogic : MonoBehaviour
     }
     private int maxActions = 0;
     private int currentActions = 0;
-    private int actionLevel = 0;
+    private int actionLevel = 1;
+    private int increaseActionsCost = 500;
+
 
 
     private int increaseStorageCost = 500;
@@ -35,7 +37,8 @@ public class GameStateLogic : MonoBehaviour
     public int maxTurn = 0;
 
     private int workersCreated = 0;
-    private int workerPay = 100; 
+    private int workerPay = 100;
+    private int buyWorkerCost = 200;
 
     private SortedDictionary<int, Worker> workerRegistry = new SortedDictionary<int, Worker>();
 
@@ -707,9 +710,39 @@ public class GameStateLogic : MonoBehaviour
         {
             return IsValidToIncreaseStorage((IncreaseStorageAction)action, isActionValidMessage);
         }
+        if(action is IncreaseActionsAction)
+        {
+            return IsValidToIncreaseActions((IncreaseActionsAction)action, isActionValidMessage);
+        }
+        if(action is BuyWorkerAction)
+        {
+            return IsValidToBuyWorker((BuyWorkerAction)action, isActionValidMessage);
+
+        }
 
         isActionValidMessage.wasActionValid = true;
         return isActionValidMessage;
+    }
+
+    private IsActionValidMessage IsValidToBuyWorker(BuyWorkerAction action, IsActionValidMessage message)
+    {
+        if(moneyStored < buyWorkerCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough money";
+            return message;
+        }
+        int actionCost = 1;
+        if(actionCost > currentActions)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough actions";
+            return message;
+        }
+
+
+        message.wasActionValid = true;
+        return message;
     }
 
     private IsActionValidMessage IsValidToIncreaseStorage(IncreaseStorageAction action, IsActionValidMessage message)
@@ -733,9 +766,30 @@ public class GameStateLogic : MonoBehaviour
             message.errorMessage = "You do not have enough actions";
             return message;
         }
-
-
-
+        message.wasActionValid = true;
+        return message;
+    }
+    private IsActionValidMessage IsValidToIncreaseActions(IncreaseActionsAction action, IsActionValidMessage message)
+    {
+        if(actionLevel == 3)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "Your storage is already at max level";
+            return message;
+        }
+        if(moneyStored < increaseActionsCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You have to little money";
+            return message;
+        }
+        int actionCost = 1;
+        if (currentActions < actionCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough actions";
+            return message;
+        }
         message.wasActionValid = true;
         return message;
     }
@@ -872,6 +926,34 @@ public class GameStateLogic : MonoBehaviour
         {
             IncreaseStorage((IncreaseStorageAction)action);
         }
+        if(action is IncreaseActionsAction)
+        {
+            IncreaseActions((IncreaseActionsAction)action);
+        }
+        if(action is BuyWorkerAction)
+        {
+            BuyWorker((BuyWorkerAction)action);
+        }
+    }
+
+
+    private void BuyWorker(BuyWorkerAction action)
+    {
+        moneyStored -= buyWorkerCost;
+        currentActions -= 1;
+
+        AddWorker();
+    }
+
+    private void IncreaseActions(IncreaseActionsAction action)
+    {
+        actionLevel += 1;
+
+        maxActions = 2 + actionLevel ;
+
+        moneyStored -= increaseActionsCost;
+
+        currentActions -= 1;
     }
 
     private void IncreaseStorage(IncreaseStorageAction action)

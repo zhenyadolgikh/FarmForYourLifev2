@@ -47,9 +47,12 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI turnText;
     public TextMeshProUGUI amountOfWorkersText;
 
-
+    public FarmMeshStages wheatStages;
 
     public ErrorMessage errorMessage;
+
+
+    private ContractLayout contractLayout;
 
     public void AddUIElement(AddedUIElement uiElement)
     {
@@ -134,6 +137,7 @@ public class UIManager : MonoBehaviour
         PlaceWorkers();
         UpdateResourceText();
         ResourceTextOnTile();
+        RefreshContractCards();
 
     }
 
@@ -191,6 +195,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         gameStateLogic.Setup();
+
+        contractLayout = FindAnyObjectByType<ContractLayout>();
 
         for(int i = 0; i < 9; i++)
         {
@@ -344,6 +350,11 @@ public class UIManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private void RefreshContractCards()
+    {
+        contractLayout.OrderCards();
     }
 
     void ResetWorkerPositions()

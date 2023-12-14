@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,15 @@ public struct ResourcesAmount
     public int pigMeatCost;
     public int moneyGained;
 }
+[Serializable]
+public struct FarmMeshStages
+{
+    public GameObject stage0;
+    public GameObject stage1;
+    public GameObject stage2;
+    public GameObject stage3;
+}
+
 
 public class EnumAndStructs 
 {

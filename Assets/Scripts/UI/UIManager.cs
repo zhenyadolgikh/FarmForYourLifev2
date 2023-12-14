@@ -137,6 +137,15 @@ public class UIManager : MonoBehaviour
 
     }
 
+//   private void HUDVFX()
+//   {
+//       int currentMoney = gameStateLogic.GetStoredResourceAmount(Resource.money);
+//       if(currentMoney != 0)
+//       {
+//
+//       }
+//   }
+
     private void UpdateResourceText()
     {
         moneyText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.money).ToString());

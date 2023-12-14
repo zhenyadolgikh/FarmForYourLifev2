@@ -7,4 +7,6 @@ public class BuildingOnTile
     public GameObject meshToPlace;
     public bool isBuilt = false;
 
+    public int previousAmount = -1;
+
 }

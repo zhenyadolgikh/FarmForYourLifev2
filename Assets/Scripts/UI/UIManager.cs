@@ -260,11 +260,36 @@ public class UIManager : MonoBehaviour
         //          farmtileposition för mesh
             }
             FarmTile farmTile = farmTileValue.Value;
+            int index = farmTileValue.Key;
             if (farmTile.isBuilt)
             {
                 if(farmTile.resourceOnTile != Resource.pigMeat)
                 {
-                    //if()
+                    if(farmTile.storedResources == 0)
+                    {
+                        if (placedMeshes[index].previousAmount ==0)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            Destroy(placedMeshes[index].meshToPlace);
+                            placedMeshes[index].previousAmount = 0;
+                            
+                        }
+                    }
+                    if(farmTile.storedResources == 40)
+                    {
+
+                    }
+                    if(farmTile.storedResources == 80)
+                    {
+
+                    }
+                    if(farmTile.storedResources == 120)
+                    {
+
+                    }
                 }
             }
         }
@@ -291,6 +316,7 @@ public class UIManager : MonoBehaviour
 
         return builtWeatMesh;
     }
+
 
     void PlaceWorkers()
     {

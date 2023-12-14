@@ -10907,10 +10907,10 @@ MonoBehaviour:
   turnText: {fileID: 1431141}
   amountOfWorkersText: {fileID: 1671490207}
   wheatStages:
-    stage0: {fileID: 0}
-    stage1: {fileID: 0}
-    stage2: {fileID: 0}
-    stage3: {fileID: 0}
+    stage0: {fileID: 4559146449061823191, guid: b50ccf258a6ec59478cca05ae0a5e246, type: 3}
+    stage1: {fileID: 4559146449061823191, guid: 9a2497d23b5106749b3bdf4f68741062, type: 3}
+    stage2: {fileID: 4559146449061823191, guid: 7bbf8478a9c03f9418dbdfb3c866bb4f, type: 3}
+    stage3: {fileID: 4559146449061823191, guid: 2c4d1d5503ff5324ca2c9d8191c8c3dd, type: 3}
   errorMessage: {fileID: 1292087210}
 --- !u!114 &1751021646 stripped
 MonoBehaviour:

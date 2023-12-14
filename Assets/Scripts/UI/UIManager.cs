@@ -247,7 +247,7 @@ public class UIManager : MonoBehaviour
         
         foreach(KeyValuePair<int, FarmTile> farmTileValue in gameStateLogic.GetFarmTiles())
         {
-            if(farmTileValue.Value.buildingOnTile && placedMeshes[farmTileValue.Key].meshToPlace == null)
+            if(farmTileValue.Value.buildingOnTile && placedMeshes[farmTileValue.Key].meshToPlace == null && !farmTileValue.Value.isBuilt)
             {
                 GameObject meshToPlace = GetMeshToPlace(farmTileValue.Value.resourceOnTile);
 
@@ -259,9 +259,13 @@ public class UIManager : MonoBehaviour
         //      farmTileValue.Value.resourceOnTile lägg ut mesh
         //          farmtileposition för mesh
             }
-            if(farmTileValue.Value.isBuilt && placedMeshes[farmTileValue.Key].isBuilt == false)
+            FarmTile farmTile = farmTileValue.Value;
+            if (farmTile.isBuilt)
             {
-
+                if(farmTile.resourceOnTile != Resource.pigMeat)
+                {
+                    //if()
+                }
             }
         }
     }

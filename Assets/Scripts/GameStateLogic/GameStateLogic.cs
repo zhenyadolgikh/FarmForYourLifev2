@@ -71,6 +71,7 @@ public class GameStateLogic : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.M))
         {
+            print("får man pengar");
             AddResources(Resource.money, 1000);
         }
     }

@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI amountOfWorkersText;
 
     public FarmMeshStages wheatStages;
+    public FarmMeshStages appleStages;
 
     public ErrorMessage errorMessage;
 
@@ -264,30 +265,18 @@ public class UIManager : MonoBehaviour
             if (farmTile.isBuilt)
             {
                 if(farmTile.resourceOnTile != Resource.pigMeat)
-                {
-                    if(farmTile.storedResources == 0)
+                {   
+                    if(farmTile.storedResources == placedMeshes[index].previousAmount)
                     {
-                        if (placedMeshes[index].previousAmount ==0)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            Destroy(placedMeshes[index].meshToPlace);
-                            placedMeshes[index].previousAmount = 0;
-                            
-                        }
+                        continue;
                     }
-                    if(farmTile.storedResources == 40)
+                    else
                     {
-
-                    }
-                    if(farmTile.storedResources == 80)
-                    {
-
-                    }
-                    if(farmTile.storedResources == 120)
-                    {
+                        Destroy(placedMeshes[index].meshToPlace);
+                        placedMeshes[index].previousAmount = farmTile.storedResources;
+                        GameObject meshToPlace = Instantiate<GameObject>(GetMeshToPlaceBuilt(farmTile.resourceOnTile,farmTile.storedResources));
+                        placedMeshes[index].meshToPlace = meshToPlace;
+                        placedMeshes[index].meshToPlace.transform.position = farmTilePositions[index].transform.position;
 
                     }
                 }
@@ -297,13 +286,65 @@ public class UIManager : MonoBehaviour
 
     private GameObject GetMeshToPlace(Resource resource)
     {
-        if(resource == Resource.wheat)
+        return builtWeatMesh;
+    //   if(resource == Resource.wheat)
+    //   {
+    //       return builtWeatMesh;
+    //   }
+    //   if(resource == Resource.apple)
+    //   {
+    //       return builtAppleMesh;
+    //   }
+    //   if(resource == Resource.cinnamon)
+    //   {
+    //       return builtCinnamonMesh;
+    //   }
+    //   if(resource == Resource.pigMeat)
+    //   {
+    //       return builtPigMesh;
+    //   }
+    //
+    //   return builtWeatMesh;
+    }
+    private GameObject GetMeshToPlaceBuilt(Resource resource,int amount)
+    {
+        if(resource == Resource.wheat )
         {
-            return builtWeatMesh;
+            if(amount == 0)
+            {
+                return wheatStages.stage0;
+            }
+            if(amount == 40)
+            {
+                return wheatStages.stage1;
+            }
+            if(amount == 80)
+            {
+                return wheatStages.stage2;
+            }
+            if(amount == 120)
+            {
+                return wheatStages.stage3;
+            }
         }
         if(resource == Resource.apple)
         {
-            return builtAppleMesh;
+            if (amount == 0)
+            {
+                return appleStages.stage0;
+            }
+            if (amount == 40)
+            {
+                return appleStages.stage1;
+            }
+            if (amount == 80)
+            {
+                return appleStages.stage2;
+            }
+            if (amount == 120)
+            {
+                return appleStages.stage3;
+            }
         }
         if(resource == Resource.cinnamon)
         {

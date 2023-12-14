@@ -9924,7 +9924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd23cdc10298004f86270286d877c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  padding: 0
+  paddingX: 0
+  paddingY: 50
   scaleModifier: 0
 --- !u!4 &1474989835 stripped
 Transform:
@@ -10911,6 +10912,11 @@ MonoBehaviour:
     stage1: {fileID: 4559146449061823191, guid: 9a2497d23b5106749b3bdf4f68741062, type: 3}
     stage2: {fileID: 4559146449061823191, guid: 7bbf8478a9c03f9418dbdfb3c866bb4f, type: 3}
     stage3: {fileID: 4559146449061823191, guid: 2c4d1d5503ff5324ca2c9d8191c8c3dd, type: 3}
+  appleStages:
+    stage0: {fileID: 2781399384096981458, guid: 84f6315b410820e4c8aaaf27923f2a80, type: 3}
+    stage1: {fileID: 2781399384096981458, guid: 0548110f7cf38294cbbf8197491daa49, type: 3}
+    stage2: {fileID: 2781399384096981458, guid: 78d6af648e4d3ce44bbe9610f912aa8e, type: 3}
+    stage3: {fileID: 2781399384096981458, guid: c16f880b31f0ec043b1683aa731d0690, type: 3}
   errorMessage: {fileID: 1292087210}
 --- !u!114 &1751021646 stripped
 MonoBehaviour:

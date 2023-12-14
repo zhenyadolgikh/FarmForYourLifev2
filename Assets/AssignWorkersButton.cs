@@ -19,6 +19,10 @@ public class AssignWorkersButton : MonoBehaviour
 
     public void AssignWorkersOnClick()
     {
+        if(uiManager == null)
+        {
+            uiManager = UIManager.instance;
+        }
         currentWorkAssigned.Clear();
 
         textShowingWorkerCount.gameObject.SetActive(true);

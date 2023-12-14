@@ -80,6 +80,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
             if (!isActive)
             {
+
                 manager.AddUIElement(new AddedUIElement(uiElementsToAdd, HudState.standard));
                 optionPanel.SetActive(true);
 
@@ -95,7 +96,9 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 BuildAction buildAction = new BuildAction();
                 buildAction.farmTileIndex = farmTileIndex;
                 buildAction.resource = GetAssociatedResource(button.name);
-                if(!manager.IsActionValid(buildAction).wasActionValid)
+                button.interactable = true;
+
+                if (!manager.IsActionValid(buildAction).wasActionValid)
                 {
                     button.interactable = false;
 
@@ -103,18 +106,11 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                     {
                         buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = Color.red;
                     }
-                //   if (manager.gameStateLogic.GetStoredResourceAmount(Resource.money) < manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)) == false)
-                //   {
-                //       
-                //   }
-
                 }
-
 
                 buildOnClick.farmTileIndex = farmTileIndex;
                 buildOnClick.SetCostText(manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)));
-
-                
+         
             }
         }
         if (manager.hudState == HudState.assignWorkers)

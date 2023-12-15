@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7d394725b4c3c49a7162848980096e, type: 3}
   m_Name: First Level victory condition
   m_EditorClassIdentifier: 
+  amountOfTurns: 12

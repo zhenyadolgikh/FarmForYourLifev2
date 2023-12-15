@@ -14,6 +14,7 @@ public class EndPanel : MonoBehaviour
 
     public UIManager manager;
 
+
     public void GameEnd()
     {
         if (manager.gameStateLogic.GetIfVictorious())
@@ -23,6 +24,7 @@ public class EndPanel : MonoBehaviour
             endPanel.SetActive(true);
         }
         else if(manager.gameStateLogic.GetHasLost()){
+ 
             endText.SetText("Haha, you lost!");
             endPanel.SetActive(true);
         }
@@ -32,9 +34,7 @@ public class EndPanel : MonoBehaviour
     {
         endPanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("Hello??");
-        startPanel.SetActive(false);   
-
+        startPanel.SetActive(false);
     }
 
     public void OnExit()

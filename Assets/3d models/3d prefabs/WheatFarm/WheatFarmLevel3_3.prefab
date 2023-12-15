@@ -104,6 +104,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c8c2e019f26849e99dcc6306ced0400, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63fb98c113beb4eb2b5285a1ae217321, type: 2}
     - target: {fileID: 919132149155446097, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
       propertyPath: m_Name
       value: SM_Wheatt_Low (5)
@@ -182,6 +190,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c8c2e019f26849e99dcc6306ced0400, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63fb98c113beb4eb2b5285a1ae217321, type: 2}
     - target: {fileID: 919132149155446097, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
       propertyPath: m_Name
       value: SM_Wheatt_Low (2)
@@ -244,6 +260,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e172e8d1f62154360afb1355b8b0c44e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68c40772ed5434a9f9bdd6d93b12b117, type: 2}
     - target: {fileID: 919132149155446097, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
       propertyPath: m_Name
       value: SM_StageOne_Low (1)
@@ -306,6 +330,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e172e8d1f62154360afb1355b8b0c44e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68c40772ed5434a9f9bdd6d93b12b117, type: 2}
     - target: {fileID: 919132149155446097, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
       propertyPath: m_Name
       value: SM_StageOne_Low (2)
@@ -368,6 +400,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e172e8d1f62154360afb1355b8b0c44e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68c40772ed5434a9f9bdd6d93b12b117, type: 2}
     - target: {fileID: 919132149155446097, guid: cc1f808f4512f4118b13214489ff455d, type: 3}
       propertyPath: m_Name
       value: SM_StageOne_Low
@@ -446,6 +486,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c8c2e019f26849e99dcc6306ced0400, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63fb98c113beb4eb2b5285a1ae217321, type: 2}
     - target: {fileID: 919132149155446097, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
       propertyPath: m_Name
       value: SM_Wheatt_Low (1)
@@ -524,6 +572,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c8c2e019f26849e99dcc6306ced0400, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63fb98c113beb4eb2b5285a1ae217321, type: 2}
     - target: {fileID: 919132149155446097, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
       propertyPath: m_Name
       value: SM_Wheatt_Low (3)
@@ -602,6 +658,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c8c2e019f26849e99dcc6306ced0400, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63fb98c113beb4eb2b5285a1ae217321, type: 2}
     - target: {fileID: 919132149155446097, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
       propertyPath: m_Name
       value: SM_Wheatt_Low (4)
@@ -680,6 +744,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c8c2e019f26849e99dcc6306ced0400, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63fb98c113beb4eb2b5285a1ae217321, type: 2}
     - target: {fileID: 919132149155446097, guid: 6e758c48150c44e038efb8e7c6d2b5a0, type: 3}
       propertyPath: m_Name
       value: SM_Wheatt_Low

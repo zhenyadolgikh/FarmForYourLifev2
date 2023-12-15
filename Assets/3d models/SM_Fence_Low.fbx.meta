@@ -3,7 +3,22 @@ guid: 2a3ed20331f274fa8a1d4bb25c257ad8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_eyes
+    second: {fileID: 2100000, guid: cce65d4237aec4ace97707a54fbf0eb0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_gras
+    second: {fileID: 2100000, guid: cb4ad9bb18e924516aa6205132603945, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_woodhand
+    second: {fileID: 2100000, guid: c27a4fba6413b4d3db03433d872594e5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

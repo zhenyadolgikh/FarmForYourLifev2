@@ -3808,6 +3808,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShuffleSpecialCardsAmountText (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1338276359}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShuffleOnClick, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6868735163784329692, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -23
@@ -3827,7 +3855,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1338276359}
   m_SourcePrefab: {fileID: 100100000, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
 --- !u!224 &502538307 stripped
 RectTransform:
@@ -4078,6 +4109,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577744248}
   m_CullTransparentMesh: 1
+--- !u!1 &578241118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+  m_PrefabInstance: {fileID: 1532077023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &578241124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578241118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d883924245ef5644d8a849ecb7338fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfCard: 1
+  cost: 200
 --- !u!224 &634147586 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6226598089653545515, guid: dda5babc786360047a9b6e29f161ed10, type: 3}
@@ -9498,6 +9548,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446e49de4fe8a2d45933fa4ed8799b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1338276353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+  m_PrefabInstance: {fileID: 502538306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1338276359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338276353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d883924245ef5644d8a849ecb7338fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfCard: 0
+  cost: 200
 --- !u!1001 &1351239694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10853,6 +10922,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 578241124}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShuffleOnClick, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7924528186144960138, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_Name
       value: ShuffleContractCards
@@ -10864,7 +10961,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 578241124}
   m_SourcePrefab: {fileID: 100100000, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
 --- !u!1001 &1552039275
 PrefabInstance:
@@ -14360,7 +14460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.size
-      value: 6
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: specialCardsForLevel.Array.data[0]
@@ -14405,27 +14505,75 @@ PrefabInstance:
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 1e4df46dcff7d4940a6f95a9154fb3be, type: 2}
+      objectReference: {fileID: 11400000, guid: 09a6f7846f622a3478774c9430b1170f, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 1e4df46dcff7d4940a6f95a9154fb3be, type: 2}
+      objectReference: {fileID: 11400000, guid: bd0ebdad22835cd48b963859b81b5130, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: bfff58d987244e842a561b73f5ae41b4, type: 2}
+      objectReference: {fileID: 11400000, guid: d05ff194a749efa4a94ffe85c4e3d688, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: bfff58d987244e842a561b73f5ae41b4, type: 2}
+      objectReference: {fileID: 11400000, guid: 489244595dd3b25459ec9570f0bf507c, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: bfff58d987244e842a561b73f5ae41b4, type: 2}
+      objectReference: {fileID: 11400000, guid: aa3ef5eb1949cfd4ab2fd9723f5a25d5, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: contractCardsForLevel.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: bfff58d987244e842a561b73f5ae41b4, type: 2}
+      objectReference: {fileID: 11400000, guid: 157e932c2924f4b4398c28774dcbd1d8, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c74d1ee37d558540a714ede82efda35, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8167742ce0c855a48b723e9e2b1ec2ab, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: fa361e065644e044ea4a253e9d2240af, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b954b38c222eec49abe633e66a5400e, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6477632c9aa9f9b48a21e2124d64d819, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92fd3fb2f16bbfe4b8bd3f5d9d9950e1, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: c00bcc6096d2057499ed11c17ec786ed, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 14f59d5d1e02b79408196fa4d8c861e2, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: c375c41b673d23946bcd970e1a6005e4, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 83f1d7a33a3637a40bb0eacf4c49b91f, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[16]
+      value: 
+      objectReference: {fileID: 11400000, guid: 99fba0f4bb7391a4399c7135d752fa7f, type: 2}
+    - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
+      propertyPath: contractCardsForLevel.Array.data[17]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6cb9ab9b99097884bb451d0c0845f5b4, type: 2}
     - target: {fileID: 5498686409153527355, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -953.1263

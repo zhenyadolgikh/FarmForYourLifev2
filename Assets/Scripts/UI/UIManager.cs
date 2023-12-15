@@ -191,7 +191,9 @@ public class UIManager : MonoBehaviour
 
                if (farmTile.buildingOnTile || farmTile.isBuilt)
                {
-                   TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>();
+                   TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
+
+                    farmTileText.gameObject.transform.parent.gameObject.SetActive(true);
 
                    if (farmTileText != null && farmTile.resourceOnTile != Resource.pigMeat)
                    {
@@ -202,7 +204,14 @@ public class UIManager : MonoBehaviour
                        farmTileText.SetText(farmTileRef.Value.amountOfAnimals + " / " + farmTileRef.Value.maxAmountOfAnimals);
                    }
                }
-           }
+               else
+                {
+                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
+                    farmTileText.gameObject.transform.parent.gameObject.SetActive(false);
+
+                }
+
+            }
        }
    }
 

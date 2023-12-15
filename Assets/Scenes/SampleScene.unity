@@ -10315,7 +10315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 130, y: -90}
+  m_AnchoredPosition: {x: 130, y: -76}
   m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1466386806
@@ -10395,7 +10395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paddingX: 10
-  paddingY: 10
+  paddingY: 8
   scaleModifier: 0
 --- !u!4 &1474989835 stripped
 Transform:
@@ -12893,7 +12893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3213224053652965999, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 164.6
+      value: 221.2
       objectReference: {fileID: 0}
     - target: {fileID: 3213224053652965999, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

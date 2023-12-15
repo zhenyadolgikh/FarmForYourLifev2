@@ -307,7 +307,7 @@ RectTransform:
   m_GameObject: {fileID: 7851047416489828555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3801, y: 1.3801, z: 1.3801}
+  m_LocalScale: {x: 1.8898867, y: 1.8898867, z: 1.8898867}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 546350005631752307}
@@ -318,7 +318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39.4, y: 22.1}
+  m_AnchoredPosition: {x: -26.4, y: 25.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8176360821464574860
@@ -443,9 +443,10 @@ MonoBehaviour:
   descriptionText: {fileID: 8390609725000520796}
   cardIndex: -1
   typeOfCard: 0
+  cardIdentifier: 
   inHand: 0
   specialCardSprite: {fileID: 21300000, guid: 51bfe22f266ea4807a3b9e2e895064b5, type: 3}
-  contractCardSprite: {fileID: 21300000, guid: 6c047c43350c6423b93058f24bb8ec43, type: 3}
+  contractCardSprite: {fileID: 21300000, guid: 38fe378ad4af4a44b85aa7840c55fb21, type: 3}
   borderImage: {fileID: 8314239201640319425}
   wheatIndicator: {fileID: 7803961712258959031}
   appleIndicator: {fileID: 6133623690672178115}

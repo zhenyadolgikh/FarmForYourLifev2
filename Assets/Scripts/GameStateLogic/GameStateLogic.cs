@@ -202,8 +202,6 @@ public class GameStateLogic : MonoBehaviour
         maxTurn = victorCondition.amountOfTurns;
 
         AddWorker();
-        AddWorker();
-        AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
         AddResources(Resource.money,1500);
         FillCardsOnTable();

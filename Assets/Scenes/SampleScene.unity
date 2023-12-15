@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12021,6 +12021,7 @@ MonoBehaviour:
   - {fileID: 1178814768}
   - {fileID: 666461868}
   cardDeck: {fileID: 858217201}
+  endPanel: {fileID: 147225627}
   testString: Testar om korrekt objekt
   builtPigMesh: {fileID: 919132149155446097, guid: 6dc4ca25cfe6c4c77a64362f8ab0937d, type: 3}
   builtWeatMesh: {fileID: 3896802615584217673, guid: fe975d32e34ccfe4ebbddd4d269ed82f, type: 3}
@@ -13940,7 +13941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
+      value: OnRestart
       objectReference: {fileID: 0}
     - target: {fileID: 4826238295232198917, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

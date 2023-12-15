@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class VictoryCondition : ScriptableObject
 {
-
+    public int amountOfTurns = 0;
 
 
     public virtual bool CheckIfVictorious(GameStateLogic.EffectInterface effectInterface)

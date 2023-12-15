@@ -199,7 +199,7 @@ public class GameStateLogic : MonoBehaviour
         maxActions = 3;
         currentActions = maxActions;
         currentTurn = 1;
-        maxTurn = 12;
+        maxTurn = victorCondition.amountOfTurns;
 
         AddWorker();
         AddWorker();
@@ -299,7 +299,7 @@ public class GameStateLogic : MonoBehaviour
 
     private bool HasLost()
     {
-        return moneyStored < 0;
+        return moneyStored < 0 || currentTurn > maxTurn;
     }
 
     private void PayWorkers()

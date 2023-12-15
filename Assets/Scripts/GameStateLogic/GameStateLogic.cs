@@ -290,16 +290,17 @@ public class GameStateLogic : MonoBehaviour
         //  MoveContractCards();
 
         PayWorkers();
+        currentTurn += 1;
+
 
         hasLost = HasLost();
-
         hasWon = victorCondition.CheckIfVictorious(effectInterface);
-        currentTurn += 1; 
+
     }
 
     private bool HasLost()
     {
-        return moneyStored < 0 || currentTurn > maxTurn;
+        return (moneyStored < 0 || currentTurn > maxTurn);
     }
 
     private void PayWorkers()
@@ -737,9 +738,29 @@ public class GameStateLogic : MonoBehaviour
             return IsValidToBuyWorker((BuyWorkerAction)action, isActionValidMessage);
 
         }
+        if(action is MoveCardsAction)
+        {
+            return IsValidToBuyMove((MoveCardsAction)action, isActionValidMessage);
+
+        }
 
         isActionValidMessage.wasActionValid = true;
         return isActionValidMessage;
+    }
+
+    private IsActionValidMessage IsValidToBuyMove(MoveCardsAction action, IsActionValidMessage message)
+    {
+        if(moneyStored < action.moneyCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough money";
+            return message;
+        }
+
+
+
+        message.wasActionValid = true;
+        return message;
     }
 
     private IsActionValidMessage IsValidToBuyWorker(BuyWorkerAction action, IsActionValidMessage message)
@@ -957,11 +978,32 @@ public class GameStateLogic : MonoBehaviour
         {
             BuyWorker((BuyWorkerAction)action);
         }
+        if(action is MoveCardsAction)
+        {
+            BuyMoveCards((MoveCardsAction)action);
+        }
 
         hasWon = victorCondition.CheckIfVictorious(effectInterface);
         hasLost = HasLost();
     }
 
+
+    private void BuyMoveCards(MoveCardsAction action)
+    {
+        //int moneyCost = action.moneyCost;
+        moneyStored -= action.moneyCost;
+
+
+        if(action.typeOfdeck == TypeOfCard.special)
+        {
+            MoveCards<SpecialCard>(specialCardsOnTable, specialCardDeck);
+        }
+        else
+        {
+            MoveCards<ContractCard>(contractCardsOnTable, contractCardDeck);
+        }
+
+    }
 
     private void BuyWorker(BuyWorkerAction action)
     {

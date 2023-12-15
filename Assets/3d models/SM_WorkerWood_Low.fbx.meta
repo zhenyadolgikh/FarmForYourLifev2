@@ -3,7 +3,27 @@ guid: 7cb24c62d648b4e87a15899b85646634
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_eyes
+    second: {fileID: 2100000, guid: 9fb4c1e60892647248ccba23bb65f4fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_woodhand
+    second: {fileID: 2100000, guid: 9e75c454b703c4fe982e22e706162635, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__lambert6
+    second: {fileID: 2100000, guid: fb5d033477ee8447582f490d4d7a4711, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface1
+    second: {fileID: 2100000, guid: fd469b27eebb04914b84dcb6bcb29b0d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

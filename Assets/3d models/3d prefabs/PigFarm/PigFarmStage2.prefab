@@ -132,6 +132,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb4ad9bb18e924516aa6205132603945, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: cce65d4237aec4ace97707a54fbf0eb0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: c27a4fba6413b4d3db03433d872594e5, type: 2}
     - target: {fileID: 919132149155446097, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
       propertyPath: m_Name
       value: SM_Fence_Low
@@ -210,6 +222,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: baf661af4278745a881dfb5f1a366363, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f8b112bbf411461eb3fbbd102ad618d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: baf661af4278745a881dfb5f1a366363, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3aef8123384ad4f42adda4c4b49b1643, type: 2}
     - target: {fileID: 919132149155446097, guid: baf661af4278745a881dfb5f1a366363, type: 3}
       propertyPath: m_Name
       value: SM_Pigg_Low
@@ -288,6 +308,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: baf661af4278745a881dfb5f1a366363, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f8b112bbf411461eb3fbbd102ad618d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: baf661af4278745a881dfb5f1a366363, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3aef8123384ad4f42adda4c4b49b1643, type: 2}
     - target: {fileID: 919132149155446097, guid: baf661af4278745a881dfb5f1a366363, type: 3}
       propertyPath: m_Name
       value: SM_Pigg_Low (2)
@@ -366,6 +394,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb4ad9bb18e924516aa6205132603945, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: cce65d4237aec4ace97707a54fbf0eb0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: c27a4fba6413b4d3db03433d872594e5, type: 2}
     - target: {fileID: 919132149155446097, guid: 2a3ed20331f274fa8a1d4bb25c257ad8, type: 3}
       propertyPath: m_Name
       value: SM_Fence_Low (1)
@@ -444,6 +484,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: baf661af4278745a881dfb5f1a366363, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f8b112bbf411461eb3fbbd102ad618d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: baf661af4278745a881dfb5f1a366363, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3aef8123384ad4f42adda4c4b49b1643, type: 2}
     - target: {fileID: 919132149155446097, guid: baf661af4278745a881dfb5f1a366363, type: 3}
       propertyPath: m_Name
       value: SM_Pigg_Low (3)

@@ -193,9 +193,13 @@ public class UIManager : MonoBehaviour
                {
                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>();
 
-                   if (farmTileText != null)
+                   if (farmTileText != null && farmTile.resourceOnTile != Resource.pigMeat)
                    {
                        farmTileText.SetText(farmTileRef.Value.storedResources + " / " + farmTileRef.Value.maxStoredResources);
+                   }
+                   if (farmTileText != null && farmTile.resourceOnTile == Resource.pigMeat)
+                   {
+                       farmTileText.SetText(farmTileRef.Value.amountOfAnimals + " / " + farmTileRef.Value.maxAmountOfAnimals);
                    }
                }
            }
@@ -391,15 +395,15 @@ public class UIManager : MonoBehaviour
             {
                 return pigStages.stage0;
             }
-            if( 7 < amount && amount < 12)
+            if( 4 < amount && amount < 12)
             {
                 return pigStages.stage1;
             }
-            if( 11 < amount && amount < 17)
+            if( 12 <= amount && amount < 16)
             {
                 return pigStages.stage2;
             }
-            if( 16 < amount )
+            if( 16 <= amount )
             {
                 return pigStages.stage3;
             }

@@ -60,6 +60,10 @@ public class GameStateLogic : MonoBehaviour
 
     private List<Card> cardsInHand = new List<Card>();
 
+    private bool hasWon = false;
+    private bool hasLost = false;
+
+    [SerializeField] private VictoryCondition victorCondition; 
 
     private List<EffectLifeTime> activeEffects = new List<EffectLifeTime>();    
 
@@ -99,6 +103,11 @@ public class GameStateLogic : MonoBehaviour
         public void AddWorker()
         {
             gameStateLogic.AddWorker();
+        }
+
+        public int GetAmountOfResource(Resource resource)
+        {
+            return gameStateLogic.GetStoredResourceAmount(resource);
         }
 
         public void BrainStormShuffleCards()
@@ -282,7 +291,15 @@ public class GameStateLogic : MonoBehaviour
 
         PayWorkers();
 
+        hasLost = HasLost();
+
+        hasWon = victorCondition.CheckIfVictorious(effectInterface);
         currentTurn += 1; 
+    }
+
+    private bool HasLost()
+    {
+        return moneyStored < 0;
     }
 
     private void PayWorkers()
@@ -940,6 +957,9 @@ public class GameStateLogic : MonoBehaviour
         {
             BuyWorker((BuyWorkerAction)action);
         }
+
+        hasWon = victorCondition.CheckIfVictorious(effectInterface);
+        hasLost = HasLost();
     }
 
 
@@ -1190,6 +1210,14 @@ public class GameStateLogic : MonoBehaviour
     public int GetMaxTurn()
     {
         return maxTurn;
+    }
+    public bool GetIfVictorious()
+    {
+        return hasWon;
+    }
+    public bool GetHasLost()
+    {
+        return hasLost;
     }
 
     public Dictionary<int, FarmTile> GetFarmTiles()

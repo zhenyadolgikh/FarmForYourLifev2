@@ -9,25 +9,32 @@ using UnityEngine.SceneManagement;
 public class EndPanel : MonoBehaviour
 {
     public GameObject endPanel;
+    public GameObject startPanel;
     public TextMeshProUGUI endText;
 
     public UIManager manager;
 
+
     public void GameEnd()
     {
-        if (manager.gameStateLogic)
+        if (manager.gameStateLogic.GetIfVictorious())
         {
+            Debug.Log("Vad händer här?");
             endText.SetText("Wow, you won!");
+            endPanel.SetActive(true);
         }
-        else
+        else if(manager.gameStateLogic.GetHasLost()){
+ 
             endText.SetText("Haha, you lost!");
+            endPanel.SetActive(true);
+        }
     }
 
     public void OnRestart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         endPanel.SetActive(false);
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        startPanel.SetActive(false);
     }
 
     public void OnExit()

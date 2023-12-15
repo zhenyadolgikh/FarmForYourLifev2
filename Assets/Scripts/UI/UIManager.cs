@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     private List<List<WorkerPosition>> workerPositions = new List<List<WorkerPosition>>();
 
     public CardDeck cardDeck;
+    public EndPanel endPanel;
 
     public static UIManager instance;
 
@@ -141,6 +142,8 @@ public class UIManager : MonoBehaviour
         UpdateResourceText();
         ResourceTextOnTile();
         RefreshContractCards();
+        endPanel.GameEnd();
+
 
     }
 

@@ -8,6 +8,10 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
+    [SerializeField] private bool isTutorial;
+
+    
+
     public GameStateLogic gameStateLogic;
     public List<GameObject> farmTilePositions = new List<GameObject>();
     public List<BuildingOnTile> placedMeshes = new List<BuildingOnTile>();
@@ -57,6 +61,8 @@ public class UIManager : MonoBehaviour
 
 
     private ContractLayout contractLayout;
+
+
 
     public void AddUIElement(AddedUIElement uiElement)
     {

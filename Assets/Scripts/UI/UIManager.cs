@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -33,7 +34,6 @@ public class UIManager : MonoBehaviour
     public GameObject cinnamonResource;
     public GameObject pigResource;
     public GameObject moneyResource;
-    private Animator resourceAnimator;
 
     public GameObject workerMesh;
 
@@ -288,7 +288,6 @@ public class UIManager : MonoBehaviour
         {
             workerPositions[workerPosition.farmTileIndex][workerPosition.positionOrder] = workerPosition;
         }
-
 
         Refresh();
         

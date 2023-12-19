@@ -12068,6 +12068,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980981339}
   m_CullTransparentMesh: 1
+--- !u!1 &983880532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8749300693549356472, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+  m_PrefabInstance: {fileID: 9131702352972731095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &985296266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18115,7 +18120,9 @@ MonoBehaviour:
   appleResource: {fileID: 314472013}
   cinnamonResource: {fileID: 1155242855}
   pigResource: {fileID: 1805134068}
-  moneyResource: {fileID: 0}
+  moneyResource: {fileID: 983880532}
+  wheatButton: {fileID: 0}
+  moneyButton: {fileID: 0}
   workerMesh: {fileID: 9044434817311573367, guid: 68969cfa6e5068a4c96ab4e68f311581, type: 3}
   farmTextPrefab: {fileID: 0}
   hudState: 0

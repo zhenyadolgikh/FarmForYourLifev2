@@ -5,6 +5,8 @@ using System.Numerics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
@@ -37,6 +39,14 @@ public class UIManager : MonoBehaviour
     public GameObject builtWeatMesh;
     public GameObject builtAppleMesh;
     public GameObject builtCinnamonMesh;
+
+    public GameObject wheatResource;
+    public GameObject appleResource;
+    public GameObject cinnamonResource;
+    public GameObject pigResource;
+    public GameObject moneyResource;
+
+    public ParticleSystem slaughterParticle;
 
     public GameObject workerMesh;
 
@@ -111,6 +121,7 @@ public class UIManager : MonoBehaviour
         {
             PopUIElement();
         }
+
     }
 
 
@@ -214,15 +225,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-//   private void HUDVFX()
-//   {
-//       int currentMoney = gameStateLogic.GetStoredResourceAmount(Resource.money);
-//       if(currentMoney != 0)
-//       {
-//
-//       }
-//   }
-
     private void UpdateResourceText()
     {
         moneyText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.money).ToString());
@@ -243,7 +245,50 @@ public class UIManager : MonoBehaviour
         actionText.SetText(gameStateLogic.GetCurrentActions() + "/" + gameStateLogic.GetMaxActions());
 
 
-        amountOfWorkersText.SetText("Workers " + gameStateLogic.GetWorkerRegistry().Count);
+        amountOfWorkersText.SetText("Workers: " + gameStateLogic.GetWorkerRegistry().Count);
+    }
+
+    public void ResourceVFX(Resource resource)
+    {
+        switch (resource)
+        {
+            case Resource.wheat:
+                Animator wheatAnim = wheatResource.GetComponent<Animator>();
+                wheatAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.apple:
+                Animator appleAnim = appleResource.GetComponent<Animator>();
+                appleAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.cinnamon:
+                Animator cinnamonAnim = cinnamonResource.GetComponent<Animator>();
+                cinnamonAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.pigMeat:
+                Animator pigAnim = pigResource.GetComponent<Animator>();
+                pigAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.money:
+                Animator moneyAnim = moneyResource.GetComponent<Animator>();
+                moneyAnim.SetTrigger("reSize");
+                break;
+
+            default:
+                
+                break;
+        }
+
+    }
+
+    public void SlaughterEffect()
+    {
+        slaughterParticle.Play(true);
+        UnityEngine.Vector2 mousePosition = Input.mousePosition;
+        slaughterParticle.transform.position = new UnityEngine.Vector3(mousePosition.x, mousePosition.y + 130);
     }
 
 
@@ -284,8 +329,6 @@ public class UIManager : MonoBehaviour
             }
        }
    }
-
-
 
     void Start()
     {
@@ -408,7 +451,6 @@ public class UIManager : MonoBehaviour
         {
             workerPositions[workerPosition.farmTileIndex][workerPosition.positionOrder] = workerPosition;
         }
-
 
         Refresh();
         

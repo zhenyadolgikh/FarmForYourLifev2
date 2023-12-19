@@ -5,10 +5,16 @@ using UnityEngine;
 public class MoneyAnimation : StateMachineBehaviour
 {
     public UIManager manager;
+    private Animator resourceAnimator;
+
+    void Start()
+    {
+       // resourceAnimator = GetComponent<Animator>();
+    }
 
     public void MoneyChange()
     {
-        int currentMoney = manager.gameStateLogic.GetStoredResourceAmount(Resource.money);
+        resourceAnimator.SetTrigger("Resize");
     }
 
 

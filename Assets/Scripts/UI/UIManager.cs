@@ -517,25 +517,25 @@ public class UIManager : MonoBehaviour
 
     private GameObject GetMeshToPlace(Resource resource)
     {
+        if(resource == Resource.wheat)
+        {
+            return builtWeatMesh;
+        }
+        if(resource == Resource.apple)
+        {
+            return builtAppleMesh;
+        }
+        if(resource == Resource.cinnamon)
+        {
+            return builtCinnamonMesh;
+        }
+        if(resource == Resource.pigMeat)
+        {
+            return builtPigMesh;
+        }
+
         return builtWeatMesh;
-    //   if(resource == Resource.wheat)
-    //   {
-    //       return builtWeatMesh;
-    //   }
-    //   if(resource == Resource.apple)
-    //   {
-    //       return builtAppleMesh;
-    //   }
-    //   if(resource == Resource.cinnamon)
-    //   {
-    //       return builtCinnamonMesh;
-    //   }
-    //   if(resource == Resource.pigMeat)
-    //   {
-    //       return builtPigMesh;
-    //   }
-    //
-    //   return builtWeatMesh;
+        
     }
     private GameObject GetMeshToPlaceBuilt(Resource resource,int amount)
     {

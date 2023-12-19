@@ -11830,6 +11830,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805927143}
   m_CullTransparentMesh: 1
+--- !u!1001 &814201717
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.231061
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.261774
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358609315890461433, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539665815912513766, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+      propertyPath: m_Name
+      value: signWheat (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 212418058495739017, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
 --- !u!1001 &833989534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20296,10 +20354,10 @@ MonoBehaviour:
   cardDeck: {fileID: 858217201}
   endPanel: {fileID: 147225627}
   testString: Testar om korrekt objekt
-  builtPigMesh: {fileID: 919132149155446097, guid: 6dc4ca25cfe6c4c77a64362f8ab0937d, type: 3}
-  builtWeatMesh: {fileID: 3896802615584217673, guid: fe975d32e34ccfe4ebbddd4d269ed82f, type: 3}
-  builtAppleMesh: {fileID: 8822082771687537059, guid: fbdbe657aa11c1b4c8d61d01da83ed50, type: 3}
-  builtCinnamonMesh: {fileID: 8511534797816126092, guid: e05b81c96c96e724784cb735b744e592, type: 3}
+  builtPigMesh: {fileID: 7539665815912513766, guid: bd3f26631042f46b8ace4cc7099a584e, type: 3}
+  builtWeatMesh: {fileID: 7539665815912513766, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
+  builtAppleMesh: {fileID: 7539665815912513766, guid: fe75c0545003048e0a3cd997805b5185, type: 3}
+  builtCinnamonMesh: {fileID: 7539665815912513766, guid: da7ffb3c1dd2c45009263e29432673fe, type: 3}
   wheatResource: {fileID: 1741988942}
   appleResource: {fileID: 314472013}
   cinnamonResource: {fileID: 1155242855}
@@ -24079,3 +24137,4 @@ SceneRoots:
   - {fileID: 61894154}
   - {fileID: 309288}
   - {fileID: 24165485}
+  - {fileID: 814201717}

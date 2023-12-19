@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public string sceneName;
+    public string tutorialName;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,11 @@ public class LevelManager : MonoBehaviour
     public void changeScene()
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene(tutorialName);
     }
 
     public void QuitGame()

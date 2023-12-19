@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-
+using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndPanel : MonoBehaviour
 {
     public GameObject endPanel;
     public GameObject startPanel;
+    public GameObject endImage;
     public TextMeshProUGUI endText;
+    public Sprite WinImage, LoseImage;
 
     public UIManager manager;
 
@@ -19,13 +22,13 @@ public class EndPanel : MonoBehaviour
     {
         if (manager.gameStateLogic.GetIfVictorious())
         {
-            Debug.Log("Vad händer här?");
+            endImage.GetComponent<Image>().sprite = WinImage;
             endText.SetText("Wow, you won!");
             endPanel.SetActive(true);
         }
         else if(manager.gameStateLogic.GetHasLost()){
- 
-            endText.SetText("Haha, you lost!");
+            endImage.GetComponent<Image>().sprite = LoseImage;
+            endText.SetText("Oh no, you lost. How sad. :(");
             endPanel.SetActive(true);
         }
     }

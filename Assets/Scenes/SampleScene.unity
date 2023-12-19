@@ -1527,27 +1527,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5272933141251162678, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
       propertyPath: m_Color.b
-      value: 0.53333336
-      objectReference: {fileID: 0}
-    - target: {fileID: 5272933141251162678, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
-      propertyPath: m_Color.g
-      value: 0.68235296
-      objectReference: {fileID: 0}
-    - target: {fileID: 5272933141251162678, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
-      propertyPath: m_Color.r
-      value: 0.5764706
-      objectReference: {fileID: 0}
-    - target: {fileID: 7131860031574063204, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
-      propertyPath: m_Color.b
       value: 0.39607844
       objectReference: {fileID: 0}
-    - target: {fileID: 7131860031574063204, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+    - target: {fileID: 5272933141251162678, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
       propertyPath: m_Color.g
       value: 0.5058824
       objectReference: {fileID: 0}
-    - target: {fileID: 7131860031574063204, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+    - target: {fileID: 5272933141251162678, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
       propertyPath: m_Color.r
       value: 0.42745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131860031574063204, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.31212175
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131860031574063204, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131860031574063204, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.33615163
       objectReference: {fileID: 0}
     - target: {fileID: 8749300693549356472, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
       propertyPath: m_Name
@@ -2285,6 +2285,11 @@ MonoBehaviour:
   farmTileIndex: -1
   resourceToBuild: 1
   costText: {fileID: 1864222611}
+--- !u!1 &314472013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8749300693549356472, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+  m_PrefabInstance: {fileID: 1241643262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &317312355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10900,7 +10905,7 @@ GameObject:
   - component: {fileID: 874114572}
   - component: {fileID: 874114571}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13023,6 +13028,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1155242855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8749300693549356472, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+  m_PrefabInstance: {fileID: 885740320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1165016783
 GameObject:
   m_ObjectHideFlags: 0
@@ -17704,6 +17714,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf661af4278745a881dfb5f1a366363, type: 3}
+--- !u!1 &1741988942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8749300693549356472, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+  m_PrefabInstance: {fileID: 1962857124}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1747244342
 GameObject:
   m_ObjectHideFlags: 0
@@ -17767,6 +17782,11 @@ MonoBehaviour:
   builtWeatMesh: {fileID: 3896802615584217673, guid: fe975d32e34ccfe4ebbddd4d269ed82f, type: 3}
   builtAppleMesh: {fileID: 8822082771687537059, guid: fbdbe657aa11c1b4c8d61d01da83ed50, type: 3}
   builtCinnamonMesh: {fileID: 8511534797816126092, guid: e05b81c96c96e724784cb735b744e592, type: 3}
+  wheatResource: {fileID: 1741988942}
+  appleResource: {fileID: 314472013}
+  cinnamonResource: {fileID: 1155242855}
+  pigResource: {fileID: 1805134068}
+  moneyResource: {fileID: 0}
   workerMesh: {fileID: 9044434817311573367, guid: 68969cfa6e5068a4c96ab4e68f311581, type: 3}
   farmTextPrefab: {fileID: 0}
   hudState: 0
@@ -18204,6 +18224,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3213224053652965999, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
   m_PrefabInstance: {fileID: 1794279093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1805134068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8749300693549356472, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+  m_PrefabInstance: {fileID: 1249027061}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1805274419
 PrefabInstance:
@@ -19426,6 +19451,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.92941177
       objectReference: {fileID: 0}
+    - target: {fileID: 7432278547217116702, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8749300693549356472, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
       propertyPath: m_Name
       value: Wheat
@@ -20113,7 +20142,7 @@ GameObject:
   - component: {fileID: 2091044348}
   - component: {fileID: 2091044347}
   m_Layer: 5
-  m_Name: Image
+  m_Name: StorageObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

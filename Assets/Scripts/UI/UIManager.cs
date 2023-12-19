@@ -28,6 +28,13 @@ public class UIManager : MonoBehaviour
     public GameObject builtAppleMesh;
     public GameObject builtCinnamonMesh;
 
+    public GameObject wheatResource;
+    public GameObject appleResource;
+    public GameObject cinnamonResource;
+    public GameObject pigResource;
+    public GameObject moneyResource;
+    private Animator resourceAnimator;
+
     public GameObject workerMesh;
 
     public GameObject farmTextPrefab;
@@ -99,6 +106,7 @@ public class UIManager : MonoBehaviour
         {
             PopUIElement();
         }
+
     }
 
     void Awake()
@@ -109,6 +117,7 @@ public class UIManager : MonoBehaviour
             instance = this;
 
         DontDestroyOnLoad(this);
+
     }
 
     public void TestString()
@@ -147,15 +156,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-//   private void HUDVFX()
-//   {
-//       int currentMoney = gameStateLogic.GetStoredResourceAmount(Resource.money);
-//       if(currentMoney != 0)
-//       {
-//
-//       }
-//   }
-
     private void UpdateResourceText()
     {
         moneyText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.money).ToString());
@@ -176,7 +176,43 @@ public class UIManager : MonoBehaviour
         actionText.SetText(gameStateLogic.GetCurrentActions() + "/" + gameStateLogic.GetMaxActions());
 
 
-        amountOfWorkersText.SetText("Workers " + gameStateLogic.GetWorkerRegistry().Count);
+        amountOfWorkersText.SetText("Workers: " + gameStateLogic.GetWorkerRegistry().Count);
+    }
+
+    public void ResourceVFX(Resource resource)
+    {
+        switch (resource)
+        {
+            case Resource.wheat:
+                Animator wheatAnim = wheatResource.GetComponent<Animator>();
+                wheatAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.apple:
+                Animator appleAnim = appleResource.GetComponent<Animator>();
+                appleAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.cinnamon:
+                Animator cinnamonAnim = cinnamonResource.GetComponent<Animator>();
+                cinnamonAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.pigMeat:
+                Animator pigAnim = pigResource.GetComponent<Animator>();
+                pigAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.money:
+                Animator moneyAnim = moneyResource.GetComponent<Animator>();
+                moneyAnim.SetTrigger("reSize");
+                break;
+
+            default:
+                
+                break;
+        }
+
     }
 
 
@@ -217,8 +253,6 @@ public class UIManager : MonoBehaviour
             }
        }
    }
-
-
 
     void Start()
     {

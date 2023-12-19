@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -116,10 +117,15 @@ public class UIManager : MonoBehaviour
         errorMessage.SetErrorMessage(message);
     }
     private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape)) 
+    {   //ska va högre musknapp men enumen strular
+        if(Input.GetMouseButtonDown(1)) 
         {
             PopUIElement();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
         }
 
     }

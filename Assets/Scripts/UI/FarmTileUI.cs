@@ -5,7 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems; 
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
+using static UnityEngine.EventSystems.PointerEventData;
 //using UnityEngine.UIElements;
 
 public class FarmTileUI : MonoBehaviour, IPointerClickHandler
@@ -163,6 +165,11 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     {
         //Output to console the clicked GameObject's name and the following message. You can replace this with your own actions for when clicking the GameObject.
      //   Debug.Log(name + " Game Object Clicked!");
+        if(pointerEventData.button == InputButton.Right)
+        {
+            return;
+        }
+
         PopUp();
     }
 

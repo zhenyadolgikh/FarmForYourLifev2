@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9529,7 +9529,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3213224053652965999, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1511912301}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
 --- !u!224 &642277815 stripped
@@ -13312,7 +13315,6 @@ RectTransform:
   - {fileID: 2091044346}
   - {fileID: 226392399}
   - {fileID: 840812964}
-  - {fileID: 1511912301}
   - {fileID: 322740686}
   - {fileID: 1172268674}
   - {fileID: 1741640438}
@@ -16464,7 +16466,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1165016787}
+    m_TransformParent: {fileID: 642277815}
     m_Modifications:
     - target: {fileID: 897016271800415965, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_IsActive
@@ -16524,23 +16526,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1007
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 440
+      value: -51
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -18121,8 +18123,6 @@ MonoBehaviour:
   cinnamonResource: {fileID: 1155242855}
   pigResource: {fileID: 1805134068}
   moneyResource: {fileID: 983880532}
-  wheatButton: {fileID: 0}
-  moneyButton: {fileID: 0}
   workerMesh: {fileID: 9044434817311573367, guid: 68969cfa6e5068a4c96ab4e68f311581, type: 3}
   farmTextPrefab: {fileID: 0}
   hudState: 0

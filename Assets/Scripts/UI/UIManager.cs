@@ -5,6 +5,7 @@ using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class UIManager : MonoBehaviour
     public GameObject cinnamonResource;
     public GameObject pigResource;
     public GameObject moneyResource;
+
+    public ParticleSystem slaughterParticle;
 
     public GameObject workerMesh;
 
@@ -213,6 +216,13 @@ public class UIManager : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void SlaughterEffect()
+    {
+        slaughterParticle.Play(true);
+        UnityEngine.Vector2 mousePosition = Input.mousePosition;
+        slaughterParticle.transform.position = new UnityEngine.Vector3(mousePosition.x, mousePosition.y + 130);
     }
 
 

@@ -19,7 +19,9 @@ public class BuildOnClick : MonoBehaviour
         buildAction.farmTileIndex = farmTileIndex;
         buildAction.resource = resourceToBuild;
 
-        if(UIManager.instance.IsActionValid(buildAction).wasActionValid == false)
+        IsActionValidMessage message = UIManager.instance.IsActionValid(buildAction);
+
+        if (message != null && message.wasActionValid == false)
         {
             UIManager.instance.SendErrorMessage(UIManager.instance.IsActionValid(buildAction).errorMessage);
         }

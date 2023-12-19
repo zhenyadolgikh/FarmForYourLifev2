@@ -98,9 +98,9 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 buildAction.resource = GetAssociatedResource(button.name);
                 button.interactable = true;
 
+                IsActionValidMessage message =  manager.IsActionValid(buildAction);
 
-
-                if (!manager.IsActionValid(buildAction).wasActionValid)
+                if (message != null && !message.wasActionValid)
                 {
                     button.interactable = false;
 

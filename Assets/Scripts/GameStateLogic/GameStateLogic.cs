@@ -206,8 +206,14 @@ public class GameStateLogic : MonoBehaviour
         AddResources(Resource.money,1500);
         FillCardsOnTable();
         FillContractCardsOnTable();
+        if(UIManager.instance.GetIsTutorial())
+        {
+            AddResources(Resource.money, 1500);
 
+        }
     }
+
+
 
 
     void FillCardsOnTable()
@@ -1260,8 +1266,20 @@ public class GameStateLogic : MonoBehaviour
         return hasLost;
     }
 
+
     public Dictionary<int, FarmTile> GetFarmTiles()
     {
         return farmTileRegistry;
+    }
+
+
+    public void CardSetupTutorial()
+    {
+        specialCardsOnTable[2] = specialCardRegistry["Money printer"];
+    }
+
+    public void CheatActionsTutorial()
+    {
+        currentActions += 3;
     }
 }

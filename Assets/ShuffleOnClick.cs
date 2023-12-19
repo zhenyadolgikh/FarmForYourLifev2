@@ -14,8 +14,12 @@ public class ShuffleOnClick : MonoBehaviour
         action.moneyCost = cost;
         action.typeOfdeck = typeOfCard;
 
-        if(UIManager.instance.IsActionValid(action).wasActionValid == false)
+        IsActionValidMessage message = UIManager.instance.IsActionValid(action);
+
+        if (message == null || message.wasActionValid == false)
         {
+            if (message == null)
+                return;
             UIManager.instance.SendErrorMessage(UIManager.instance.IsActionValid(action).errorMessage);
         }
         else

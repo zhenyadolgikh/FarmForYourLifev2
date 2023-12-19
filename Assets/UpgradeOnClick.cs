@@ -9,14 +9,15 @@ public class UpgradeOnClick : MonoBehaviour
         UIManager uiManager = UIManager.instance;
 
         IncreaseStorageAction action = new IncreaseStorageAction();
-
-        if(uiManager.IsActionValid(action).wasActionValid)
+        IsActionValidMessage message = uiManager.IsActionValid(action);
+        if (message != null && message.wasActionValid)
         {
             uiManager.DoAction(action);
         }
         else
-        {
-            uiManager.SendErrorMessage(uiManager.IsActionValid(action).errorMessage);
+        {   if (message == null)
+                return;
+            uiManager.SendErrorMessage(message.errorMessage);
         }      
     }   
     public void UpgradeActionClick()
@@ -24,14 +25,16 @@ public class UpgradeOnClick : MonoBehaviour
         UIManager uiManager = UIManager.instance;
 
         IncreaseActionsAction action = new IncreaseActionsAction();
-
-        if(uiManager.IsActionValid(action).wasActionValid)
+        IsActionValidMessage message = uiManager.IsActionValid(action);
+        if (message != null && message.wasActionValid)
         {
             uiManager.DoAction(action);
         }
         else
         {
-            uiManager.SendErrorMessage(uiManager.IsActionValid(action).errorMessage);
+            if (message == null)
+                return;
+            uiManager.SendErrorMessage(message.errorMessage);
         }      
     }
 
@@ -40,14 +43,17 @@ public class UpgradeOnClick : MonoBehaviour
         UIManager uiManager = UIManager.instance;
 
         BuyWorkerAction action = new BuyWorkerAction();
+        IsActionValidMessage message = uiManager.IsActionValid(action);
 
-        if (uiManager.IsActionValid(action).wasActionValid)
+        if (message != null && message.wasActionValid)
         {
             uiManager.DoAction(action);
         }
         else
         {
-            uiManager.SendErrorMessage(uiManager.IsActionValid(action).errorMessage);
+            if (message == null)
+                return;
+            uiManager.SendErrorMessage(message.errorMessage);
         }
     }
 }

@@ -87,15 +87,20 @@ public class DisplayCard : MonoBehaviour
             AddCardToHandAction addCardToHandAction = new AddCardToHandAction();
             addCardToHandAction.index = cardIndex;
             addCardToHandAction.cardType = typeOfCard;
-            
-            if(uiManager.IsActionValid(addCardToHandAction).wasActionValid)
+
+            IsActionValidMessage message = uiManager.IsActionValid(addCardToHandAction);
+
+            if (message != null && message.wasActionValid)
             {
                 gameObject.SetActive(false);
                 uiManager.DoAction(addCardToHandAction);
             }
             else
-            {
-                uiManager.SendErrorMessage(uiManager.IsActionValid(addCardToHandAction).errorMessage);
+            {   if(message == null)
+                {
+                    return;
+                }
+                uiManager.SendErrorMessage(message.errorMessage);
             }
         }
         if(inHand)
@@ -104,14 +109,17 @@ public class DisplayCard : MonoBehaviour
             playCardAction.index = cardIndex;
             playCardAction.typeOfCard = typeOfCard;
             playCardAction.cardIdentifier = cardIdentifier;
+            IsActionValidMessage message = uiManager.IsActionValid(playCardAction);
 
-            if(uiManager.IsActionValid(playCardAction).wasActionValid)
+            if (message != null && message.wasActionValid)
             {
                 gameObject.SetActive(false);
                 uiManager.DoAction(playCardAction);
             }
             else
             {
+                if (message == null)
+                    return;
                 uiManager.SendErrorMessage(uiManager.IsActionValid(playCardAction).errorMessage);
 
             }

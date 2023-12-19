@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
 
     [SerializeField] private bool isTutorial;
+    [SerializeField] private bool acceptActions;
+
+    private List<Action> tutorialAcceptedActions = new List<Action>();
+
+    private TutorialObject tutorialObjectToPop;
 
     
 
@@ -107,6 +113,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
     void Awake()
     {
         if (instance != null)
@@ -115,6 +122,7 @@ public class UIManager : MonoBehaviour
             instance = this;
 
         DontDestroyOnLoad(this);
+
     }
 
     public void TestString()
@@ -124,11 +132,64 @@ public class UIManager : MonoBehaviour
 
     public void DoAction(Action action)
     {
+
+        if (!acceptActions)
+        {
+            return ;
+        }
+
+        if (isTutorial)
+        {
+            if(action is AssignWorkersAction)
+            {
+                int hej = 4;
+            }
+
+            if (tutorialAcceptedActions.Count > 0 &&!action.Equals(tutorialAcceptedActions[0]))
+            {
+                return ;
+            }
+            else
+            {   
+                if(action is MoveCardsAction)
+                {
+                    gameStateLogic.CheatActionsTutorial();
+                }
+
+                tutorialAcceptedActions.RemoveAt(0);
+
+                tutorialObjectToPop.RemoveObject();
+            }
+        }
+
+
         gameStateLogic.DoAction(action);
         Refresh();
     }
     public IsActionValidMessage IsActionValid(Action action)
-    {
+    {   
+
+        if(action is PlayCardAction)
+        {
+
+            int hej = 5;
+        }
+        if (!acceptActions)
+        {
+            return null;
+        }
+
+        if (isTutorial)
+        {   
+            if (tutorialAcceptedActions.Count > 0 && !action.Equals(tutorialAcceptedActions[0]))
+            {
+                return null;
+            }
+            else
+            {
+            }
+        }
+
         return gameStateLogic.IsActionValid(action);    
     }
         
@@ -229,6 +290,93 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         gameStateLogic.Setup();
+
+        if (isTutorial)
+        {
+            BuildAction buildAction = new BuildAction();
+            buildAction.farmTileIndex = 3;
+            buildAction.resource = Resource.wheat;
+
+            tutorialAcceptedActions.Add(buildAction);
+
+            AssignWorkersAction assignAction = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tuple = new Tuple<int, WorkType>(3,WorkType.building);
+
+            assignAction.workAssigned.Add(tuple);
+
+            tutorialAcceptedActions.Add(assignAction);
+
+
+            AddCardToHandAction addCardToHandAction = new AddCardToHandAction();
+            addCardToHandAction.index = 2;
+            addCardToHandAction.cardType = TypeOfCard.special;
+
+            tutorialAcceptedActions.Add(addCardToHandAction);
+
+            EndTurnAction endTurnAction = new EndTurnAction();
+            tutorialAcceptedActions.Add(endTurnAction);
+
+
+            AssignWorkersAction assignActionHarvest = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tupleHarvest = new Tuple<int, WorkType>(3, WorkType.harvesting);
+
+            assignActionHarvest.workAssigned.Add(tupleHarvest);
+
+            tutorialAcceptedActions.Add(assignActionHarvest);
+
+            IncreaseStorageAction increaseStorageAction = new IncreaseStorageAction();
+
+            tutorialAcceptedActions.Add(increaseStorageAction);
+
+            PlayCardAction playCard = new PlayCardAction();
+            playCard.index = 0;
+            playCard.typeOfCard = TypeOfCard.special;
+            playCard.cardIdentifier = "Money printer";
+            tutorialAcceptedActions.Add(playCard);
+
+            MoveCardsAction moveCards = new MoveCardsAction();
+            moveCards.typeOfdeck = TypeOfCard.special;
+            moveCards.moneyCost = 200;
+
+            tutorialAcceptedActions.Add(moveCards);
+
+            tutorialAcceptedActions.Add(endTurnAction);
+
+
+            BuildAction buildPig = new BuildAction();
+            buildPig.farmTileIndex = 0;
+            buildPig.resource = Resource.pigMeat;
+
+            tutorialAcceptedActions.Add(buildPig);
+
+            AssignWorkersAction assignPigWorkBuild = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tupleBuildPig = new Tuple<int, WorkType>(0, WorkType.building);
+
+            assignPigWorkBuild.workAssigned.Add(tupleBuildPig);
+
+
+            tutorialAcceptedActions.Add(assignPigWorkBuild);
+
+
+            tutorialAcceptedActions.Add(endTurnAction);
+
+
+            AssignWorkersAction assignPigWorkSlaughter = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tupleSlaughter = new Tuple<int, WorkType>(0, WorkType.slaughtering);
+
+            assignPigWorkSlaughter.workAssigned.Add(tupleSlaughter);
+
+            tutorialAcceptedActions.Add(assignPigWorkSlaughter);
+
+            //
+            gameStateLogic.CardSetupTutorial();
+        }
+
+
 
         contractLayout = FindAnyObjectByType<ContractLayout>();
 
@@ -534,4 +682,18 @@ public class UIManager : MonoBehaviour
     }
 
 
+
+    public void SetAcceptActions(bool value)
+    {
+        acceptActions = value;
+    }
+    public void SetTutorialObjectToPop(TutorialObject value)
+    {
+        tutorialObjectToPop = value;
+    }
+
+    public bool GetIsTutorial()
+    {
+        return isTutorial;
+    }
 }

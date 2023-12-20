@@ -2533,8 +2533,8 @@ PrefabInstance:
       objectReference: {fileID: 1169945889}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
-      value: When you end your actions reset to the maximum. You can increase your
-        max number of actions here.
+      value: When you end your turn your actions reset to the maximum. You can increase
+        your max number of actions here.
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_fontSize
@@ -3795,8 +3795,7 @@ PrefabInstance:
       objectReference: {fileID: 1974478913}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
-      value: There are also cards two types of different cards, contract cards and
-        special cards
+      value: There are also two types of cards, contract cards and special cards
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_fontSize
@@ -11980,8 +11979,9 @@ PrefabInstance:
       objectReference: {fileID: 1015416862}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
-      value: When the turn ends 2 cards rotate and the cards available are refilled.
-        You can also shuffle the cards by paying money. Shuffle the special cards
+      value: When the turn ends the 2 leftmost cards are added to the deck and the
+        cards available are refilled. You can also make this happen by paying 200
+        gold. Shuffle the special cards
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_fontSize
@@ -13186,7 +13186,7 @@ PrefabInstance:
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
       value: 'The maximum central storage in the beginning  is 120. If a worker harvest
-        resources that would increase the stored resources beyond the maxiumum, those
+        resources that would increase the stored resources beyond the maximum, those
         resources are lost. '
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
@@ -14175,8 +14175,8 @@ PrefabInstance:
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
       value: Workers do their work after you end your turn. You can buy more workers
-        at the upgrade tab. Workers also cost 100 money in upkeep when you end your
-        turn
+        at the upgrade tab. Workers also cost 100 money in upkeep each time you end
+        your turn
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_fontSize
@@ -14882,7 +14882,7 @@ PrefabInstance:
       objectReference: {fileID: 2013075702}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
-      value: 'Many of the game actions you take cost actions. You can see the amount
+      value: 'Many of the things you do in game costs actions. You can see the amount
         of actions you have left and the maxium actions you have here. '
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
@@ -21321,9 +21321,9 @@ PrefabInstance:
       objectReference: {fileID: 534881088}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
-      value: 'Now you can play the card you added to your hand. Playing a cord from
-        the hand costs 1 action and their effect happens immediatly. You can max
-        have 10 cards in your hand
+      value: 'Now you can play the card you added to your hand. Playing a card from
+        the hand costs 1 action and its effect happens immediately. You can max have
+        10 cards in your hand
 
 '
       objectReference: {fileID: 0}
@@ -22933,7 +22933,7 @@ PrefabInstance:
       objectReference: {fileID: 500704940}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
-      value: The goal in this game the goal is to complete the objective shown here
+      value: The goal in this game is to complete the objective shown here
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_fontSize
@@ -25416,8 +25416,9 @@ PrefabInstance:
       objectReference: {fileID: 2122617760}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_text
-      value: Workers can harvest 80 of a resource and when they harvest the resource
-        they place it in the central storage
+      value: Workers can harvest 80 of a resource at a time and when they harvest
+        the resource they place it in the central storage. Workers harvest after
+        you end your turn
       objectReference: {fileID: 0}
     - target: {fileID: 6160769832278137839, guid: 2530d4b6f01a76e4a9309974f3596642, type: 3}
       propertyPath: m_fontSize

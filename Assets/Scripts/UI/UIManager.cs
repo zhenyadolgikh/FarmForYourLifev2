@@ -255,7 +255,11 @@ public class UIManager : MonoBehaviour
     }
 
     public void ResourceVFX(Resource resource)
-    {
+    {   
+        if(isTutorial)
+        {
+            return;
+        }
         switch (resource)
         {
             case Resource.wheat:

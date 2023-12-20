@@ -690,19 +690,44 @@ public class GameStateLogic : MonoBehaviour
         if(resource == Resource.money)
         {
             moneyStored += amount;
+
+            UIManager.instance.ResourceVFX(resource);
+
         }
-        if(resource == Resource.wheat)
-        {
+        if (resource == Resource.wheat)
+        {   
+            if(wheatStored != currentStorage)
+            {
+                UIManager.instance.ResourceVFX(resource);
+            }
             wheatStored += amount;
         }
         if(resource == Resource.apple)
         {
+            if (appleStored != currentStorage)
+            {
+                UIManager.instance.ResourceVFX(resource);
+            }
             appleStored += amount;
         }
         if(resource == Resource.cinnamon)
         {
+            if (cinnamonStored != currentStorage)
+            {
+                UIManager.instance.ResourceVFX(resource);
+            }
             cinnamonStored += amount;
+        }        
+        if(resource == Resource.pigMeat)
+        {
+            if (pigMeatStored != currentStorage/10)
+            {
+                UIManager.instance.ResourceVFX(resource);
+            }
+            pigMeatStored += amount;
         }
+
+        
     }
     // void AddMoney(int32 amount);
     public IsActionValidMessage IsActionValid(Action action)
@@ -1077,12 +1102,14 @@ public class GameStateLogic : MonoBehaviour
                     int amountSlaughtered = farmTile.amountOfAnimals / 2;
                     farmTile.amountOfAnimals = farmTile.amountOfAnimals / 2;
 
-                    pigMeatStored += amountSlaughtered;
-                    if(pigMeatStored > currentStorage / 10)
-                    {
-                        pigMeatStored = currentStorage / 10;
-                    }
 
+                    AddResources(Resource.pigMeat, amountSlaughtered);
+                    //pigMeatStored += amountSlaughtered;
+                    //if(pigMeatStored > currentStorage / 10)
+                    //{
+                    //    pigMeatStored = currentStorage / 10;
+                    //}
+                    ResetNumbers();
                     workerToAdd.workType = WorkType.unassigned;
                 }
             }

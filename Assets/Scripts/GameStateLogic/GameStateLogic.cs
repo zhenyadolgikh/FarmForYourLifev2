@@ -1105,11 +1105,11 @@ public class GameStateLogic : MonoBehaviour
 
                     AddResources(Resource.pigMeat, amountSlaughtered);
                     //pigMeatStored += amountSlaughtered;
-                    //if(pigMeatStored > currentStorage / 10)
-                    //{
-                    //    pigMeatStored = currentStorage / 10;
-                    //}
-                    ResetNumbers();
+                    if(pigMeatStored > currentStorage / 10)
+                    {
+                        pigMeatStored = currentStorage / 10;
+                    }
+                   // ResetNumbers();
                     workerToAdd.workType = WorkType.unassigned;
                 }
             }

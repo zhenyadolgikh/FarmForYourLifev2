@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2884,7 +2884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &303446346
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12640,7 +12640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 215
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -12696,7 +12696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4114528578816266687, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 4114528578816266687, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -12740,7 +12740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
-      value: Upgrade Workers
+      value: Hire 1 more worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_fontSize
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 9079577366901617159, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
@@ -12919,7 +12923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 215
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -12975,7 +12979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4114528578816266687, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 4114528578816266687, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -13019,7 +13023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
-      value: Upgrade Actions
+      value: Buy 1 more action
       objectReference: {fileID: 0}
     - target: {fileID: 9079577366901617159, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
@@ -13327,7 +13331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 215
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -13383,7 +13387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4114528578816266687, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 4114528578816266687, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -13427,7 +13431,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
-      value: Buy more storage
+      value: Buy 120 more storage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_fontSize
+      value: 22.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_VerticalAlignment
@@ -13440,6 +13452,14 @@ PrefabInstance:
     - target: {fileID: 9079577366901617159, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_fontSize
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9145087023029884280, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -16.2314
+      objectReference: {fileID: 0}
+    - target: {fileID: 9145087023029884280, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20544,8 +20564,8 @@ MonoBehaviour:
 
     360'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e185d51609b520041a9e1e8812cd9434, type: 2}
+  m_sharedMaterial: {fileID: -7441108700903861160, guid: e185d51609b520041a9e1e8812cd9434, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20569,7 +20589,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.05
+  m_fontSize: 22.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

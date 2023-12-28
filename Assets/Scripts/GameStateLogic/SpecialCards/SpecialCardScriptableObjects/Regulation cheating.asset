@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Regulation cheating
   m_EditorClassIdentifier: 
   cardName: Regulation cheating
-  cardDescription: This turn it costs no actions to build. +1 action
+  cardDescription: This turn it costs no actions to buy a farm. +1 action

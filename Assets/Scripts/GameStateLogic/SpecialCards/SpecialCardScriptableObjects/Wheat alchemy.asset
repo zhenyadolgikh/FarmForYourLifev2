@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wheat alchemy
   m_EditorClassIdentifier: 
   cardName: Wheat alchemy
-  cardDescription: The next contract so can the difference in resources needed be
-    payed in wheat
+  cardDescription: Use wheat to pay for the next contract card instead of the resource
+    stated on the card

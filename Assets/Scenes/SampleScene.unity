@@ -737,7 +737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
-      value: Build a cinnamon farm
+      value: Buy a cinnamon farm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3138,7 +3138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
-      value: Build a wheat farm
+      value: Buy a wheat farm
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_fontSize
@@ -20173,7 +20173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
-      value: Build a pig farm
+      value: Buy a pig farm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22874,7 +22874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8686485750877999736, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_text
-      value: Build an apple farm
+      value: Buy an apple farm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -100,23 +100,9 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 BuildAction buildAction = new BuildAction();
                 buildAction.farmTileIndex = farmTileIndex;
                 buildAction.resource = GetAssociatedResource(button.name);
-                button.interactable = true;
+                //button.interactable = true;
 
                 IsActionValidMessage message =  manager.IsActionValid(buildAction);
-
-                if (message != null && !message.wasActionValid)
-                {
-                    button.interactable = false;
-
-                    if (manager.gameStateLogic.GetStoredResourceAmount(Resource.money) < manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)))
-                    {
-                        buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = Color.red;
-                    }
-                }
-                else
-                {
-                    buildOnClick.costText.GetComponent<TextMeshProUGUI>().color = defaultTextColor;
-                }
 
                 buildOnClick.farmTileIndex = farmTileIndex;
                 buildOnClick.SetCostText(manager.gameStateLogic.GetBuildingCost(GetAssociatedResource(button.name)));

@@ -2866,6 +2866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270398541}
+  - component: {fileID: 270398542}
   m_Layer: 0
   m_Name: IdleWorkerPosition (8)
   m_TagString: Untagged
@@ -2888,6 +2889,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &270398542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270398540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 8
 --- !u!224 &290833926 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
@@ -9973,6 +9987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543999876}
+  - component: {fileID: 543999877}
   m_Layer: 0
   m_Name: IdleWorkerPosition (5)
   m_TagString: Untagged
@@ -9995,6 +10010,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &543999877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543999875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 5
 --- !u!1001 &564375140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10414,6 +10442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636575910}
+  - component: {fileID: 636575911}
   m_Layer: 0
   m_Name: IdleWorkerPosition (2)
   m_TagString: Untagged
@@ -10436,6 +10465,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &636575911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636575909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 2
 --- !u!1001 &642277814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17254,6 +17296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1390757956}
+  - component: {fileID: 1390757957}
   m_Layer: 0
   m_Name: IdleWorkerPosition (6)
   m_TagString: Untagged
@@ -17276,6 +17319,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1390757957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390757955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 6
 --- !u!1001 &1396154403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18843,6 +18899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538347318}
+  - component: {fileID: 1538347319}
   m_Layer: 0
   m_Name: IdleWorkerPosition
   m_TagString: Untagged
@@ -18865,6 +18922,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1538347319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538347317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
 --- !u!1001 &1552039275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19308,6 +19378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1571720196}
+  - component: {fileID: 1571720197}
   m_Layer: 0
   m_Name: IdleWorkerPosition (3)
   m_TagString: Untagged
@@ -19330,6 +19401,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1571720197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571720195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 3
 --- !u!224 &1574256366 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
@@ -19344,6 +19428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596782679}
+  - component: {fileID: 1596782680}
   m_Layer: 0
   m_Name: IdleWorkerPosition (4)
   m_TagString: Untagged
@@ -19366,6 +19451,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596782680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596782678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 4
 --- !u!224 &1604337681 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6226598089653545515, guid: dda5babc786360047a9b6e29f161ed10, type: 3}
@@ -19752,6 +19850,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667754824}
+  - component: {fileID: 1667754825}
   m_Layer: 0
   m_Name: IdleWorkerPosition (1)
   m_TagString: Untagged
@@ -19774,6 +19873,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1667754825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667754823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 1
 --- !u!114 &1671490207 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4987014603350345749, guid: e052e54c1ed805c4480a99312a6682e7, type: 3}
@@ -22144,6 +22256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1916667856}
+  - component: {fileID: 1916667857}
   m_Layer: 0
   m_Name: IdleWorkerPosition (7)
   m_TagString: Untagged
@@ -22166,6 +22279,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 353173235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1916667857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916667855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53e631a56bd654baec1881b711e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 7
 --- !u!1 &1927526108
 GameObject:
   m_ObjectHideFlags: 0

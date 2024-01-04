@@ -13,7 +13,8 @@ public class BuildOnClick : MonoBehaviour
 
     //asdasd
     public void BuildOnClickMethod()
-    {   
+    {
+        UIManager.instance.MouseClickHandled();
 
         BuildAction buildAction = new BuildAction();
         buildAction.farmTileIndex = farmTileIndex;

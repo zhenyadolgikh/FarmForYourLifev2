@@ -66,7 +66,9 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
     private void PopUp()
     {
-        if(manager.hudState != HudState.assignWorkers)
+        UIManager.instance.MouseClickHandled();
+
+        if (manager.hudState != HudState.assignWorkers)
         {
 
                 //   print(Input.mousePosition);
@@ -83,7 +85,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
             if (!isActive)
             {
 
-                manager.AddUIElement(new AddedUIElement(uiElementsToAdd, HudState.standard));
+                manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.standard));
                 optionPanel.SetActive(true);
 
             }
@@ -131,17 +133,17 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 Vector2 mousePosition = Input.mousePosition;
                 assignWorkersPanel.transform.position = new Vector3(mousePosition.x, mousePosition.y + 130);
                 bool isActive = assignWorkersPanel.activeSelf;
-                assignWorkersPanel.SetActive(!isActive);
 
                 List<GameObject> uiElementsToAdd = new List<GameObject>();
 
                 uiElementsToAdd.Add(assignWorkersPanel);
 
-                if (assignWorkersPanel.activeSelf)
-                {
-                    manager.AddUIElement(new AddedUIElement(uiElementsToAdd, HudState.assignWorkers));
+            //    if (assignWorkersPanel.activeSelf)
+             //   {
+                    //manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.assignWorkers));
 
-                }
+           //     }
+                assignWorkersPanel.SetActive(!isActive);
             }
 
             foreach (Button button in workOptions)
@@ -162,7 +164,12 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData pointerEventData)
-    {
+    {   
+
+        if(pointerEventData.button == InputButton.Left)
+        {
+            UIManager.instance.MouseClickHandled();
+        }
         //Output to console the clicked GameObject's name and the following message. You can replace this with your own actions for when clicking the GameObject.
      //   Debug.Log(name + " Game Object Clicked!");
         if(pointerEventData.button == InputButton.Right)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddedUIElement 
+public abstract class AddedUIElement 
 {
     public HudState hudStateNeeded;
 
@@ -14,5 +14,8 @@ public class AddedUIElement
         uiElementToInactivate = gameObject;
         hudStateNeeded = hudstate;
     }
+
+    public abstract bool RemoveElement();
+
 
 }

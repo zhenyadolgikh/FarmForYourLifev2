@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private bool isTutorial;
     [SerializeField] private bool acceptActions;
 
+
+    [SerializeField] private AssignWorkersButton assignWorkersButton;
+
     private List<Action> tutorialAcceptedActions = new List<Action>();
 
     private TutorialObject tutorialObjectToPop;
@@ -28,6 +31,8 @@ public class UIManager : MonoBehaviour
     public List<TextMeshProUGUI> farmTileTexts = new List<TextMeshProUGUI>();
 
     private List<List<WorkerPosition>> workerPositions = new List<List<WorkerPosition>>();
+
+    private List<Transform> idleWorkerTransforms = new List<Transform>();
 
     public CardDeck cardDeck;
     public EndPanel endPanel;
@@ -55,7 +60,7 @@ public class UIManager : MonoBehaviour
 
     public HudState hudState;
 
-    private Stack<AddedUIElement> addedUIElements = new Stack<AddedUIElement>();
+    public AddedUIElement currentUIelement { get; private set; }
 
     private SortedDictionary<int, GameObject> workerToBePlacedRegistry = new SortedDictionary<int, GameObject>();
 
@@ -79,36 +84,71 @@ public class UIManager : MonoBehaviour
 
     private ContractLayout contractLayout;
 
+    //ghetto af
+    private bool mouseClickHandled = false;
+    private bool mouseClickOccured = false;
+    private bool mouseClickedHandledSecondTime = false;
+
+
+    public void MouseClickHandled()
+    {
+        mouseClickHandled = true;
+        mouseClickedHandledSecondTime = true;
+
+        print("hej");
+    }
 
 
     public void AddUIElement(AddedUIElement uiElement)
     {
-        hudState = uiElement.hudStateNeeded;
 
-        addedUIElements.Push(uiElement);
+        ResetUIElement();
+
+        hudState = uiElement.hudStateNeeded;
+        currentUIelement = uiElement;
+    }
+
+
+    public void ResetUIElement()
+    {
+        if (currentUIelement != null)
+        {
+            bool elementRemoved = false;
+            while (!elementRemoved)
+            {
+                elementRemoved = currentUIelement.RemoveElement();
+            }
+        }
+        hudState = HudState.standard;
+
+        currentUIelement = null;
+
+    }
+
+    public void SetHudState(HudState newState)
+    {
+        hudState = newState;
     }
 
     public void PopUIElement()
     {
-        if (addedUIElements.Count > 0)
+        if (currentUIelement != null)
         {
+            bool elementRemoved = false;
 
-            foreach (GameObject gameObject in addedUIElements.Peek().uiElementToInactivate)
+            elementRemoved = currentUIelement.RemoveElement();
+            if(elementRemoved)
             {
-                print("element poppades " + gameObject.name);
-                gameObject.SetActive(false);
-            }
-            //addedUIElements.Peek().uiElementToInactivate.SetActive(false);
-            addedUIElements.Pop();
-            if (addedUIElements.Count > 0)
-            {
-                hudState = addedUIElements.Peek().hudStateNeeded;
-            }
-            else
-            {
+                currentUIelement = null;
                 hudState = HudState.standard;
             }
+
         }
+        else
+        {
+            hudState = HudState.standard;
+        }
+
     }
 
 
@@ -117,8 +157,33 @@ public class UIManager : MonoBehaviour
         errorMessage.SetErrorMessage(message);
     }
     private void Update()
-    {   //ska va högre musknapp men enumen strular
-        if(Input.GetMouseButtonDown(1)) 
+    {   
+
+        if(mouseClickOccured && !mouseClickHandled)
+        {
+            if(!mouseClickedHandledSecondTime)
+            {
+                PopUIElement();
+
+            }
+            else
+            {
+                mouseClickedHandledSecondTime = false;
+            }
+
+        }
+        else
+        {
+            print("fungerade typ kanske " + mouseClickHandled + "occurades det " + mouseClickOccured);
+        }
+
+        mouseClickOccured = false;
+        mouseClickHandled = false;
+        if (Input.GetMouseButtonUp(((int)MouseButton.Left)))
+        {
+            mouseClickOccured = true;
+        }
+        if(Input.GetMouseButtonDown(((int)MouseButton.Right))) 
         {
             PopUIElement();
         }
@@ -127,6 +192,9 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu");
         }
+
+        
+        print(hudState);
 
     }
 
@@ -217,7 +285,7 @@ public class UIManager : MonoBehaviour
         DoAction(endTurnAction);
     }
 
-    private void Refresh()
+    public void Refresh()
     {
         
         cardDeck.Refresh();
@@ -462,6 +530,20 @@ public class UIManager : MonoBehaviour
             workerPositions[workerPosition.farmTileIndex][workerPosition.positionOrder] = workerPosition;
         }
 
+
+        IdleWorkerPosition[] foundIdlePositions = FindObjectsByType<IdleWorkerPosition>(FindObjectsSortMode.None);
+            
+        for(int i = 0; i < 9; i++)
+        {
+            idleWorkerTransforms.Add(null);
+        }
+
+        foreach(IdleWorkerPosition idlePosition in foundIdlePositions)
+        {
+            idleWorkerTransforms[idlePosition.index] = idlePosition.gameObject.transform;
+        }
+
+
         Refresh();
         
 
@@ -675,17 +757,64 @@ public class UIManager : MonoBehaviour
             }
             indexFarmTile += 1;
         }
-        int padding = 0;
-
+        int placedWorkers = 0;
         foreach(KeyValuePair<int, Worker> pair in registredWorkers)
         {
             if (ContainsForTArrayWorker(workersOnTiles, pair.Value) == false)
-            {
-                workerToBePlacedRegistry[pair.Key].transform.position = new UnityEngine.Vector3(0,300+padding,0);
-                padding += 30;
+            {   
+
+                workerToBePlacedRegistry[pair.Key].transform.position = idleWorkerTransforms[placedWorkers].position;
+
+
+                placedWorkers += 1;
             }
         }
 
+    }
+    
+    public void PlaceWorkerDuringAssign(Tuple<int, WorkType> workAssigned, int count)
+    {   
+        if(count == 0)
+        {
+            return;
+        }
+        else
+        {
+            PlaceWorker(workAssigned.Item1, count - 1);
+         //   workerToBePlacedRegistry[count - 1].transform.position = farmTilePositions[workAssigned.Item1].transform.position;
+        }
+
+    }
+
+    IEnumerator PopElementLeftClick()
+    {
+        yield return new WaitForEndOfFrame();
+        print("är det handled " + mouseClickHandled);
+        if(Input.GetMouseButtonDown(((int)MouseButton.Left)))
+        {
+            if(mouseClickHandled)
+            {
+            }
+            else
+            {
+                PopUIElement();
+            }
+        }
+
+    }
+
+    public void PlaceAllWorkersIdle()
+    {
+        ResetWorkerPositions();
+        int placedWorkers = 0;
+        foreach (KeyValuePair<int, Worker> pair in gameStateLogic.GetWorkerRegistry())
+        {
+
+            workerToBePlacedRegistry[pair.Key].transform.position = idleWorkerTransforms[placedWorkers].position;
+
+            placedWorkers += 1;
+
+        }
     }
 
     void PlaceWorker(int farmTileIndex, int workerId)

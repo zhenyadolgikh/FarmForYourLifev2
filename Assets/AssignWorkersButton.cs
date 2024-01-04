@@ -10,6 +10,10 @@ public class AssignWorkersButton : MonoBehaviour
 
     private UIManager uiManager;
 
+    [SerializeField] private GameObject buttonPanel;
+
+    //
+
     public List<Tuple<int, WorkType>> currentWorkAssigned = new List<Tuple<int, WorkType>>();
 
     private void Start()
@@ -17,23 +21,43 @@ public class AssignWorkersButton : MonoBehaviour
         uiManager = UIManager.instance;
     }
 
+    public void DisableText()
+    {
+        textShowingWorkerCount.gameObject.SetActive(false);
+    }
+
     public void AssignWorkersOnClick()
     {
+        uiManager.MouseClickHandled();
+
+
+        if(uiManager.hudState == HudState.assignWorkers)
+        {
+            uiManager.ResetUIElement();
+            return;
+        }
+
         if(uiManager == null)
         {
             uiManager = UIManager.instance;
         }
         currentWorkAssigned.Clear();
+        uiManager.PlaceAllWorkersIdle();
 
-        textShowingWorkerCount.gameObject.SetActive(true);
 
         List<GameObject> uiElementsAdded = new List<GameObject>();
 
         uiElementsAdded.Add(textShowingWorkerCount.gameObject);
 
-        AddedUIElement addedUIElement = new AddedUIElement(uiElementsAdded, HudState.assignWorkers);
+        AddedAssignWorkers addedUIElement = new AddedAssignWorkers(uiElementsAdded, HudState.assignWorkers);
+
+        addedUIElement.panel = buttonPanel;
+        addedUIElement.text = textShowingWorkerCount.gameObject;
 
         uiManager.AddUIElement(addedUIElement);
+
+
+        textShowingWorkerCount.gameObject.SetActive(true);
 
         textShowingWorkerCount.SetText("Workers placed " + "0/" + uiManager.gameStateLogic.GetWorkerRegistry().Count);
 
@@ -60,6 +84,8 @@ public class AssignWorkersButton : MonoBehaviour
 
            // print("den skickar actionen");
         }
+
+        uiManager.PlaceWorkerDuringAssign(workAssigned, currentWorkAssigned.Count);
     }
     
 }

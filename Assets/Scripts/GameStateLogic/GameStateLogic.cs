@@ -807,7 +807,12 @@ public class GameStateLogic : MonoBehaviour
             message.errorMessage = "You do not have enough actions";
             return message;
         }
-
+        if(workerRegistry.Count >= 9)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You have the max amount of workers";
+            return message;
+        }
 
         message.wasActionValid = true;
         return message;

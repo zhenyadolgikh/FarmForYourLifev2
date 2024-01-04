@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
 
     public CardDeck cardDeck;
     public EndPanel endPanel;
+    public UICostManager uiCostManager;
 
     public static UIManager instance;
 
@@ -69,6 +70,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI turnText;
     public TextMeshProUGUI amountOfWorkersText;
 
+    Sprite buildSprite;
+    Sprite harvestSprite;
+    Sprite idleSprite;
+
     public FarmMeshStages wheatStages;
     public FarmMeshStages appleStages;
     public FarmMeshStages cinnamonStages;
@@ -80,55 +85,6 @@ public class UIManager : MonoBehaviour
     private ContractLayout contractLayout;
 
 
-
-    public void AddUIElement(AddedUIElement uiElement)
-    {
-        hudState = uiElement.hudStateNeeded;
-
-        addedUIElements.Push(uiElement);
-    }
-
-    public void PopUIElement()
-    {
-        if (addedUIElements.Count > 0)
-        {
-
-            foreach (GameObject gameObject in addedUIElements.Peek().uiElementToInactivate)
-            {
-                print("element poppades " + gameObject.name);
-                gameObject.SetActive(false);
-            }
-            //addedUIElements.Peek().uiElementToInactivate.SetActive(false);
-            addedUIElements.Pop();
-            if (addedUIElements.Count > 0)
-            {
-                hudState = addedUIElements.Peek().hudStateNeeded;
-            }
-            else
-            {
-                hudState = HudState.standard;
-            }
-        }
-    }
-
-
-    public void SendErrorMessage(string message)
-    {
-        errorMessage.SetErrorMessage(message);
-    }
-    private void Update()
-    {   //ska va högre musknapp men enumen strular
-        if(Input.GetMouseButtonDown(1)) 
-        {
-            PopUIElement();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
-    }
 
 
     void Awake()
@@ -142,207 +98,11 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void TestString()
-    {
-        print(testString);
-    }
-
-    public void DoAction(Action action)
-    {
-
-        if (!acceptActions)
-        {
-            return ;
-        }
-
-        if (isTutorial)
-        {
-            if(action is AssignWorkersAction)
-            {
-                int hej = 4;
-            }
-
-            if (tutorialAcceptedActions.Count > 0 &&!action.Equals(tutorialAcceptedActions[0]))
-            {
-                return ;
-            }
-            else
-            {   
-                if(action is MoveCardsAction)
-                {
-                    gameStateLogic.CheatActionsTutorial();
-                }
-
-                tutorialAcceptedActions.RemoveAt(0);
-
-                tutorialObjectToPop.RemoveObject();
-            }
-        }
-
-
-        gameStateLogic.DoAction(action);
-        Refresh();
-    }
-    public IsActionValidMessage IsActionValid(Action action)
-    {   
-
-        if(action is PlayCardAction)
-        {
-
-            int hej = 5;
-        }
-        if (!acceptActions)
-        {
-            return null;
-        }
-
-        if (isTutorial)
-        {   
-            if (tutorialAcceptedActions.Count > 0 && !action.Equals(tutorialAcceptedActions[0]))
-            {
-                return null;
-            }
-            else
-            {
-            }
-        }
-
-        return gameStateLogic.IsActionValid(action);    
-    }
-        
-    public void EndTurn()
-    {
-        EndTurnAction endTurnAction = new EndTurnAction();
-
-        DoAction(endTurnAction);
-    }
-
-    private void Refresh()
-    {
-        
-        cardDeck.Refresh();
-        PlaceMeshes();
-        PlaceWorkers();
-        UpdateResourceText();
-        ResourceTextOnTile();
-        RefreshContractCards();
-        endPanel.GameEnd();
-
-
-    }
-
-    private void UpdateResourceText()
-    {
-        moneyText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.money).ToString());
-        wheatText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.wheat) + "/" + gameStateLogic.GetMaxStorage());
-        appleText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.apple) + "/" + gameStateLogic.GetMaxStorage());
-        cinnamonText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.cinnamon) + "/" + gameStateLogic.GetMaxStorage());
-        pigText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.pigMeat) + "/" + (gameStateLogic.GetMaxStorage()/10));
-
-
-        //print("vilken turn är det " + gameStateLogic.GetCurrentTurn());
-
-        string turnTextString = gameStateLogic.GetCurrentTurn() + "/" + gameStateLogic.GetMaxTurn();
-
-        turnText.SetText(turnTextString);
-
-       // print(turnTextString);
-
-        actionText.SetText(gameStateLogic.GetCurrentActions() + "/" + gameStateLogic.GetMaxActions());
-
-
-        amountOfWorkersText.SetText("Workers: " + gameStateLogic.GetWorkerRegistry().Count);
-    }
-
-    public void ResourceVFX(Resource resource)
-    {   
-        if(isTutorial)
-        {
-            return;
-        }
-        switch (resource)
-        {
-            case Resource.wheat:
-                Animator wheatAnim = wheatResource.GetComponent<Animator>();
-                wheatAnim.SetTrigger("reSize");
-                break;
-
-            case Resource.apple:
-                Animator appleAnim = appleResource.GetComponent<Animator>();
-                appleAnim.SetTrigger("reSize");
-                break;
-
-            case Resource.cinnamon:
-                Animator cinnamonAnim = cinnamonResource.GetComponent<Animator>();
-                cinnamonAnim.SetTrigger("reSize");
-                break;
-
-            case Resource.pigMeat:
-                Animator pigAnim = pigResource.GetComponent<Animator>();
-                pigAnim.SetTrigger("reSize");
-                break;
-
-            case Resource.money:
-                Animator moneyAnim = moneyResource.GetComponent<Animator>();
-                moneyAnim.SetTrigger("reSize");
-                break;
-
-            default:
-                
-                break;
-        }
-
-    }
-
-    public void SlaughterEffect()
-    {
-        slaughterParticle.Play(true);
-        UnityEngine.Vector2 mousePosition = Input.mousePosition;
-        slaughterParticle.transform.position = new UnityEngine.Vector3(mousePosition.x, mousePosition.y + 130);
-    }
-
-
-  private void ResourceTextOnTile()
-   {
-       foreach (KeyValuePair<int, FarmTile> farmTileRef in gameStateLogic.GetFarmTiles())
-       {
-           int farmTileIndex = farmTileRef.Key;
-
-           GameObject farmMeshPosition = farmTilePositions[farmTileIndex];
-
-           if (farmMeshPosition != null)
-           {
-               FarmTile farmTile = farmTileRef.Value;
-
-               if (farmTile.buildingOnTile || farmTile.isBuilt)
-               {
-                   TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
-
-                    farmTileText.gameObject.transform.parent.gameObject.SetActive(true);
-
-                   if (farmTileText != null && farmTile.resourceOnTile != Resource.pigMeat)
-                   {
-                       farmTileText.SetText(farmTileRef.Value.storedResources + " / " + farmTileRef.Value.maxStoredResources);
-                   }
-                   if (farmTileText != null && farmTile.resourceOnTile == Resource.pigMeat)
-                   {
-                       farmTileText.SetText(farmTileRef.Value.amountOfAnimals + " / " + farmTileRef.Value.maxAmountOfAnimals);
-                   }
-               }
-               else
-                {
-                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
-                    farmTileText.gameObject.transform.parent.gameObject.SetActive(false);
-
-                }
-
-            }
-       }
-   }
-
     void Start()
     {
         gameStateLogic.Setup();
+
+        harvestSprite = Resources.Load<Sprite>("2D/WHarvest/2d1WorkerHarvest");
 
         if (isTutorial)
         {
@@ -354,7 +114,7 @@ public class UIManager : MonoBehaviour
 
             AssignWorkersAction assignAction = new AssignWorkersAction();
 
-            Tuple<int, WorkType> tuple = new Tuple<int, WorkType>(3,WorkType.building);
+            Tuple<int, WorkType> tuple = new Tuple<int, WorkType>(3, WorkType.building);
 
             assignAction.workAssigned.Add(tuple);
 
@@ -433,7 +193,7 @@ public class UIManager : MonoBehaviour
 
         contractLayout = FindAnyObjectByType<ContractLayout>();
 
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
         {
             farmTilePositions.Add(null);
             placedMeshes.Add(new BuildingOnTile());
@@ -445,10 +205,10 @@ public class UIManager : MonoBehaviour
         }
 
 
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
         {
             workerPositions.Add(new List<WorkerPosition>());
-            for(int z = 0; z < 3; z++)
+            for (int z = 0; z < 3; z++)
             {
                 workerPositions[i].Add(null);
             }
@@ -457,15 +217,270 @@ public class UIManager : MonoBehaviour
 
         print("hur många worker positions " + foundWorkerPositions.Length);
 
-        foreach(WorkerPosition workerPosition in foundWorkerPositions)
+        foreach (WorkerPosition workerPosition in foundWorkerPositions)
         {
             workerPositions[workerPosition.farmTileIndex][workerPosition.positionOrder] = workerPosition;
         }
 
         Refresh();
-        
 
     }
+
+    private void Update()
+    {   //ska va högre musknapp men enumen strular
+        if (Input.GetMouseButtonDown(1))
+        {
+            PopUIElement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+    }
+
+    private void Refresh()
+    {
+
+        cardDeck.Refresh();
+        PlaceMeshes();
+        PlaceWorkers();
+        WorkerAnimation();
+        UpdateResourceText();
+        ResourceTextOnTile();
+        RefreshContractCards();
+        uiCostManager.CanAfford();
+        endPanel.GameEnd();
+    }
+
+    public void AddUIElement(AddedUIElement uiElement)
+    {
+        hudState = uiElement.hudStateNeeded;
+
+        addedUIElements.Push(uiElement);
+    }
+
+    public void PopUIElement()
+    {
+        if (addedUIElements.Count > 0)
+        {
+
+            foreach (GameObject gameObject in addedUIElements.Peek().uiElementToInactivate)
+            {
+                print("element poppades " + gameObject.name);
+                gameObject.SetActive(false);
+            }
+            //addedUIElements.Peek().uiElementToInactivate.SetActive(false);
+            addedUIElements.Pop();
+            if (addedUIElements.Count > 0)
+            {
+                hudState = addedUIElements.Peek().hudStateNeeded;
+            }
+            else
+            {
+                hudState = HudState.standard;
+            }
+        }
+    }
+
+
+    public void SendErrorMessage(string message)
+    {
+        errorMessage.SetErrorMessage(message);
+    }
+
+
+    public void TestString()
+    {
+        print(testString);
+    }
+
+    public void DoAction(Action action)
+    {
+
+        if (!acceptActions)
+        {
+            return ;
+        }
+
+        if (isTutorial)
+        {
+            if(action is AssignWorkersAction)
+            {
+                int hej = 4;
+            }
+
+            if (tutorialAcceptedActions.Count > 0 &&!action.Equals(tutorialAcceptedActions[0]))
+            {
+                return ;
+            }
+            else
+            {   
+                if(action is MoveCardsAction)
+                {
+                    gameStateLogic.CheatActionsTutorial();
+                }
+
+                tutorialAcceptedActions.RemoveAt(0);
+
+                tutorialObjectToPop.RemoveObject();
+            }
+        }
+
+
+        gameStateLogic.DoAction(action);
+        Refresh();
+    }
+    public IsActionValidMessage IsActionValid(Action action)
+    {   
+
+        if(action is PlayCardAction)
+        {
+
+            int hej = 5;
+        }
+        if (!acceptActions)
+        {
+            return null;
+        }
+
+        if (isTutorial)
+        {   
+            if (tutorialAcceptedActions.Count > 0 && !action.Equals(tutorialAcceptedActions[0]))
+            {
+                return null;
+            }
+            else
+            {
+            }
+        }
+
+        return gameStateLogic.IsActionValid(action);    
+    }
+        
+    public void EndTurn()
+    {
+        EndTurnAction endTurnAction = new EndTurnAction();
+
+        DoAction(endTurnAction);
+    }
+
+
+    private void UpdateResourceText()
+    {
+        moneyText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.money).ToString());
+        wheatText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.wheat) + "/" + gameStateLogic.GetMaxStorage());
+        appleText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.apple) + "/" + gameStateLogic.GetMaxStorage());
+        cinnamonText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.cinnamon) + "/" + gameStateLogic.GetMaxStorage());
+        pigText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.pigMeat) + "/" + (gameStateLogic.GetMaxStorage()/10));
+
+
+        //print("vilken turn är det " + gameStateLogic.GetCurrentTurn());
+
+        string turnTextString = gameStateLogic.GetCurrentTurn() + "/" + gameStateLogic.GetMaxTurn();
+
+        turnText.SetText(turnTextString);
+
+       // print(turnTextString);
+
+        actionText.SetText(gameStateLogic.GetCurrentActions() + "/" + gameStateLogic.GetMaxActions());
+
+
+        amountOfWorkersText.SetText("Workers: " + gameStateLogic.GetWorkerRegistry().Count);
+    }
+
+    public void ResourceVFX(Resource resource)
+    {   
+        if(isTutorial)
+        {
+            return;
+        }
+        switch (resource)
+        {
+            case Resource.wheat:
+                Animator wheatAnim = wheatResource.GetComponent<Animator>();
+                wheatAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.apple:
+                Animator appleAnim = appleResource.GetComponent<Animator>();
+                appleAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.cinnamon:
+                Animator cinnamonAnim = cinnamonResource.GetComponent<Animator>();
+                cinnamonAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.pigMeat:
+                Animator pigAnim = pigResource.GetComponent<Animator>();
+                pigAnim.SetTrigger("reSize");
+                break;
+
+            case Resource.money:
+                Animator moneyAnim = moneyResource.GetComponent<Animator>();
+                moneyAnim.SetTrigger("reSize");
+                break;
+
+            default:
+                
+                break;
+        }
+
+    }
+
+    private void CantAfford()
+    {
+
+    }
+
+    public void SlaughterEffect()
+    {
+        slaughterParticle.Play(true);
+        UnityEngine.Vector2 mousePosition = Input.mousePosition;
+        slaughterParticle.transform.position = new UnityEngine.Vector3(mousePosition.x, mousePosition.y + 130);
+    }
+
+
+  private void ResourceTextOnTile()
+   {
+       foreach (KeyValuePair<int, FarmTile> farmTileRef in gameStateLogic.GetFarmTiles())
+       {
+           int farmTileIndex = farmTileRef.Key;
+
+           GameObject farmMeshPosition = farmTilePositions[farmTileIndex];
+
+           if (farmMeshPosition != null)
+           {
+               FarmTile farmTile = farmTileRef.Value;
+
+               if (farmTile.buildingOnTile || farmTile.isBuilt)
+               {
+                   TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
+
+                    farmTileText.gameObject.transform.parent.gameObject.SetActive(true);
+
+                   if (farmTileText != null && farmTile.resourceOnTile != Resource.pigMeat)
+                   {
+                       farmTileText.SetText(farmTileRef.Value.storedResources + " / " + farmTileRef.Value.maxStoredResources);
+                   }
+                   if (farmTileText != null && farmTile.resourceOnTile == Resource.pigMeat)
+                   {
+                       farmTileText.SetText(farmTileRef.Value.amountOfAnimals + " / " + farmTileRef.Value.maxAmountOfAnimals);
+                   }
+               }
+               else
+                {
+                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
+                    farmTileText.gameObject.transform.parent.gameObject.SetActive(false);
+
+                }
+
+            }
+       }
+   }
+
 
     void PlaceMeshes()
     {   
@@ -643,8 +658,10 @@ public class UIManager : MonoBehaviour
             if (workerToBePlacedRegistry.ContainsKey(registredWorker.workedId) == false)
             {
                 GameObject spawnedWorker = Instantiate<GameObject>(workerMesh);
-                //	workerToBePlacedRegistry.Add()
                 workerToBePlacedRegistry.Add(registredWorker.workedId, spawnedWorker);
+
+                //	workerToBePlacedRegistry.Add()
+
             }
         }
         foreach(KeyValuePair<int, GameObject> pair in workerToBePlacedRegistry)
@@ -672,6 +689,14 @@ public class UIManager : MonoBehaviour
             {
                 PlaceWorker(indexFarmTile, worker.workedId);
                 workersOnTiles.Add(worker);
+                if (worker.workType == WorkType.harvesting)
+                {
+                    
+                //  Animator harvestAnim = spawnedWorker.GetComponentInChildren<Animator>();
+                //  spawnedWorker.GetComponentInChildren<SpriteRenderer>().sprite = harvestSprite;
+                //  harvestAnim.runtimeAnimatorController = Resources.Load("Animations/2d1WorkerHarvest") as RuntimeAnimatorController;
+                //  harvestAnim.SetTrigger("harvest");
+                }
             }
             indexFarmTile += 1;
         }
@@ -686,6 +711,26 @@ public class UIManager : MonoBehaviour
             }
         }
 
+    }
+
+    void WorkerAnimation()
+    {
+        SortedDictionary<int, Worker> registredWorkers = gameStateLogic.GetWorkerRegistry();
+        Dictionary<int, FarmTile> farmTileRegistry = gameStateLogic.GetFarmTiles();
+
+        foreach (KeyValuePair<int, FarmTile> farmTilePair in farmTileRegistry)
+        {
+            foreach (Worker workerOnTile in farmTilePair.Value.workersOnTile)
+            {
+            //    if (workerOnTile.workType == WorkType.harvesting)
+            //    {
+            //        Animator harvestAnim = spawnedWorker.GetComponentInChildren<Animator>();
+            //        spawnedWorker.GetComponentInChildren<SpriteRenderer>().sprite = harvestSprite;
+            //        harvestAnim.runtimeAnimatorController = Resources.Load("Animations/2d1WorkerHarvest") as RuntimeAnimatorController;
+            //        harvestAnim.SetTrigger("harvest");
+            //    }
+            }
+        }
     }
 
     void PlaceWorker(int farmTileIndex, int workerId)

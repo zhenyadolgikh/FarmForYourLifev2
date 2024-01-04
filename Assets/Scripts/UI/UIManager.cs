@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
 
     public CardDeck cardDeck;
     public EndPanel endPanel;
+    public UICostManager costManager;
 
     public static UIManager instance;
 
@@ -294,6 +295,7 @@ public class UIManager : MonoBehaviour
         UpdateResourceText();
         ResourceTextOnTile();
         RefreshContractCards();
+        costManager.CanAfford();
         endPanel.GameEnd();
 
 

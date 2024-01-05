@@ -1271,6 +1271,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc8ccad7a7097640865dd413dc1fa49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &141394971 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6404274487155512622, guid: c6c4c4fae6a0f0d4ca27b8eff94b8ad8, type: 3}
+  m_PrefabInstance: {fileID: 2944209402815233775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &146420747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4009419465036801066, guid: c78a5966a7f607c42b92c00a162611fe, type: 3}
@@ -13108,6 +13119,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 303446346}
     m_Modifications:
+    - target: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_Name
+      value: UpgradeWorkersButton
+      objectReference: {fileID: 0}
     - target: {fileID: 2978689814115124810, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 19
@@ -13411,6 +13426,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 303446346}
     m_Modifications:
+    - target: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_Name
+      value: UpgradeActionsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 2978689814115124810, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 19
@@ -13835,6 +13854,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 303446346}
     m_Modifications:
+    - target: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_Name
+      value: UpgradeStorageButton
+      objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -24793,6 +24816,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1165016787}
     m_Modifications:
+    - target: {fileID: 3891301299393921450, guid: c6c4c4fae6a0f0d4ca27b8eff94b8ad8, type: 3}
+      propertyPath: errorText
+      value: 
+      objectReference: {fileID: 141394971}
     - target: {fileID: 4368752120549034614, guid: c6c4c4fae6a0f0d4ca27b8eff94b8ad8, type: 3}
       propertyPath: m_Name
       value: ErrorMessage

@@ -754,7 +754,7 @@ public class UIManager : MonoBehaviour
             FarmTile farmTile = pair.Value;
             foreach(Worker worker in farmTile.workersOnTile)
             {
-                PlaceWorker(indexFarmTile, worker.workedId);
+                PlaceWorker(indexFarmTile, worker.workedId, worker.workType);
                 workersOnTiles.Add(worker);
             }
             indexFarmTile += 1;
@@ -782,7 +782,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            PlaceWorker(workAssigned.Item1, count - 1);
+            PlaceWorker(workAssigned.Item1, count - 1, workAssigned.Item2);
          //   workerToBePlacedRegistry[count - 1].transform.position = farmTilePositions[workAssigned.Item1].transform.position;
         }
 
@@ -819,7 +819,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void PlaceWorker(int farmTileIndex, int workerId)
+    void PlaceWorker(int farmTileIndex, int workerId, WorkType workType)
     {
         List<WorkerPosition> arrayToLoop = workerPositions[farmTileIndex];
 
@@ -830,6 +830,7 @@ public class UIManager : MonoBehaviour
                 arrayToLoop[i].workerPlacedHere = true;
                 GameObject workerToPlace = workerToBePlacedRegistry[workerId];
                 workerToPlace.transform.position = arrayToLoop[i].transform.position;
+                Debug.Log("hejhej");
                 return;
             }
         }

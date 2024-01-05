@@ -304,8 +304,6 @@ public class UIManager : MonoBehaviour
     {
         mouseClickHandled = true;
         mouseClickedHandledSecondTime = true;
-
-        print("hej");
     }
 
 

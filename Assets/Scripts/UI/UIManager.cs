@@ -82,7 +82,9 @@ public class UIManager : MonoBehaviour
     public ErrorMessage errorMessage;
 
 
-    private ContractLayout contractLayout;
+    [SerializeField] private ContractLayout contractLayout;
+    [SerializeField] private ContractLayout specialCardLayout;
+    [SerializeField] private CardHandLayout handLayout;
 
     //ghetto af
     private bool mouseClickHandled = false;
@@ -293,10 +295,20 @@ public class UIManager : MonoBehaviour
         PlaceWorkers();
         UpdateResourceText();
         ResourceTextOnTile();
-        RefreshContractCards();
+        handLayout.OrderCards();
+      //  RefreshContractCards();
         endPanel.GameEnd();
+    }
 
+    //Callback istället för refresh strukturen
+    public void OrderContractCards()
+    {
+        contractLayout.OrderCards();
 
+    }
+    public void OrderSpecialCards()
+    {
+        specialCardLayout.OrderCards();
     }
 
     private void UpdateResourceText()
@@ -499,7 +511,7 @@ public class UIManager : MonoBehaviour
 
 
 
-        contractLayout = FindAnyObjectByType<ContractLayout>();
+        //contractLayout = FindAnyObjectByType<ContractLayout>();
 
         for(int i = 0; i < 9; i++)
         {

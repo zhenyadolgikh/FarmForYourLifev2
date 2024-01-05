@@ -75,7 +75,21 @@ public class AssignWorkersButton : MonoBehaviour
             AssignWorkersAction assignWorkersAction = new AssignWorkersAction();
             assignWorkersAction.workAssigned = currentWorkAssigned;
 
-            uiManager.DoAction(assignWorkersAction);
+
+            IsActionValidMessage message = uiManager.IsActionValid(assignWorkersAction);
+
+            if(message != null)
+            {
+                if(message.wasActionValid)
+                {
+                    uiManager.DoAction(assignWorkersAction);
+                }
+                else
+                {
+                    uiManager.SendErrorMessage(message.errorMessage);
+                }
+            }
+
             uiManager.PopUIElement();
            // textShowingWorkerCount.gameObject.SetActive(false);
            // uiManager.hudState = HudState.standard;

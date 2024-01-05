@@ -22,13 +22,13 @@ public class ContractLayout : MonoBehaviour
 
     private void Update()
     {
-        DisplayCard[] displayCards = GetComponentsInChildren<DisplayCard>();
+        //DisplayCard[] displayCards = GetComponentsInChildren<DisplayCard>();
 
     }
 
     public void OrderCards()
     {
-        DisplayCard[] displayCards = GetComponentsInChildren<DisplayCard>();
+        DisplayCard[] displayCards = GetComponentsInChildren<DisplayCard>(true);
 
         if (displayCards.Length > 0 ) 
         {

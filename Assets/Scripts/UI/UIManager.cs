@@ -91,6 +91,215 @@ public class UIManager : MonoBehaviour
     private bool mouseClickedHandledSecondTime = false;
 
 
+    void Start()
+    {
+        gameStateLogic.Setup();
+
+        if (isTutorial)
+        {
+            BuildAction buildAction = new BuildAction();
+            buildAction.farmTileIndex = 3;
+            buildAction.resource = Resource.wheat;
+
+            tutorialAcceptedActions.Add(buildAction);
+
+            AssignWorkersAction assignAction = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tuple = new Tuple<int, WorkType>(3, WorkType.building);
+
+            assignAction.workAssigned.Add(tuple);
+
+            tutorialAcceptedActions.Add(assignAction);
+
+
+            AddCardToHandAction addCardToHandAction = new AddCardToHandAction();
+            addCardToHandAction.index = 2;
+            addCardToHandAction.cardType = TypeOfCard.special;
+
+            tutorialAcceptedActions.Add(addCardToHandAction);
+
+            EndTurnAction endTurnAction = new EndTurnAction();
+            tutorialAcceptedActions.Add(endTurnAction);
+
+
+            AssignWorkersAction assignActionHarvest = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tupleHarvest = new Tuple<int, WorkType>(3, WorkType.harvesting);
+
+            assignActionHarvest.workAssigned.Add(tupleHarvest);
+
+            tutorialAcceptedActions.Add(assignActionHarvest);
+
+            IncreaseStorageAction increaseStorageAction = new IncreaseStorageAction();
+
+            tutorialAcceptedActions.Add(increaseStorageAction);
+
+            PlayCardAction playCard = new PlayCardAction();
+            playCard.index = 0;
+            playCard.typeOfCard = TypeOfCard.special;
+            playCard.cardIdentifier = "Money printer";
+            tutorialAcceptedActions.Add(playCard);
+
+            MoveCardsAction moveCards = new MoveCardsAction();
+            moveCards.typeOfdeck = TypeOfCard.special;
+            moveCards.moneyCost = 200;
+
+            tutorialAcceptedActions.Add(moveCards);
+
+            tutorialAcceptedActions.Add(endTurnAction);
+
+
+            BuildAction buildPig = new BuildAction();
+            buildPig.farmTileIndex = 0;
+            buildPig.resource = Resource.pigMeat;
+
+            tutorialAcceptedActions.Add(buildPig);
+
+            AssignWorkersAction assignPigWorkBuild = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tupleBuildPig = new Tuple<int, WorkType>(0, WorkType.building);
+
+            assignPigWorkBuild.workAssigned.Add(tupleBuildPig);
+
+
+            tutorialAcceptedActions.Add(assignPigWorkBuild);
+
+
+            tutorialAcceptedActions.Add(endTurnAction);
+
+
+            AssignWorkersAction assignPigWorkSlaughter = new AssignWorkersAction();
+
+            Tuple<int, WorkType> tupleSlaughter = new Tuple<int, WorkType>(0, WorkType.slaughtering);
+
+            assignPigWorkSlaughter.workAssigned.Add(tupleSlaughter);
+
+            tutorialAcceptedActions.Add(assignPigWorkSlaughter);
+
+            //
+            gameStateLogic.CardSetupTutorial();
+        }
+
+
+
+        contractLayout = FindAnyObjectByType<ContractLayout>();
+
+        for (int i = 0; i < 9; i++)
+        {
+            farmTilePositions.Add(null);
+            placedMeshes.Add(new BuildingOnTile());
+        }
+        FarmMeshPosition[] foundPositions = FindObjectsByType<FarmMeshPosition>(FindObjectsSortMode.None);
+        foreach (FarmMeshPosition position in foundPositions)
+        {
+            farmTilePositions[position.farmTileIndex] = position.gameObject;
+        }
+
+
+        for (int i = 0; i < 9; i++)
+        {
+            workerPositions.Add(new List<WorkerPosition>());
+            for (int z = 0; z < 3; z++)
+            {
+                workerPositions[i].Add(null);
+            }
+        }
+        WorkerPosition[] foundWorkerPositions = FindObjectsByType<WorkerPosition>(FindObjectsSortMode.None);
+
+        print("hur många worker positions " + foundWorkerPositions.Length);
+
+        foreach (WorkerPosition workerPosition in foundWorkerPositions)
+        {
+            workerPositions[workerPosition.farmTileIndex][workerPosition.positionOrder] = workerPosition;
+        }
+
+
+        IdleWorkerPosition[] foundIdlePositions = FindObjectsByType<IdleWorkerPosition>(FindObjectsSortMode.None);
+
+        for (int i = 0; i < 9; i++)
+        {
+            idleWorkerTransforms.Add(null);
+        }
+
+        foreach (IdleWorkerPosition idlePosition in foundIdlePositions)
+        {
+            idleWorkerTransforms[idlePosition.index] = idlePosition.gameObject.transform;
+        }
+
+
+        Refresh();
+
+
+    }
+
+    private void Update()
+    {
+
+        if (mouseClickOccured && !mouseClickHandled)
+        {
+            if (!mouseClickedHandledSecondTime)
+            {
+                PopUIElement();
+
+            }
+            else
+            {
+                mouseClickedHandledSecondTime = false;
+            }
+
+        }
+        else
+        {
+            print("fungerade typ kanske " + mouseClickHandled + "occurades det " + mouseClickOccured);
+        }
+
+        mouseClickOccured = false;
+        mouseClickHandled = false;
+        if (Input.GetMouseButtonUp(((int)MouseButton.Left)))
+        {
+            mouseClickOccured = true;
+        }
+        if (Input.GetMouseButtonDown(((int)MouseButton.Right)))
+        {
+            PopUIElement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+
+        print(hudState);
+
+    }
+
+    void Awake()
+    {
+        if (instance != null)
+            GameObject.Destroy(instance);
+        else
+            instance = this;
+
+        DontDestroyOnLoad(this);
+
+    }
+
+    public void Refresh()
+    {
+
+        cardDeck.Refresh();
+        PlaceMeshes();
+        PlaceWorkers();
+        UpdateResourceText();
+        ResourceTextOnTile();
+        RefreshContractCards();
+        costManager.CanAfford();
+        endPanel.GameEnd();
+
+    }
+
+
     public void MouseClickHandled()
     {
         mouseClickHandled = true;
@@ -157,59 +366,7 @@ public class UIManager : MonoBehaviour
     {
         errorMessage.SetErrorMessage(message);
     }
-    private void Update()
-    {   
-
-        if(mouseClickOccured && !mouseClickHandled)
-        {
-            if(!mouseClickedHandledSecondTime)
-            {
-                PopUIElement();
-
-            }
-            else
-            {
-                mouseClickedHandledSecondTime = false;
-            }
-
-        }
-        else
-        {
-            print("fungerade typ kanske " + mouseClickHandled + "occurades det " + mouseClickOccured);
-        }
-
-        mouseClickOccured = false;
-        mouseClickHandled = false;
-        if (Input.GetMouseButtonUp(((int)MouseButton.Left)))
-        {
-            mouseClickOccured = true;
-        }
-        if(Input.GetMouseButtonDown(((int)MouseButton.Right))) 
-        {
-            PopUIElement();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
-        
-        print(hudState);
-
-    }
-
-
-    void Awake()
-    {
-        if (instance != null)
-            GameObject.Destroy(instance);
-        else
-            instance = this;
-
-        DontDestroyOnLoad(this);
-
-    }
+   
 
     public void TestString()
     {
@@ -251,6 +408,7 @@ public class UIManager : MonoBehaviour
 
         gameStateLogic.DoAction(action);
         Refresh();
+
     }
     public IsActionValidMessage IsActionValid(Action action)
     {   
@@ -286,20 +444,6 @@ public class UIManager : MonoBehaviour
         DoAction(endTurnAction);
     }
 
-    public void Refresh()
-    {
-        
-        cardDeck.Refresh();
-        PlaceMeshes();
-        PlaceWorkers();
-        UpdateResourceText();
-        ResourceTextOnTile();
-        RefreshContractCards();
-        costManager.CanAfford();
-        endPanel.GameEnd();
-
-
-    }
 
     private void UpdateResourceText()
     {
@@ -409,147 +553,6 @@ public class UIManager : MonoBehaviour
             }
        }
    }
-
-    void Start()
-    {
-        gameStateLogic.Setup();
-
-        if (isTutorial)
-        {
-            BuildAction buildAction = new BuildAction();
-            buildAction.farmTileIndex = 3;
-            buildAction.resource = Resource.wheat;
-
-            tutorialAcceptedActions.Add(buildAction);
-
-            AssignWorkersAction assignAction = new AssignWorkersAction();
-
-            Tuple<int, WorkType> tuple = new Tuple<int, WorkType>(3,WorkType.building);
-
-            assignAction.workAssigned.Add(tuple);
-
-            tutorialAcceptedActions.Add(assignAction);
-
-
-            AddCardToHandAction addCardToHandAction = new AddCardToHandAction();
-            addCardToHandAction.index = 2;
-            addCardToHandAction.cardType = TypeOfCard.special;
-
-            tutorialAcceptedActions.Add(addCardToHandAction);
-
-            EndTurnAction endTurnAction = new EndTurnAction();
-            tutorialAcceptedActions.Add(endTurnAction);
-
-
-            AssignWorkersAction assignActionHarvest = new AssignWorkersAction();
-
-            Tuple<int, WorkType> tupleHarvest = new Tuple<int, WorkType>(3, WorkType.harvesting);
-
-            assignActionHarvest.workAssigned.Add(tupleHarvest);
-
-            tutorialAcceptedActions.Add(assignActionHarvest);
-
-            IncreaseStorageAction increaseStorageAction = new IncreaseStorageAction();
-
-            tutorialAcceptedActions.Add(increaseStorageAction);
-
-            PlayCardAction playCard = new PlayCardAction();
-            playCard.index = 0;
-            playCard.typeOfCard = TypeOfCard.special;
-            playCard.cardIdentifier = "Money printer";
-            tutorialAcceptedActions.Add(playCard);
-
-            MoveCardsAction moveCards = new MoveCardsAction();
-            moveCards.typeOfdeck = TypeOfCard.special;
-            moveCards.moneyCost = 200;
-
-            tutorialAcceptedActions.Add(moveCards);
-
-            tutorialAcceptedActions.Add(endTurnAction);
-
-
-            BuildAction buildPig = new BuildAction();
-            buildPig.farmTileIndex = 0;
-            buildPig.resource = Resource.pigMeat;
-
-            tutorialAcceptedActions.Add(buildPig);
-
-            AssignWorkersAction assignPigWorkBuild = new AssignWorkersAction();
-
-            Tuple<int, WorkType> tupleBuildPig = new Tuple<int, WorkType>(0, WorkType.building);
-
-            assignPigWorkBuild.workAssigned.Add(tupleBuildPig);
-
-
-            tutorialAcceptedActions.Add(assignPigWorkBuild);
-
-
-            tutorialAcceptedActions.Add(endTurnAction);
-
-
-            AssignWorkersAction assignPigWorkSlaughter = new AssignWorkersAction();
-
-            Tuple<int, WorkType> tupleSlaughter = new Tuple<int, WorkType>(0, WorkType.slaughtering);
-
-            assignPigWorkSlaughter.workAssigned.Add(tupleSlaughter);
-
-            tutorialAcceptedActions.Add(assignPigWorkSlaughter);
-
-            //
-            gameStateLogic.CardSetupTutorial();
-        }
-
-
-
-        contractLayout = FindAnyObjectByType<ContractLayout>();
-
-        for(int i = 0; i < 9; i++)
-        {
-            farmTilePositions.Add(null);
-            placedMeshes.Add(new BuildingOnTile());
-        }
-        FarmMeshPosition[] foundPositions = FindObjectsByType<FarmMeshPosition>(FindObjectsSortMode.None);
-        foreach (FarmMeshPosition position in foundPositions)
-        {
-            farmTilePositions[position.farmTileIndex] = position.gameObject;
-        }
-
-
-        for(int i = 0; i < 9; i++)
-        {
-            workerPositions.Add(new List<WorkerPosition>());
-            for(int z = 0; z < 3; z++)
-            {
-                workerPositions[i].Add(null);
-            }
-        }
-        WorkerPosition[] foundWorkerPositions = FindObjectsByType<WorkerPosition>(FindObjectsSortMode.None);
-
-        print("hur många worker positions " + foundWorkerPositions.Length);
-
-        foreach(WorkerPosition workerPosition in foundWorkerPositions)
-        {
-            workerPositions[workerPosition.farmTileIndex][workerPosition.positionOrder] = workerPosition;
-        }
-
-
-        IdleWorkerPosition[] foundIdlePositions = FindObjectsByType<IdleWorkerPosition>(FindObjectsSortMode.None);
-            
-        for(int i = 0; i < 9; i++)
-        {
-            idleWorkerTransforms.Add(null);
-        }
-
-        foreach(IdleWorkerPosition idlePosition in foundIdlePositions)
-        {
-            idleWorkerTransforms[idlePosition.index] = idlePosition.gameObject.transform;
-        }
-
-
-        Refresh();
-        
-
-    }
 
     void PlaceMeshes()
     {   

@@ -11,6 +11,9 @@ public class ErrorMessage : MonoBehaviour
 
     public void SetErrorMessage(string message)
     {
+        Vector2 mousePosition = Input.mousePosition;
+        gameObject.transform.position = new Vector3(mousePosition.x, mousePosition.y);
+        //bool isActive = gameObject.activeSelf;
         gameObject.SetActive(true);
 
         errorText.text = message;

@@ -83,6 +83,8 @@ public class UIManager : MonoBehaviour
 
     public ErrorMessage errorMessage;
 
+    public GameObject pausePanel;
+
 
     private ContractLayout contractLayout;
 
@@ -267,7 +269,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainMenu");
+            pausePanel.SetActive(true);
         }
 
 
@@ -360,6 +362,10 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void ContinuePlay()
+    {
+        pausePanel.SetActive(false);
+    }
 
     public void SendErrorMessage(string message)
     {
@@ -809,6 +815,7 @@ public class UIManager : MonoBehaviour
         {
 
             workerToBePlacedRegistry[pair.Key].transform.position = idleWorkerTransforms[placedWorkers].position;
+            workerToBePlacedRegistry[pair.Key].GetComponent<ClonedWorker>().WorkerAnimation(WorkType.unassigned);
 
             placedWorkers += 1;
 
@@ -826,7 +833,7 @@ public class UIManager : MonoBehaviour
                 arrayToLoop[i].workerPlacedHere = true;
                 GameObject workerToPlace = workerToBePlacedRegistry[workerId];
                 workerToPlace.transform.position = arrayToLoop[i].transform.position;
-                workerToPlace.GetComponent<ClonedWorker>().WorkerAnimation();
+                workerToPlace.GetComponent<ClonedWorker>().WorkerAnimation(workType);
                 return;
             }
         }

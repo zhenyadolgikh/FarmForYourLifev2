@@ -16701,7 +16701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -108
+      value: -49.5
       objectReference: {fileID: 0}
     - target: {fileID: 3183742576713840424, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -39794,7 +39794,6 @@ SceneRoots:
   - {fileID: 945157666}
   - {fileID: 45270638}
   - {fileID: 1293844255}
-  - {fileID: 1165016787}
   - {fileID: 734837448}
   - {fileID: 1959402695}
   - {fileID: 353173235}
@@ -39829,6 +39828,7 @@ SceneRoots:
   - {fileID: 1828082156}
   - {fileID: 1482169892}
   - {fileID: 602547119}
+  - {fileID: 1165016787}
   - {fileID: 1994739552}
   - {fileID: 1035585259}
   - {fileID: 1719363026}

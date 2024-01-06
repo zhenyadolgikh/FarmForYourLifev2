@@ -15,6 +15,7 @@ public class DisplayCard : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
 
+    public Color defaultTextColor;
 
     public int cardIndex = -1;
     public TypeOfCard typeOfCard;
@@ -208,6 +209,27 @@ public class DisplayCard : MonoBehaviour
     //        this.tag = "Untagged";            
     //    }
 
+    }
+
+    public void CardCost()
+    {
+
+        TextMeshProUGUI contractActionText = contractCardVariant.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI specialActionText = specialCardVariant.GetComponent<TextMeshProUGUI>();
+
+        if (uiManager.gameStateLogic.GetCurrentActions() < 1)
+        {
+            Debug.Log("Hello?");
+            contractActionText.color = Color.red;
+            specialActionText.color = Color.red;
+        }
+        else
+        {
+            contractActionText.color = defaultTextColor;
+            specialActionText.color = defaultTextColor;
+        }
+            
+        
     }
 
 }

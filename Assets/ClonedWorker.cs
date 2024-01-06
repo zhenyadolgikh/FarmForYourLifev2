@@ -7,39 +7,39 @@ using UnityEngine.UI;
 public class ClonedWorker : MonoBehaviour
 {
     public GameObject workerMesh;
-    public Image workIcon;
     public Animator workAnim;
 
     public Sprite buildSprite, harvestSprite, idleSprite;
-    public Animator buildAnim, harvestAnim, idleAnim;
 
 
     // Start is called before the first frame update
     void Awake()
     {
-        workIcon = gameObject.GetComponentInChildren<Image>();
         workAnim = gameObject.GetComponentInChildren<Animator>();
     }
 
     public void WorkerAnimation(WorkType workType)
     {
+        workAnim.SetBool("building", false);
+        workAnim.SetBool("harvesting", false);
+        workAnim.SetBool("idle", false);
 
-       switch (workType)
-       {
+        switch (workType)
+        {
             case WorkType.building:
-                workIcon.sprite = buildSprite;
-                workAnim = buildAnim;
-                buildAnim.SetTrigger("reSize");
+                workAnim.SetBool("building", true);
+                workAnim.SetBool("idle", false);
+
                 break;
 
           case WorkType.harvesting:
-              workIcon.sprite = harvestSprite;
-                Debug.Log(workIcon.sprite);
+                //    workIcon.sprite = harvestSprite;
+                workAnim.SetBool("harvesting", true);
               break;
        
           case WorkType.unassigned:
-              workIcon.sprite = idleSprite;
-              break;
+                workAnim.SetBool("idle", true);
+                break;
        
            default:
                 break;

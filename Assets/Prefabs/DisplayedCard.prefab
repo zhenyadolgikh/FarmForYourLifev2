@@ -1376,6 +1376,7 @@ MonoBehaviour:
   cardDescription: 
   nameText: {fileID: 5000202408850868414}
   descriptionText: {fileID: 8390609725000520796}
+  defaultTextColor: {r: 1, g: 0.995283, b: 0.995283, a: 0}
   cardIndex: -1
   typeOfCard: 0
   cardIdentifier: 

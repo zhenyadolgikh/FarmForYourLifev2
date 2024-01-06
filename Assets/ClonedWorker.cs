@@ -19,31 +19,33 @@ public class ClonedWorker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         print(Camera.main);
         buildSprite = Resources.Load<Sprite>("2D/WBuild/2d1workerbuild");
+        harvestSprite = Resources.Load<Sprite>("2D/WBuild/2d1WorkerHarvest");
+        idleSprite = Resources.Load<Sprite>("2D/WBuild/2d1WorkerSleep");
         workIcon = gameObject.GetComponentInChildren<Image>();
     }
 
-    public void WorkerAnimation()
+    public void WorkerAnimation(WorkType workType)
     {
-        workIcon.sprite = buildSprite;
-    //   switch (workType)
-    //   {
-            //case WorkType.building:
-               
+
+       switch (workType)
+       {
+            case WorkType.building:
+                workIcon.sprite = buildSprite;
                 //Animator pigAnim = pigResource.GetComponent<Animator>();
                 //pigAnim.SetTrigger("reSize");
-                //break;
+                break;
 
-       //   case WorkType.harvesting:
-       //       workIcon.sprite = buildSprite;
-       //       break;
-       //
-       //   case WorkType.unassigned:
-       //       workIcon.sprite = buildSprite;
-       //       break;
-       //
-        //    default:
-          //      break;
-        //}
+          case WorkType.harvesting:
+              workIcon.sprite = harvestSprite;
+              break;
+       
+          case WorkType.unassigned:
+              workIcon.sprite = idleSprite;
+              break;
+       
+           default:
+                break;
+       }
 
     }
 

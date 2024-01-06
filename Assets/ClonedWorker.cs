@@ -9,15 +9,43 @@ public class ClonedWorker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public GameObject workerMesh;
     public Image workIcon;
 
+    private Sprite buildSprite, harvestSprite, idleSprite;
+
 
     private Vector3 mousePosition;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         print(Camera.main);
+        buildSprite = Resources.Load<Sprite>("2D/WBuild/2d1workerbuild");
+        workIcon = gameObject.GetComponentInChildren<Image>();
     }
 
+    public void WorkerAnimation()
+    {
+        workIcon.sprite = buildSprite;
+    //   switch (workType)
+    //   {
+            //case WorkType.building:
+               
+                //Animator pigAnim = pigResource.GetComponent<Animator>();
+                //pigAnim.SetTrigger("reSize");
+                //break;
+
+       //   case WorkType.harvesting:
+       //       workIcon.sprite = buildSprite;
+       //       break;
+       //
+       //   case WorkType.unassigned:
+       //       workIcon.sprite = buildSprite;
+       //       break;
+       //
+        //    default:
+          //      break;
+        //}
+
+    }
 
     private Vector3 ConvertScreenSpaceToWorldSpace()
     {

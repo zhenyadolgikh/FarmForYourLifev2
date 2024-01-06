@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public CardDeck cardDeck;
     public EndPanel endPanel;
     public UICostManager costManager;
+    public ClonedWorker clonedWorker;
 
     public static UIManager instance;
 
@@ -252,7 +253,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            print("fungerade typ kanske " + mouseClickHandled + "occurades det " + mouseClickOccured);
+            //print("fungerade typ kanske " + mouseClickHandled + "occurades det " + mouseClickOccured);
         }
 
         mouseClickOccured = false;
@@ -272,7 +273,7 @@ public class UIManager : MonoBehaviour
         }
 
 
-        print(hudState);
+        //print(hudState);
 
     }
 
@@ -472,10 +473,7 @@ public class UIManager : MonoBehaviour
 
         turnText.SetText(turnTextString);
 
-       // print(turnTextString);
-
         actionText.SetText(gameStateLogic.GetCurrentActions() + "/" + gameStateLogic.GetMaxActions());
-
 
         amountOfWorkersText.SetText("Workers: " + gameStateLogic.GetWorkerRegistry().Count);
     }
@@ -522,9 +520,10 @@ public class UIManager : MonoBehaviour
 
     public void SlaughterEffect()
     {
-        slaughterParticle.Play(true);
+        
         UnityEngine.Vector2 mousePosition = Input.mousePosition;
         slaughterParticle.transform.position = new UnityEngine.Vector3(mousePosition.x, mousePosition.y + 130);
+        slaughterParticle.Play(true);
     }
 
 
@@ -743,7 +742,6 @@ public class UIManager : MonoBehaviour
             if (workerToBePlacedRegistry.ContainsKey(registredWorker.workedId) == false)
             {
                 GameObject spawnedWorker = Instantiate<GameObject>(workerMesh);
-                //	workerToBePlacedRegistry.Add()
                 workerToBePlacedRegistry.Add(registredWorker.workedId, spawnedWorker);
             }
         }
@@ -846,7 +844,7 @@ public class UIManager : MonoBehaviour
                 arrayToLoop[i].workerPlacedHere = true;
                 GameObject workerToPlace = workerToBePlacedRegistry[workerId];
                 workerToPlace.transform.position = arrayToLoop[i].transform.position;
-                Debug.Log("hejhej");
+                workerToPlace.GetComponent<ClonedWorker>().WorkerAnimation();
                 return;
             }
         }

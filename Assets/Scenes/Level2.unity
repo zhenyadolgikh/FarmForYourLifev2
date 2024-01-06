@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -29884,6 +29884,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 4496777533965653846, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4759692797797019514, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -33325,6 +33329,7 @@ MonoBehaviour:
   cardDeck: {fileID: 858217201}
   endPanel: {fileID: 147225627}
   costManager: {fileID: 492479305}
+  clonedWorker: {fileID: 0}
   testString: Testar om korrekt objekt
   builtPigMesh: {fileID: 7539665815912513766, guid: bd3f26631042f46b8ace4cc7099a584e, type: 3}
   builtWeatMesh: {fileID: 7539665815912513766, guid: 1367a86355d744f8e92043d5c092bdc7, type: 3}
@@ -36851,7 +36856,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7d40793197930419ea5d2fdb99d14078, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1

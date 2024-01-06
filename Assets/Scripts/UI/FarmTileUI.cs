@@ -70,9 +70,6 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
         if (manager.hudState != HudState.assignWorkers)
         {
-
-                //   print(Input.mousePosition);
-
             Vector2 mousePosition = Input.mousePosition;
             optionPanel.transform.position = new Vector3(mousePosition.x, mousePosition.y + 130);
             bool isActive = optionPanel.activeSelf;
@@ -82,16 +79,31 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
             uiElementsToAdd.Add(optionPanel);
 
+
             if (!isActive)
             {
+                FarmTile clickedFarmTile;
+                if (manager.gameStateLogic.GetFarmTiles().TryGetValue(farmTileIndex, out clickedFarmTile))
+                {
 
-                manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.standard));
-                optionPanel.SetActive(true);
-
-            }
-            else
-            {
-                manager.PopUIElement();
+                    if (!clickedFarmTile.buildingOnTile && !clickedFarmTile.isBuilt)
+                    {
+                        manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.standard));
+                        optionPanel.SetActive(true);
+                    }
+                    else
+                    {
+                        //manager.PopUIElement();
+                        BuildAction ba = new BuildAction();
+                        ba.farmTileIndex = farmTileIndex;
+                        Debug.Log(farmTileIndex);
+                        IsActionValidMessage message = manager.IsActionValid(ba);
+                        if (message.wasActionValid == false)
+                        {
+                            manager.SendErrorMessage(message.errorMessage);
+                        }
+                    }
+                }
             }
             
             foreach (Button button in options)

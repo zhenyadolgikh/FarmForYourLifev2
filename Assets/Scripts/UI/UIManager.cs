@@ -245,10 +245,29 @@ public class UIManager : MonoBehaviour
 
 
     }
+        
+    private WorkType GetWorkTypeFromFarm(int farmindex)
+    {
+        FarmTile farmTile = gameStateLogic.GetFarmTiles()[farmindex];
 
+        if(!farmTile.isBuilt || !farmTile.buildingOnTile)
+        {
+            return WorkType.building;
+        }
+        if(farmTile.resourceOnTile == Resource.pigMeat)
+        {
+            return WorkType.slaughtering;
+        }
+        else
+        {
+            return WorkType.harvesting;
+        }
+
+    }
     private void AssignWorkerFromDrag(int farmTileIndex)
     {
-        print("hej här är indexet");
+        
+
     }
 
     public void SetFarmTileMouseUp(int farmTileIndex, bool value)

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -66,7 +67,10 @@ public class GameStateLogic : MonoBehaviour
 
     [SerializeField] private VictoryCondition victorCondition; 
 
-    private List<EffectLifeTime> activeEffects = new List<EffectLifeTime>();    
+    private List<EffectLifeTime> activeEffects = new List<EffectLifeTime>();
+
+
+    private bool assignedWorkersThisTurn = false;
 
 
     private EffectInterface effectInterface;
@@ -358,6 +362,8 @@ public class GameStateLogic : MonoBehaviour
     }
     void ResetNumbers()
     {
+
+        assignedWorkersThisTurn = false;
         currentActions = maxActions;
 
         if(wheatStored > currentStorage)
@@ -1094,9 +1100,28 @@ public class GameStateLogic : MonoBehaviour
             actionCost = effect.ModifyActionCost(ActionCostingType.assignWorkers, actionCost);
         }
 
-        currentActions -= actionCost; 
 
+
+
+
+        bool containsSlaughter = false;
+        foreach(Tuple<int,WorkType> assignedWork in assignAction.workAssigned)
+        {
+            if(assignedWork.Item2 == WorkType.slaughtering)
+            {
+                containsSlaughter = true;
+            }
+        }
         
+        if(containsSlaughter || !assignedWorkersThisTurn)
+        {
+            currentActions -= actionCost; 
+        }
+        assignedWorkersThisTurn = true;
+
+
+
+
         List<int> workerIds = new List<int>();
         foreach(KeyValuePair<int,Worker> workerPair in workerRegistry)
         {

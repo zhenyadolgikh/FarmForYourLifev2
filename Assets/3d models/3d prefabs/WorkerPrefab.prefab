@@ -86,7 +86,7 @@ Animator:
   m_GameObject: {fileID: 714388027313305785}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8cfce6d5b5742c2429431b091ced7daf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -246,6 +246,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workerMesh: {fileID: 6238320096955934227}
   workIcon: {fileID: 8836804527689759213}
+  workAnim: {fileID: 308129986968170987}
+  buildSprite: {fileID: 21300000, guid: 2b1a2ae0dabd84e31a3f3a1e14d39e16, type: 3}
+  harvestSprite: {fileID: 21300000, guid: ceedab3fdec954bdab5765d794089040, type: 3}
+  idleSprite: {fileID: 21300000, guid: e58c156e67b1c4e749eb54e6dfdf9bb3, type: 3}
 --- !u!1001 &6508720445128186690
 PrefabInstance:
   m_ObjectHideFlags: 0

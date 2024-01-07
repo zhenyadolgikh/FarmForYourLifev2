@@ -14,7 +14,9 @@ public class DisplayCard : MonoBehaviour
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI actionCostText;
 
+    public Color defaultTextColor;
 
     public int cardIndex = -1;
     public TypeOfCard typeOfCard;
@@ -208,6 +210,24 @@ public class DisplayCard : MonoBehaviour
     //        this.tag = "Untagged";            
     //    }
 
+    }
+
+    public void CardCost()
+    {
+        uiManager = UIManager.instance;
+
+        Debug.Log(uiManager.gameStateLogic);
+        if (uiManager.gameStateLogic.GetCurrentActions() < 1)
+        {
+
+            actionCostText.color = Color.red;
+        }
+        else
+        {
+            actionCostText.color = defaultTextColor;
+        }
+            
+        
     }
 
 }

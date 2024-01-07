@@ -67,8 +67,25 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     private void OnMouseUp()
     {
 
-        print("mouse up hände");
+        print("mouse up hï¿½nde");
         manager.SetFarmTileMouseUp(farmTileIndex, true);
+
+    }
+    private WorkType GetWorkTypeFromFarm()
+    {
+        FarmTile farm = manager.gameStateLogic.GetFarmTiles()[farmTileIndex];
+        if(!farm.isBuilt || !farm.buildingOnTile)
+        {
+            return WorkType.building;
+        }
+        if(farm.resourceOnTile == Resource.pigMeat)
+        {
+            return WorkType.slaughtering;
+        }
+        else
+        {
+            return WorkType.harvesting;
+        }
     }
 
     private void PopUp()
@@ -92,10 +109,11 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 FarmTile clickedFarmTile;
                 if (manager.gameStateLogic.GetFarmTiles().TryGetValue(farmTileIndex, out clickedFarmTile))
                 {
-
+                    
                     if (!clickedFarmTile.buildingOnTile && !clickedFarmTile.isBuilt)
                     {
                         manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.standard));
+                        
                         optionPanel.SetActive(true);
                     }
                     else
@@ -103,7 +121,6 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                         //manager.PopUIElement();
                         BuildAction ba = new BuildAction();
                         ba.farmTileIndex = farmTileIndex;
-                        Debug.Log(farmTileIndex);
                         IsActionValidMessage message = manager.IsActionValid(ba);
                         if (message.wasActionValid == false)
                         {
@@ -143,11 +160,20 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
                 uiElementsToAdd.Add(assignWorkersPanel);
 
-            //    if (assignWorkersPanel.activeSelf)
-             //   {
-                    //manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.assignWorkers));
+                AssignWorkersPanel[] buttons = assignWorkersPanel.GetComponentsInChildren<AssignWorkersPanel>(true);
+                print(buttons.Length);
+                foreach (AssignWorkersPanel button in buttons)
+                {
+                    button.gameObject.SetActive(true);
+                }
+                foreach (AssignWorkersPanel button in buttons)
+                {
+                    if (button.workType != GetWorkTypeFromFarm())
+                    {
+                        button.gameObject.SetActive(false);
+                    }
 
-           //     }
+                }
                 assignWorkersPanel.SetActive(!isActive);
             }
 

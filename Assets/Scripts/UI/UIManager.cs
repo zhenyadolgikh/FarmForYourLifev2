@@ -83,6 +83,8 @@ public class UIManager : MonoBehaviour
 
     public ErrorMessage errorMessage;
 
+    public GameObject pausePanel;
+
 
     [SerializeField] private ContractLayout contractLayout;
     [SerializeField] private ContractLayout specialCardLayout;
@@ -328,7 +330,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainMenu");
+            pausePanel.SetActive(true);
         }
 
 
@@ -421,6 +423,10 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void ContinuePlay()
+    {
+        pausePanel.SetActive(false);
+    }
 
     public void SendErrorMessage(string message)
     {
@@ -622,12 +628,22 @@ public class UIManager : MonoBehaviour
            if (farmMeshPosition != null)
            {
                FarmTile farmTile = farmTileRef.Value;
+                if (!farmTile.isBuilt)
+                {
+                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
+                    farmTileText.gameObject.transform.parent.gameObject.SetActive(false);
+                }
+                else
+                {
+                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
+                    farmTileText.gameObject.transform.parent.gameObject.SetActive(true);
+                }
 
-               if (farmTile.buildingOnTile || farmTile.isBuilt)
+                if (farmTile.buildingOnTile || farmTile.isBuilt)
                {
                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
 
-                    farmTileText.gameObject.transform.parent.gameObject.SetActive(true);
+                    //farmTileText.gameObject.transform.parent.gameObject.SetActive(true);
 
                    if (farmTileText != null && farmTile.resourceOnTile != Resource.pigMeat)
                    {
@@ -638,12 +654,6 @@ public class UIManager : MonoBehaviour
                        farmTileText.SetText(farmTileRef.Value.amountOfAnimals + " / " + farmTileRef.Value.maxAmountOfAnimals);
                    }
                }
-               else
-                {
-                    TextMeshProUGUI farmTileText = farmMeshPosition.GetComponentInChildren<TextMeshProUGUI>(true);
-                    farmTileText.gameObject.transform.parent.gameObject.SetActive(false);
-
-                }
 
             }
        }
@@ -911,6 +921,7 @@ public class UIManager : MonoBehaviour
         {
 
             workerToBePlacedRegistry[pair.Key].transform.position = idleWorkerTransforms[placedWorkers].position;
+            workerToBePlacedRegistry[pair.Key].GetComponent<ClonedWorker>().WorkerAnimation(WorkType.unassigned);
 
             placedWorkers += 1;
 

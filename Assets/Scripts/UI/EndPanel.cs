@@ -39,6 +39,11 @@ public class EndPanel : MonoBehaviour
         startPanel.SetActive(false);
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void OnExit()
     {
         #if UNITY_STANDALONE

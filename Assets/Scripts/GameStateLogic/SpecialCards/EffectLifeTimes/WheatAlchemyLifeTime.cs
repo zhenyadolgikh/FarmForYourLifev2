@@ -45,7 +45,7 @@ public class WheatAlchemyLifeTime : EffectLifeTime
         {
             if(contractCost.pigMeatCost > storedResources.pigMeatCost) 
             {
-                wheatNeeded += (contractCost.pigMeatCost - storedResources.pigMeatCost)/10;
+                wheatNeeded += (contractCost.pigMeatCost - storedResources.pigMeatCost)*10;
                 potenialContract.pigMeatCost = storedResources.pigMeatCost;
 
             }

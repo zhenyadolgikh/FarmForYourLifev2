@@ -86,12 +86,23 @@ public class UIManager : MonoBehaviour
     public GameObject pausePanel;
 
 
-    private ContractLayout contractLayout;
+    [SerializeField] private ContractLayout contractLayout;
+    [SerializeField] private ContractLayout specialCardLayout;
+    [SerializeField] private CardHandLayout handLayout;
 
     //ghetto af
     private bool mouseClickHandled = false;
     private bool mouseClickOccured = false;
     private bool mouseClickedHandledSecondTime = false;
+
+
+    private bool isWorkerDragged = false;
+    private bool isWorkerDraggedSecondFrame = false;
+
+    private bool farmTileMouseUp = false;
+    private bool farmTileMouseUpSecondFrame = false;
+    private int farmTileMouseUpIndex = -1;
+   
 
 
     void Start()
@@ -209,7 +220,7 @@ public class UIManager : MonoBehaviour
         }
         WorkerPosition[] foundWorkerPositions = FindObjectsByType<WorkerPosition>(FindObjectsSortMode.None);
 
-        print("hur många worker positions " + foundWorkerPositions.Length);
+        print("hur mï¿½nga worker positions " + foundWorkerPositions.Length);
 
         foreach (WorkerPosition workerPosition in foundWorkerPositions)
         {
@@ -235,8 +246,58 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void AssignWorkerFromDrag(int farmTileIndex)
+    {
+        print("hej hÃ¤r Ã¤r indexet");
+    }
+
+    public void SetFarmTileMouseUp(int farmTileIndex, bool value)
+    {
+        farmTileMouseUpIndex = farmTileIndex;
+
+        farmTileMouseUp = value;
+        farmTileMouseUpSecondFrame = value;
+    }
+
     private void Update()
     {
+
+        if(Input.GetMouseButtonUp((int)MouseButton.Left))
+        {
+
+            print("mouseknappen Ã¤r upp");
+            RayCastFarmTile();
+        }
+
+        if(farmTileMouseUp && isWorkerDragged)
+        {
+            AssignWorkerFromDrag(farmTileMouseUpIndex);
+        }
+
+        if(farmTileMouseUp)
+        {
+            if(farmTileMouseUpSecondFrame)
+            {
+                farmTileMouseUpSecondFrame = false;
+            }
+            else
+            {
+                farmTileMouseUp = false;
+            }
+        }
+
+        if (isWorkerDragged)
+        {
+            if (isWorkerDraggedSecondFrame)
+            {
+                isWorkerDraggedSecondFrame = false;
+            }
+            else
+            {
+                isWorkerDragged = false;
+            }
+        }
+
 
         if (mouseClickOccured && !mouseClickHandled)
         {
@@ -377,6 +438,31 @@ public class UIManager : MonoBehaviour
     {
         print(testString);
     }
+    
+    public void SetWorkerBeingDragged(bool value)
+    {
+        isWorkerDragged = value;
+        isWorkerDraggedSecondFrame = value;
+    }
+
+
+    public void RayCastFarmTile()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        LayerMask mask = LayerMask.GetMask("FarmTile");
+
+        if(Physics.Raycast(ray, out hit, mask))
+        {
+            print(hit.collider.gameObject.GetComponent<FarmTileUI>().farmTileIndex);
+
+            farmTileMouseUpIndex = hit.collider.gameObject.GetComponent<FarmTileUI>().farmTileIndex;
+            farmTileMouseUp = true;
+            farmTileMouseUpSecondFrame = true;
+        }
+
+    }
+
 
     public void DoAction(Action action)
     {
@@ -450,6 +536,18 @@ public class UIManager : MonoBehaviour
     }
 
 
+
+    //Callback istï¿½llet fï¿½r refresh strukturen
+    public void OrderContractCards()
+    {
+        contractLayout.OrderCards();
+
+    }
+    public void OrderSpecialCards()
+    {
+        specialCardLayout.OrderCards();
+    }
+
     private void UpdateResourceText()
     {
         moneyText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.money).ToString());
@@ -457,6 +555,9 @@ public class UIManager : MonoBehaviour
         appleText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.apple) + "/" + gameStateLogic.GetMaxStorage());
         cinnamonText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.cinnamon) + "/" + gameStateLogic.GetMaxStorage());
         pigText.SetText(gameStateLogic.GetStoredResourceAmount(Resource.pigMeat) + "/" + (gameStateLogic.GetMaxStorage()/10));
+
+
+        //print("vilken turn ï¿½r det " + gameStateLogic.GetCurrentTurn());
 
         string turnTextString = gameStateLogic.GetCurrentTurn() + "/" + gameStateLogic.GetMaxTurn();
 
@@ -568,6 +669,7 @@ public class UIManager : MonoBehaviour
        }
    }
 
+
     void PlaceMeshes()
     {   
         
@@ -582,8 +684,8 @@ public class UIManager : MonoBehaviour
                 placedMeshes[farmTileValue.Key].meshToPlace.transform.position = farmTilePositions[farmTileValue.Key].transform.position;
                 
 
-        //      farmTileValue.Value.resourceOnTile lägg ut mesh
-        //          farmtileposition för mesh
+        //      farmTileValue.Value.resourceOnTile lï¿½gg ut mesh
+        //          farmtileposition fï¿½r mesh
             }
             FarmTile farmTile = farmTileValue.Value;
             int index = farmTileValue.Key;
@@ -807,7 +909,7 @@ public class UIManager : MonoBehaviour
     IEnumerator PopElementLeftClick()
     {
         yield return new WaitForEndOfFrame();
-        print("är det handled " + mouseClickHandled);
+        print("ï¿½r det handled " + mouseClickHandled);
         if(Input.GetMouseButtonDown(((int)MouseButton.Left)))
         {
             if(mouseClickHandled)

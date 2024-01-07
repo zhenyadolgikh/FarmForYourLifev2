@@ -64,6 +64,13 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
         GetComponent<Renderer>().material.SetColor("_Color", normalColor);
     }
 
+    private void OnMouseUp()
+    {
+
+        print("mouse up h�nde");
+        manager.SetFarmTileMouseUp(farmTileIndex, true);
+
+    }
     private WorkType GetWorkTypeFromFarm()
     {
         FarmTile farm = manager.gameStateLogic.GetFarmTiles()[farmTileIndex];

@@ -10,17 +10,18 @@ using UnityEngine;
 
 public class GameStateLogic : MonoBehaviour
 {
+    private UIManager uiManager; 
     // Start is called before the first frame update
     void Start()
     {
-        
+        uiManager = UIManager.instance;
     }
     private int maxActions = 0;
     private int currentActions = 0;
     private int actionLevel = 1;
     private int increaseActionsCost = 500;
 
-
+    
 
     private int increaseStorageCost = 500;
     private int storageLevel = 1;
@@ -134,6 +135,8 @@ public class GameStateLogic : MonoBehaviour
                     gameStateLogic.specialCardDeck.RemoveAt(0);
                 }
             }
+
+            UIManager.instance.OrderSpecialCards();
         }
 
         public void DoubleAnimals()
@@ -226,6 +229,8 @@ public class GameStateLogic : MonoBehaviour
             specialCardsOnTable.Add(cardToAdd);
             specialCardDeck.Remove(cardToAdd);
         }
+
+        uiManager.OrderSpecialCards();
     }
     
 
@@ -239,6 +244,9 @@ public class GameStateLogic : MonoBehaviour
             contractCardsOnTable.Add(cardToAdd);
             contractCardDeck.Remove(cardToAdd);
         }
+        uiManager.OrderContractCards();
+
+
     }
 
     private System.Random rng = new System.Random();
@@ -501,7 +509,9 @@ public class GameStateLogic : MonoBehaviour
                 pigMeatStored -= resourcesAmount.pigMeatCost;
             }
 
-            moneyStored += resourcesAmount.moneyGained;
+            AddResources(Resource.money, resourcesAmount.moneyGained);
+
+           // moneyStored += resourcesAmount.moneyGained;
 
         }
         //
@@ -634,7 +644,7 @@ public class GameStateLogic : MonoBehaviour
                 if(workerOnTile.workType == WorkType.building && farmTilePair.Value.buildingOnTile && farmTilePair.Value.isBuilt == false)
                 {
                     farmTilePair.Value.isBuilt = true;
-
+                    workerOnTile.workType = WorkType.unassigned;
                     print("worker har byggt en byggnad");
                 }
                 

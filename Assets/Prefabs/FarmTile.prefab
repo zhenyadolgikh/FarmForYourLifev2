@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4787273781096661491}
   - component: {fileID: 8269685397226421106}
   - component: {fileID: 7293657268313375401}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: RText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5971461159516800180}
   - component: {fileID: 80556254961791158}
   - component: {fileID: 1456833657080627048}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 7842469470452931242}
   - component: {fileID: 4290144782326720314}
   - component: {fileID: 2356137829118422335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FarmTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 9103143935850523152}
   - component: {fileID: 5034301380584101836}
   - component: {fileID: 1268966621250134498}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7673734320837523602}
   - component: {fileID: 2013848315480167701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FarmMeshPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 176270845489252733}
   - component: {fileID: 5194604879930785423}
   - component: {fileID: 3153221216478525209}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 7576685217191477035}
   - component: {fileID: 5981368823458509856}
   - component: {fileID: 6876426560185195175}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: RText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -748,7 +748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6941517996708697166}
   - component: {fileID: 3789548575819065506}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WorkerPosition1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5673684080170607173}
   - component: {fileID: 5959079105887267645}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WorkerPosition2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 330313206355464227}
   - component: {fileID: 4168845593811899220}
   - component: {fileID: 5670499196452558852}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ResourceImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +919,7 @@ GameObject:
   - component: {fileID: 1479194777487617084}
   - component: {fileID: 8070889641964486066}
   - component: {fileID: 2249589314942027911}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ResourceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1052,7 +1052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6096053520310847901}
   - component: {fileID: 3719468411740814657}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WorkerPosition0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1153,6 +1153,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_SignWood_Low (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0d4315500898d4530a15e82a1ddf2794, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1229,6 +1233,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0d4315500898d4530a15e82a1ddf2794, type: 3}
       propertyPath: m_Name
       value: SM_SignWood_Low
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0d4315500898d4530a15e82a1ddf2794, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0d4315500898d4530a15e82a1ddf2794, type: 3}
       propertyPath: m_IsActive

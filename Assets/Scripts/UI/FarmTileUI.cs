@@ -64,6 +64,23 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
         GetComponent<Renderer>().material.SetColor("_Color", normalColor);
     }
 
+    private WorkType GetWorkTypeFromFarm()
+    {
+        FarmTile farm = manager.gameStateLogic.GetFarmTiles()[farmTileIndex];
+        if(!farm.isBuilt || !farm.buildingOnTile)
+        {
+            return WorkType.building;
+        }
+        if(farm.resourceOnTile == Resource.pigMeat)
+        {
+            return WorkType.slaughtering;
+        }
+        else
+        {
+            return WorkType.harvesting;
+        }
+    }
+
     private void PopUp()
     {
         UIManager.instance.MouseClickHandled();
@@ -85,10 +102,11 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 FarmTile clickedFarmTile;
                 if (manager.gameStateLogic.GetFarmTiles().TryGetValue(farmTileIndex, out clickedFarmTile))
                 {
-
+                    
                     if (!clickedFarmTile.buildingOnTile && !clickedFarmTile.isBuilt)
                     {
                         manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.standard));
+                        
                         optionPanel.SetActive(true);
                     }
                     else
@@ -135,11 +153,20 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
                 uiElementsToAdd.Add(assignWorkersPanel);
 
-            //    if (assignWorkersPanel.activeSelf)
-             //   {
-                    //manager.AddUIElement(new AddedBuildPanel(uiElementsToAdd, HudState.assignWorkers));
+                AssignWorkersPanel[] buttons = assignWorkersPanel.GetComponentsInChildren<AssignWorkersPanel>(true);
+                print(buttons.Length);
+                foreach (AssignWorkersPanel button in buttons)
+                {
+                    button.gameObject.SetActive(true);
+                }
+                foreach (AssignWorkersPanel button in buttons)
+                {
+                    if (button.workType != GetWorkTypeFromFarm())
+                    {
+                        button.gameObject.SetActive(false);
+                    }
 
-           //     }
+                }
                 assignWorkersPanel.SetActive(!isActive);
             }
 

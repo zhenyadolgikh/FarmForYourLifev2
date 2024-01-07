@@ -54,7 +54,7 @@ public class CardDeck : MonoBehaviour
                 cardsToShow[i].cardIndex = i;
                 cardsToShow[i].SetCardType(cardType, cardsOnTable[i]);
                 cardsToShow[i].inHand = false;
-                //DisplayCard.CardCost();
+                cardsToShow[i].CardCost();
             }
         }
     }
@@ -85,7 +85,7 @@ public class CardDeck : MonoBehaviour
             cardsToShowHand[i].gameObject.SetActive(true);
             cardsToShowHand[i].cardIndex = i;
             cardsToShowHand[i].inHand = true;
-            //DisplayCard.CardCost();
+            cardsToShowHand[i].CardCost();
             if (cardsInHand[i] is SpecialCard)
             {
                 cardsToShowHand[i].SetCardType(TypeOfCard.special, cardsInHand[i]);

@@ -14,6 +14,7 @@ public class DisplayCard : MonoBehaviour
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI actionCostText;
 
     public Color defaultTextColor;
 
@@ -213,20 +214,17 @@ public class DisplayCard : MonoBehaviour
 
     public void CardCost()
     {
+        uiManager = UIManager.instance;
 
-        TextMeshProUGUI contractActionText = contractCardVariant.GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI specialActionText = specialCardVariant.GetComponent<TextMeshProUGUI>();
-
+        Debug.Log(uiManager.gameStateLogic);
         if (uiManager.gameStateLogic.GetCurrentActions() < 1)
         {
-            Debug.Log("Hello?");
-            contractActionText.color = Color.red;
-            specialActionText.color = Color.red;
+
+            actionCostText.color = Color.red;
         }
         else
         {
-            contractActionText.color = defaultTextColor;
-            specialActionText.color = defaultTextColor;
+            actionCostText.color = defaultTextColor;
         }
             
         

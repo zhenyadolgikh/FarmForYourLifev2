@@ -548,6 +548,7 @@ public class GameStateLogic : MonoBehaviour
                 wheatStored -= amountToBeEaten;
 
 
+
             }
             else
             {
@@ -557,6 +558,8 @@ public class GameStateLogic : MonoBehaviour
                 int amountToDie = foodDifference / 10;
 
                 farmTile.amountOfAnimals -= amountToDie * 4;
+
+                UIManager.instance.SlaughterEffect(farmTilePair.Key);
 
                 if (farmTile.amountOfAnimals < 1)
                 {
@@ -1313,5 +1316,10 @@ public class GameStateLogic : MonoBehaviour
     public void CheatActionsTutorial()
     {
         currentActions += 3;
+    }
+
+    public List<EffectLifeTime> GetActiveEffects()
+    {
+        return activeEffects;
     }
 }

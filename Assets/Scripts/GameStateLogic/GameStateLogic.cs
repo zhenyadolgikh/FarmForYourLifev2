@@ -509,7 +509,9 @@ public class GameStateLogic : MonoBehaviour
                 pigMeatStored -= resourcesAmount.pigMeatCost;
             }
 
-            moneyStored += resourcesAmount.moneyGained;
+            AddResources(Resource.money, resourcesAmount.moneyGained);
+
+           // moneyStored += resourcesAmount.moneyGained;
 
         }
         //

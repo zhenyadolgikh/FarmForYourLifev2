@@ -64,6 +64,13 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
         GetComponent<Renderer>().material.SetColor("_Color", normalColor);
     }
 
+    private void OnMouseUp()
+    {
+
+        print("mouse up hände");
+        manager.SetFarmTileMouseUp(farmTileIndex, true);
+    }
+
     private void PopUp()
     {
         UIManager.instance.MouseClickHandled();

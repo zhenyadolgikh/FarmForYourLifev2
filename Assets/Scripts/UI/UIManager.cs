@@ -94,6 +94,15 @@ public class UIManager : MonoBehaviour
     private bool mouseClickedHandledSecondTime = false;
 
 
+    private bool isWorkerDragged = false;
+    private bool isWorkerDraggedSecondFrame = false;
+
+    private bool farmTileMouseUp = false;
+    private bool farmTileMouseUpSecondFrame = false;
+    private int farmTileMouseUpIndex = -1;
+   
+
+
     void Start()
     {
         gameStateLogic.Setup();
@@ -235,8 +244,58 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void AssignWorkerFromDrag(int farmTileIndex)
+    {
+        print("hej här är indexet");
+    }
+
+    public void SetFarmTileMouseUp(int farmTileIndex, bool value)
+    {
+        farmTileMouseUpIndex = farmTileIndex;
+
+        farmTileMouseUp = value;
+        farmTileMouseUpSecondFrame = value;
+    }
+
     private void Update()
     {
+
+        if(Input.GetMouseButtonUp((int)MouseButton.Left))
+        {
+
+            print("mouseknappen är upp");
+            RayCastFarmTile();
+        }
+
+        if(farmTileMouseUp && isWorkerDragged)
+        {
+            AssignWorkerFromDrag(farmTileMouseUpIndex);
+        }
+
+        if(farmTileMouseUp)
+        {
+            if(farmTileMouseUpSecondFrame)
+            {
+                farmTileMouseUpSecondFrame = false;
+            }
+            else
+            {
+                farmTileMouseUp = false;
+            }
+        }
+
+        if (isWorkerDragged)
+        {
+            if (isWorkerDraggedSecondFrame)
+            {
+                isWorkerDraggedSecondFrame = false;
+            }
+            else
+            {
+                isWorkerDragged = false;
+            }
+        }
+
 
         if (mouseClickOccured && !mouseClickHandled)
         {
@@ -373,6 +432,31 @@ public class UIManager : MonoBehaviour
     {
         print(testString);
     }
+    
+    public void SetWorkerBeingDragged(bool value)
+    {
+        isWorkerDragged = value;
+        isWorkerDraggedSecondFrame = value;
+    }
+
+
+    public void RayCastFarmTile()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        LayerMask mask = LayerMask.GetMask("FarmTile");
+
+        if(Physics.Raycast(ray, out hit, mask))
+        {
+            print(hit.collider.gameObject.GetComponent<FarmTileUI>().farmTileIndex);
+
+            farmTileMouseUpIndex = hit.collider.gameObject.GetComponent<FarmTileUI>().farmTileIndex;
+            farmTileMouseUp = true;
+            farmTileMouseUpSecondFrame = true;
+        }
+
+    }
+
 
     public void DoAction(Action action)
     {
@@ -844,7 +928,7 @@ public class UIManager : MonoBehaviour
                 arrayToLoop[i].workerPlacedHere = true;
                 GameObject workerToPlace = workerToBePlacedRegistry[workerId];
                 workerToPlace.transform.position = arrayToLoop[i].transform.position;
-                workerToPlace.GetComponent<ClonedWorker>().WorkerAnimation();
+                workerToPlace.GetComponent<ClonedWorker>().WorkerAnimation(workType);
                 return;
             }
         }

@@ -14,6 +14,8 @@ public class ClonedWorker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     private Vector3 mousePosition;
 
+    private UIManager uiManager;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,6 +24,7 @@ public class ClonedWorker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         harvestSprite = Resources.Load<Sprite>("2D/WBuild/2d1WorkerHarvest");
         idleSprite = Resources.Load<Sprite>("2D/WBuild/2d1WorkerSleep");
         workIcon = gameObject.GetComponentInChildren<Image>();
+        uiManager = UIManager.instance;
     }
 
     public void WorkerAnimation(WorkType workType)
@@ -59,8 +62,8 @@ public class ClonedWorker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         Vector3 mouseVector = worldPoint + (cameraForward * worldPoint.y / (-cameraForward.y));
 
-        print("world pointen " + worldPoint);
-        print("mouse vector " + mouseVector);
+    //    print("world pointen " + worldPoint);
+    //    print("mouse vector " + mouseVector);
 
         return mouseVector;
     }
@@ -79,14 +82,14 @@ public class ClonedWorker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        print("mouse down");
 
         mousePosition = Input.mousePosition - GetMousePos();
+
+        uiManager.SetWorkerBeingDragged(true);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        print("mouse drag ");
 
      //Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition - mousePosition);
      //   
@@ -95,10 +98,14 @@ public class ClonedWorker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
      //   newPosition.y = transform.position.y;
 
         transform.position = ConvertScreenSpaceToWorldSpace();
+
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-       //throw new System.NotImplementedException();
+        uiManager.SetWorkerBeingDragged(false);
+
+        //throw new System.NotImplementedException();
     }
 }

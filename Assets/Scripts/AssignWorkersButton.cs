@@ -78,7 +78,6 @@ public class AssignWorkersButton : MonoBehaviour
 
             IsActionValidMessage message = uiManager.IsActionValid(assignWorkersAction);
 
-            IsActionValidMessage message = uiManager.IsActionValid(assignWorkersAction);
             if(message != null)
             {
                 if(message.wasActionValid)

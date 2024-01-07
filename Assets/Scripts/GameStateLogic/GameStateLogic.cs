@@ -644,7 +644,7 @@ public class GameStateLogic : MonoBehaviour
                 if(workerOnTile.workType == WorkType.building && farmTilePair.Value.buildingOnTile && farmTilePair.Value.isBuilt == false)
                 {
                     farmTilePair.Value.isBuilt = true;
-
+                    workerOnTile.workType = WorkType.unassigned;
                     print("worker har byggt en byggnad");
                 }
                 

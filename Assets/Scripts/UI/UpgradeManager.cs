@@ -32,4 +32,13 @@ public class UpgradeManager : MonoBehaviour
             buttonPanel.SetActive(!isActive);
         }
     }
+
+    public void ClosePanel()
+    {
+        if (buttonPanel != null)
+        {
+            //bool isActive = buttonPanel.activeSelf;
+            buttonPanel.SetActive(false);
+        }
+    }
 }

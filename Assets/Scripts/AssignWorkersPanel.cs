@@ -20,6 +20,7 @@ public class AssignWorkersPanel : MonoBehaviour
         //panelToInactivate.SetActive(false);
         UIManager.instance.PopUIElement();
         assignWorkersButton.AssignNewWork(new Tuple<int, WorkType>(farmTileIndex, workType));
+        
     }
 
 }

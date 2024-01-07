@@ -608,12 +608,22 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void SlaughterEffect()
+    public void CardEffectVFX()
     {
-        
-        UnityEngine.Vector2 mousePosition = Input.mousePosition;
-        slaughterParticle.transform.position = new UnityEngine.Vector3(mousePosition.x, mousePosition.y + 130);
-        slaughterParticle.Play(true);
+        foreach(EffectLifeTime effect in gameStateLogic.GetActiveEffects())
+        {
+            if(effect is AnimalFastingLifeTime)
+            {
+                //VFX
+            }
+        }
+    }
+
+    public void SlaughterEffect(int farmTileIndex)
+    {
+        ParticleSystem particle = Instantiate(slaughterParticle);
+        particle.transform.position = farmTilePositions[farmTileIndex].transform.position;
+        particle.Play(true);
     }
 
 

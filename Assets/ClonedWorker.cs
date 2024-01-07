@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ClonedWorker : MonoBehaviour
 {
     public GameObject workerMesh;
+    public Image workIcon;
     public Animator workAnim;
 
     public Sprite buildSprite, harvestSprite, idleSprite;
@@ -20,20 +21,21 @@ public class ClonedWorker : MonoBehaviour
 
     public void WorkerAnimation(WorkType workType)
     {
-        workAnim.SetBool("building", false);
-        workAnim.SetBool("harvesting", false);
-        workAnim.SetBool("idle", false);
+       workAnim.SetBool("building", false);
+       workAnim.SetBool("harvesting", false);
+       workAnim.SetBool("idle", false);
 
         switch (workType)
         {
             case WorkType.building:
+                //workIcon.sprite = buildSprite;
+                Debug.Log(workIcon.sprite.name);
                 workAnim.SetBool("building", true);
-                workAnim.SetBool("idle", false);
+                //workAnim.SetBool("idle", false);
 
                 break;
 
           case WorkType.harvesting:
-                //    workIcon.sprite = harvestSprite;
                 workAnim.SetBool("harvesting", true);
               break;
        

@@ -28,11 +28,7 @@ public class ClonedWorker : MonoBehaviour
         switch (workType)
         {
             case WorkType.building:
-                //workIcon.sprite = buildSprite;
-                Debug.Log(workIcon.sprite.name);
                 workAnim.SetBool("building", true);
-                //workAnim.SetBool("idle", false);
-
                 break;
 
           case WorkType.harvesting:

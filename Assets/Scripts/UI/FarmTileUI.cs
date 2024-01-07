@@ -96,7 +96,6 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                         //manager.PopUIElement();
                         BuildAction ba = new BuildAction();
                         ba.farmTileIndex = farmTileIndex;
-                        Debug.Log(farmTileIndex);
                         IsActionValidMessage message = manager.IsActionValid(ba);
                         if (message.wasActionValid == false)
                         {

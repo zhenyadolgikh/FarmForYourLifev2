@@ -150,7 +150,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: harvesting
     m_Type: 4
@@ -248,7 +248,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -8832135117684973236}
+  m_DefaultState: {fileID: -5921124014289003195}
 --- !u!1102 &8130066564313381726
 AnimatorState:
   serializedVersion: 6

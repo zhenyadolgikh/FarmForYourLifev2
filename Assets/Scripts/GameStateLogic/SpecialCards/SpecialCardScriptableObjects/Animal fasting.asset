@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Animal fasting
   m_EditorClassIdentifier: 
   cardName: Animal fasting
-  cardDescription: Animals does not need to eat for 3 tunrs
+  cardDescription: Animals do not need to eat for 3 turns

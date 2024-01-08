@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Labour rush
   m_EditorClassIdentifier: 
   cardName: Labour rush
-  cardDescription: Get 1 worker on your upkeep for 3 turns
+  cardDescription: Get 3 additional workers (1 per turn) starting on the next turn

@@ -161,16 +161,16 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                 uiElementsToAdd.Add(assignWorkersPanel);
 
                 AssignWorkersPanel[] buttons = assignWorkersPanel.GetComponentsInChildren<AssignWorkersPanel>(true);
-                print(buttons.Length);
                 foreach (AssignWorkersPanel button in buttons)
                 {
-                    button.gameObject.SetActive(true);
+                    button.gameObject.transform.parent.gameObject.SetActive(true);
                 }
                 foreach (AssignWorkersPanel button in buttons)
                 {
                     if (button.workType != GetWorkTypeFromFarm())
                     {
-                        button.gameObject.SetActive(false);
+                        button.gameObject.transform.parent.gameObject.SetActive(false);
+
                     }
 
                 }

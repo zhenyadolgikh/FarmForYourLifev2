@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8163,7 +8163,8 @@ PrefabInstance:
       value: Shuffle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4496777533965653846, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
@@ -27376,8 +27377,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Shuffle
       objectReference: {fileID: 0}
+    - target: {fileID: 9079577366901617159, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_text
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197097967764546615, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4496777533965653846, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1083030807585464427, guid: 7df291681da722843b4130ebfd3684cc, type: 3}
@@ -30592,6 +30602,10 @@ MonoBehaviour:
   moneyResource: {fileID: 983880532}
   workers: {fileID: 513225081}
   workersAssignment: {fileID: 1666737720}
+  buildWheatFarm: {fileID: 0}
+  buildAppleFarm: {fileID: 0}
+  buildCinnamonFarm: {fileID: 0}
+  buildPigFarm: {fileID: 0}
   slaughterParticle: {fileID: 8748655152434531392, guid: 8b28e910c7623584b8a7befe482897ef, type: 3}
   workerMesh: {fileID: 9044434817311573367, guid: 68969cfa6e5068a4c96ab4e68f311581, type: 3}
   farmTextPrefab: {fileID: 0}

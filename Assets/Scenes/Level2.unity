@@ -17785,7 +17785,6 @@ GameObject:
   - component: {fileID: 1020488371}
   - component: {fileID: 1020488373}
   - component: {fileID: 1020488372}
-  - component: {fileID: 1020488374}
   - component: {fileID: 1020488375}
   m_Layer: 5
   m_Name: CardHand
@@ -17861,32 +17860,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020488370}
   m_CullTransparentMesh: 1
---- !u!114 &1020488374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020488370}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &1020488375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17899,8 +17872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9912dca304a2954bb59d1069ea304bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddingX: 10
-  height: 0
+  paddingX: 0
+  height: -20
 --- !u!1001 &1021267968
 PrefabInstance:
   m_ObjectHideFlags: 0

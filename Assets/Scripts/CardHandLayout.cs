@@ -70,10 +70,7 @@ public class CardHandLayout : MonoBehaviour
             Vector2 nyVector = new Vector2(originPosition.x + ((cardWidth + paddingX) * i), height);
 
 
-            if(i == 0)
-            {
-                nyVector.x = middleX;
-            }
+     
             print("nya grejen " + nyVector);
 
             //Vector3 vector = new Vector3(originPosition.x,originPosition.y,originPosition.z);

@@ -6101,6 +6101,7 @@ MonoBehaviour:
   - {fileID: 1294105191}
   gameObjectsToDisable:
   - {fileID: 344836919}
+  originPosition: {x: 0, y: 0}
 --- !u!1 &622716537
 GameObject:
   m_ObjectHideFlags: 0
@@ -13362,6 +13363,7 @@ MonoBehaviour:
   - {fileID: 344836919}
   gameObjectsToDisable:
   - {fileID: 1294105191}
+  originPosition: {x: 0, y: 0}
 --- !u!1 &2141398429
 GameObject:
   m_ObjectHideFlags: 0

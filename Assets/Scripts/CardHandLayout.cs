@@ -49,17 +49,17 @@ public class CardHandLayout : MonoBehaviour
             //print("vad är widthen" + cardWidth);
         }
         float positionsLeft;
-        Vector3 originPosition;// = new Vector3();
+        Vector2 originPosition;// = new Vector3();
         
         if(cardsToOrderSorted.Count % 2 == 0)
         {
             positionsLeft = cardsToOrderSorted.Count / 2;
-            originPosition = new Vector3(middleX - (cardWidth + paddingX) * positionsLeft, rectTransform.position.y,0);
+            originPosition = new Vector2(middleX - (cardWidth + paddingX) * positionsLeft, rectTransform.position.y);
         }
         else
         {
             positionsLeft = cardsToOrderSorted.Count / 2;
-            originPosition = new Vector3(middleX - (cardWidth + paddingX) * positionsLeft, rectTransform.position.y, 0);
+            originPosition = new Vector2(middleX - (cardWidth + paddingX) * positionsLeft, rectTransform.position.y);
         }
 
         for(int i = 0; i < cardsToOrderSorted.Count; i++)
@@ -67,7 +67,7 @@ public class CardHandLayout : MonoBehaviour
 
             print("orign grejen " + originPosition);
 
-            Vector3 nyVector = new Vector3(originPosition.x + ((cardWidth + paddingX) * i), height, originPosition.z);
+            Vector2 nyVector = new Vector2(originPosition.x + ((cardWidth + paddingX) * i), height);
 
 
             if(i == 0)
@@ -77,7 +77,7 @@ public class CardHandLayout : MonoBehaviour
             print("nya grejen " + nyVector);
 
             //Vector3 vector = new Vector3(originPosition.x,originPosition.y,originPosition.z);
-            cardsToOrder[i].GetComponent<RectTransform>().transform.position = nyVector;
+            cardsToOrder[i].GetComponent<RectTransform>().anchoredPosition = nyVector;
             
         }
     }

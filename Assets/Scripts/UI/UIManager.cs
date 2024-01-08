@@ -54,6 +54,9 @@ public class UIManager : MonoBehaviour
     public GameObject pigResource;
     public GameObject moneyResource;
 
+    public GameObject workers;
+    public GameObject workersAssignment;
+
     public ParticleSystem slaughterParticle;
 
     public GameObject workerMesh;
@@ -359,6 +362,7 @@ public class UIManager : MonoBehaviour
         ResourceTextOnTile();
         RefreshContractCards();
         costManager.CanAfford();
+        CardEffectVFX();
         endPanel.GameEnd();
 
     }
@@ -610,11 +614,39 @@ public class UIManager : MonoBehaviour
 
     public void CardEffectVFX()
     {
+        ParticleSystem particleSystem;
+
         foreach(EffectLifeTime effect in gameStateLogic.GetActiveEffects())
         {
             if(effect is AnimalFastingLifeTime)
             {
                 //VFX
+            }
+            if (effect is WheatAlchemyLifeTime)
+            {
+                particleSystem = wheatResource.GetComponentInChildren<ParticleSystem>();
+                particleSystem.loop = true;
+                particleSystem.Play();
+            }
+            if (effect is WheatSeasonLifeTme)
+            {
+                //VFX
+            }
+            if (effect is UnionCrackDownLifeTime)
+            {
+                //VFX
+            }
+            if (effect is LabourRushLifeTime)
+            {
+                particleSystem = workers.GetComponentInChildren<ParticleSystem>();
+                particleSystem.loop = true;
+                particleSystem.Play();
+            }
+            if (effect is ActionCostLifeTime)
+            {
+                particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
+                particleSystem.loop = true;
+                particleSystem.Play();
             }
         }
     }

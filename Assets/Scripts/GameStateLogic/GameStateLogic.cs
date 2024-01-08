@@ -11,11 +11,14 @@ using UnityEngine;
 
 public class GameStateLogic : MonoBehaviour
 {
-    private UIManager uiManager; 
+    private UIManager uiManager;
+    private SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
         uiManager = UIManager.instance;
+        soundManager = SoundManager.instance;
+
     }
     private int maxActions = 0;
     private int currentActions = 0;
@@ -1224,7 +1227,7 @@ public class GameStateLogic : MonoBehaviour
         {
             MoveCards<ContractCard>(contractCardsOnTable, contractCardDeck);
         }
-
+        soundManager.PlayMoveSound();
     }
 
     private void BuyWorker(BuyWorkerAction action)

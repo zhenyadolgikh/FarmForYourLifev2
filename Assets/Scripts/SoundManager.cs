@@ -6,6 +6,17 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
+    private AudioSource audioSource;
+
+    public AudioClip cardMovedSound;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        print("vad är audio sourcen" + audioSource);
+    }
+
     void Awake()
     {
         if (instance != null)
@@ -31,8 +42,9 @@ public class SoundManager : MonoBehaviour
 
 
 
-    private void PlaySound()
+    public void PlayMoveSound()
     {
-
+        print(" vad är audiosourcen sen " + audioSource);
+        audioSource.PlayOneShot(cardMovedSound);
     }
 }

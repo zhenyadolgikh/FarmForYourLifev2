@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,33 +11,30 @@ public class DisableEnableButton : MonoBehaviour
     public List<GameObject> gameObjectsToEnable;
     public List<GameObject> gameObjectsToDisable;
 
+    public Vector2 originPosition;
+
+    private void Start()
+    {
+        //originPosition = gameObjectsToEnable[0]
+    }
 
     public void OnClick()
     {
         foreach(GameObject gameObject in gameObjectsToEnable)
         {
-            gameObject.SetActive(true);
-            Animator[] animatorsToReset = gameObject.GetComponentsInChildren<Animator>();
-
-            foreach(Animator animator in animatorsToReset)
+            //gameObject.SetActive(true);
+            gameObject.GetComponent<RectTransform>().anchoredPosition = originPosition;
+            if (!gameObject.activeSelf)
             {
-                print("kommer hit");
-                animator.ResetTrigger("Normal");
-
+                gameObject.SetActive(true);
             }
+
             
         }
         foreach(GameObject gameObject in gameObjectsToDisable)
         {
-            gameObject.SetActive(false);
-            Animator[] animatorsToReset = gameObject.GetComponentsInChildren<Animator>();
-
-            foreach (Animator animator in animatorsToReset)
-            {
-                print("kommer hit");
-                animator.ResetTrigger("Normal");
-
-            }
+            //  gameObject.SetActive(false);
+            gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1000, -1000);
         }
     }
 }

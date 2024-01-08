@@ -671,6 +671,11 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void MoneyFromContract()
+    {
+        moneyResource.GetComponentInChildren<ParticleSystem>().Play();
+    }
+
     public void CardEffectVFX()
     {
         ParticleSystem particleSystem;

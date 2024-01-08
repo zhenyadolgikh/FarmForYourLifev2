@@ -791,9 +791,53 @@ public class GameStateLogic : MonoBehaviour
             return IsValidToBuyMove((MoveCardsAction)action, isActionValidMessage);
 
         }
+        if(action is AssignIndividualWorker)
+        {
+            return IsValidToAssignIndividual((AssignIndividualWorker)action, isActionValidMessage);
+
+        }
 
         isActionValidMessage.wasActionValid = true;
         return isActionValidMessage;
+    }
+    private IsActionValidMessage IsValidToAssignIndividual(AssignIndividualWorker action, IsActionValidMessage message)
+    {
+        int actionCost = 1;
+
+        foreach (EffectLifeTime effectLifeTime in activeEffects)
+        {
+            actionCost = effectLifeTime.ModifyActionCost(ActionCostingType.assignWorkers, actionCost);
+        }
+
+        bool containsSlaughter = false;
+
+        if (action.workType == WorkType.slaughtering)
+        {
+            containsSlaughter = true;
+        }
+        
+
+        if (!containsSlaughter && assignedWorkersThisTurn)
+        {
+            actionCost = 0;
+        }
+
+        if (currentActions < actionCost)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You do not have enough actions";
+            return message;
+        }
+        if (farmTileRegistry[action.farmTileIndex].workersOnTile.Count >= 3)
+        {
+            message.wasActionValid = false;
+            message.errorMessage = "You can have a maximum of 3 workers on a tile";
+            return message;
+        }
+
+
+        message.wasActionValid = true;
+        return message;
     }
 
     private IsActionValidMessage IsValidToBuyMove(MoveCardsAction action, IsActionValidMessage message)
@@ -893,6 +937,20 @@ public class GameStateLogic : MonoBehaviour
         foreach(EffectLifeTime effectLifeTime in activeEffects)
         {
             actionCost = effectLifeTime.ModifyActionCost(ActionCostingType.assignWorkers, actionCost);
+        }
+
+        bool containsSlaughter = false;
+        foreach (Tuple<int, WorkType> assignedWork in action.workAssigned)
+        {
+            if (assignedWork.Item2 == WorkType.slaughtering)
+            {
+                containsSlaughter = true;
+            }
+        }
+
+        if (!containsSlaughter && assignedWorkersThisTurn)
+        {
+            actionCost = 0; 
         }
 
         if (currentActions < actionCost)
@@ -1035,11 +1093,92 @@ public class GameStateLogic : MonoBehaviour
         {
             BuyMoveCards((MoveCardsAction)action);
         }
+        
+        if(action is AssignIndividualWorker)
+        {
+            AssignIndividualWorker((AssignIndividualWorker)action);
+        }
 
         hasWon = victorCondition.CheckIfVictorious(effectInterface);
         hasLost = HasLost();
     }
 
+
+    private void AssignIndividualWorker(AssignIndividualWorker action)
+    {
+        FarmTile farmToRemoveFrom = null;
+
+        int indexWorkerToRemvove = -1;
+
+        for(int i = 0; i < farmTileRegistry.Count; i++)
+        {
+            for(int z = 0; z < farmTileRegistry[i].workersOnTile.Count; z++)
+            {
+                if (farmTileRegistry[i].workersOnTile[z].workedId == action.workerId)
+                {
+                    indexWorkerToRemvove = z;
+                    farmToRemoveFrom = farmTileRegistry[i];
+                }
+            }
+        }
+        print("vilken worker to remove " + indexWorkerToRemvove);
+
+        if(!(indexWorkerToRemvove == -1))
+        {
+            farmToRemoveFrom.workersOnTile.RemoveAt(indexWorkerToRemvove);
+
+        }
+
+        int actionCost = 1;
+
+        foreach (EffectLifeTime effectLifeTime in activeEffects)
+        {
+            actionCost = effectLifeTime.ModifyActionCost(ActionCostingType.assignWorkers, actionCost);
+        }
+
+        bool containsSlaughter = false;
+
+        if (action.workType == WorkType.slaughtering)
+        {
+            containsSlaughter = true;
+        }
+
+
+        if (!containsSlaughter && assignedWorkersThisTurn)
+        {
+            actionCost = 0;
+        }
+
+        currentActions -= actionCost;
+
+        assignedWorkersThisTurn = true;
+
+
+        if (containsSlaughter && farmTileRegistry[action.farmTileIndex].resourceOnTile == Resource.pigMeat)
+        {
+            FarmTile farmTile = farmTileRegistry[action.farmTileIndex];
+            if (farmTile.amountOfAnimals > 1)
+            {
+                int amountSlaughtered = farmTile.amountOfAnimals / 2;
+                farmTile.amountOfAnimals = farmTile.amountOfAnimals / 2;
+
+
+                AddResources(Resource.pigMeat, amountSlaughtered);
+                //pigMeatStored += amountSlaughtered;
+                if (pigMeatStored > currentStorage / 10)
+                {
+                    pigMeatStored = currentStorage / 10;
+                }
+                // ResetNumbers();
+                workerRegistry[action.workerId].workType = WorkType.unassigned;
+            }
+        }
+
+        workerRegistry[action.workerId].workType = action.workType;
+        farmTileRegistry[action.farmTileIndex].workersOnTile.Add(workerRegistry[action.workerId]);
+        
+
+    }
 
     private void BuyMoveCards(MoveCardsAction action)
     {

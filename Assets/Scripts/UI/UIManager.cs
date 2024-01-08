@@ -98,6 +98,7 @@ public class UIManager : MonoBehaviour
 
     private bool isWorkerDragged = false;
     private bool isWorkerDraggedSecondFrame = false;
+    private int workerBeingDraggedId = -1;
 
     private bool farmTileMouseUp = false;
     private bool farmTileMouseUpSecondFrame = false;
@@ -266,8 +267,38 @@ public class UIManager : MonoBehaviour
     }
     private void AssignWorkerFromDrag(int farmTileIndex)
     {
-        
+        AssignIndividualWorker action = new AssignIndividualWorker();
 
+        action.workerId = workerBeingDraggedId;
+        action.workType = GetWorkTypeFromFarm(farmTileIndex);
+        action.farmTileIndex = farmTileIndex;
+
+        IsActionValidMessage message = IsActionValid(action);
+
+        if(message != null )
+        {
+            if(message.wasActionValid)
+            {
+                DoAction(action);
+                ResetDragValues();
+            }
+            else
+            {
+                SendErrorMessage(message.errorMessage);
+            }
+        }
+
+    }
+
+    private void ResetDragValues()
+    {
+        isWorkerDragged = false;
+        isWorkerDraggedSecondFrame = false;
+        workerBeingDraggedId = -1;
+
+        farmTileMouseUp = false;
+        farmTileMouseUpSecondFrame = false;
+        farmTileMouseUpIndex = -1;
     }
 
     public void SetFarmTileMouseUp(int farmTileIndex, bool value)
@@ -284,12 +315,15 @@ public class UIManager : MonoBehaviour
         if(Input.GetMouseButtonUp((int)MouseButton.Left))
         {
 
-            print("mouseknappen är upp");
             RayCastFarmTile();
         }
 
+        print("är knappen uppe " + farmTileMouseUp);
+        print("är workern dragged " + isWorkerDragged);
+
         if(farmTileMouseUp && isWorkerDragged)
         {
+            print("kommer den hit");
             AssignWorkerFromDrag(farmTileMouseUpIndex);
         }
 
@@ -378,6 +412,7 @@ public class UIManager : MonoBehaviour
         ResourceTextOnTile();
         RefreshContractCards();
         costManager.CanAfford();
+        handLayout.OrderCards();
         endPanel.GameEnd();
 
     }
@@ -514,7 +549,6 @@ public class UIManager : MonoBehaviour
                 tutorialObjectToPop.RemoveObject();
             }
         }
-
 
         gameStateLogic.DoAction(action);
         Refresh();
@@ -865,6 +899,7 @@ public class UIManager : MonoBehaviour
             if (workerToBePlacedRegistry.ContainsKey(registredWorker.workedId) == false)
             {
                 GameObject spawnedWorker = Instantiate<GameObject>(workerMesh);
+                spawnedWorker.GetComponent<ClonedWorker>().workerId = registredWorker.workedId;
                 workerToBePlacedRegistry.Add(registredWorker.workedId, spawnedWorker);
             }
         }
@@ -1012,6 +1047,12 @@ public class UIManager : MonoBehaviour
     public void SetTutorialObjectToPop(TutorialObject value)
     {
         tutorialObjectToPop = value;
+    }
+
+
+    public void SetWorkerBeingDraggedId(int value)
+    {
+        workerBeingDraggedId = value;
     }
 
     public bool GetIsTutorial()

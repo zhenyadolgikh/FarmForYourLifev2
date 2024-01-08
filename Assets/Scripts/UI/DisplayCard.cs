@@ -216,7 +216,6 @@ public class DisplayCard : MonoBehaviour
     {
         uiManager = UIManager.instance;
 
-        Debug.Log(uiManager.gameStateLogic);
         if (uiManager.gameStateLogic.GetCurrentActions() < 1)
         {
 

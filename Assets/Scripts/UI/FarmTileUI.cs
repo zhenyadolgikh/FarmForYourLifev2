@@ -68,7 +68,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     {
 
         print("mouse up h�nde");
-        manager.SetFarmTileMouseUp(farmTileIndex, true);
+     //   manager.SetFarmTileMouseUp(farmTileIndex, true);
 
     }
     private WorkType GetWorkTypeFromFarm()

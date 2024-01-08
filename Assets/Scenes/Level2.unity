@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17780,6 +17780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paddingX: 10
+  height: 0
 --- !u!1001 &1021267968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25520,6 +25521,10 @@ PrefabInstance:
     - target: {fileID: 4196240367666964437, guid: 8d6f05e6980af7745bbd1a4896bb23ee, type: 3}
       propertyPath: m_Name
       value: GlowParticleSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856155050907516318, guid: 8d6f05e6980af7745bbd1a4896bb23ee, type: 3}
+      propertyPath: stopAction
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35910,7 +35915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5837645103985897682, guid: 2464ef70c70a40449b746616a34cde4f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5905509955246368429, guid: 2464ef70c70a40449b746616a34cde4f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

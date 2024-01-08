@@ -1263,6 +1263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlowParticleSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 4196240367666964437, guid: 8d6f05e6980af7745bbd1a4896bb23ee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

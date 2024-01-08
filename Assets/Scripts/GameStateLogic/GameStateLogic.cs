@@ -527,6 +527,7 @@ public class GameStateLogic : MonoBehaviour
             }
 
             AddResources(Resource.money, resourcesAmount.moneyGained);
+            uiManager.MoneyFromContract();
 
            // moneyStored += resourcesAmount.moneyGained;
 

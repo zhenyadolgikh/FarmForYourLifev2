@@ -57,6 +57,11 @@ public class UIManager : MonoBehaviour
     public GameObject workers;
     public GameObject workersAssignment;
 
+    public GameObject buildWheatFarm;
+    public GameObject buildAppleFarm;
+    public GameObject buildCinnamonFarm;
+    public GameObject buildPigFarm;
+
     public ParticleSystem slaughterParticle;
 
     public GameObject workerMesh;
@@ -694,7 +699,14 @@ public class UIManager : MonoBehaviour
             }
             if (effect is UnionCrackDownLifeTime)
             {
-                //VFX
+                particleSystem = moneyResource.GetComponentInChildren<ParticleSystem>();
+                particleSystem.loop = true;
+                particleSystem.Play();
+
+                if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
+                {
+                    playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
+                }
             }
             if (effect is LabourRushLifeTime)
             {
@@ -707,6 +719,41 @@ public class UIManager : MonoBehaviour
                     playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
                 }
 
+            }
+            //Over Working
+            if (effect is ActionCostLifeTime)
+            {
+                particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
+                particleSystem.loop = true;
+                particleSystem.Play();
+
+                if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
+                {
+                    playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
+                }
+            }
+            //Regulation Cheating
+            if (effect is ActionCostLifeTime)
+            {
+                particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
+                particleSystem.loop = true;
+                particleSystem.Play();
+
+                if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
+                {
+                    playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
+                }
+            }
+            if (effect is ActionCostLifeTime)
+            {
+                particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
+                particleSystem.loop = true;
+                particleSystem.Play();
+
+                if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
+                {
+                    playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
+                }
             }
             if (effect is ActionCostLifeTime)
             {

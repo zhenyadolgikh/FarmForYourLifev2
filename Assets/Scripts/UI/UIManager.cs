@@ -106,7 +106,8 @@ public class UIManager : MonoBehaviour
     private bool farmTileMouseUp = false;
     private bool farmTileMouseUpSecondFrame = false;
     private int farmTileMouseUpIndex = -1;
-   
+
+    private Dictionary<string, ParticleSystem> playingVFXeffects = new Dictionary<string, ParticleSystem>();
 
 
     void Start()
@@ -680,6 +681,12 @@ public class UIManager : MonoBehaviour
                 particleSystem = wheatResource.GetComponentInChildren<ParticleSystem>();
                 particleSystem.loop = true;
                 particleSystem.Play();
+
+                if(!playingVFXeffects.ContainsKey(effect.cardIdentifier))
+                {
+                    playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
+                }
+
             }
             if (effect is WheatSeasonLifeTme)
             {
@@ -694,14 +701,45 @@ public class UIManager : MonoBehaviour
                 particleSystem = workers.GetComponentInChildren<ParticleSystem>();
                 particleSystem.loop = true;
                 particleSystem.Play();
+
+                if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
+                {
+                    playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
+                }
+
             }
             if (effect is ActionCostLifeTime)
             {
                 particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
                 particleSystem.loop = true;
                 particleSystem.Play();
+
+                if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
+                {
+                    playingVFXeffects.Add(effect.cardIdentifier, particleSystem);
+                }
             }
         }
+
+        foreach(KeyValuePair<string, ParticleSystem> valuePair in playingVFXeffects)
+        {
+            bool contains = false;
+
+            foreach(EffectLifeTime effectLifeTime in gameStateLogic.GetActiveEffects())
+            {
+                if(effectLifeTime.cardIdentifier.Equals(valuePair.Key))
+                {
+                    contains = true;
+                }
+            }
+
+            if(contains == false)
+            {
+                playingVFXeffects[valuePair.Key].Stop();
+            }
+        }
+
+        
     }
 
     public void SlaughterEffect(int farmTileIndex)

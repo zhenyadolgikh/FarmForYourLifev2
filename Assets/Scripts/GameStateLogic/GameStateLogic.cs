@@ -490,11 +490,22 @@ public class GameStateLogic : MonoBehaviour
 
             ResourcesAmount resourcesAmount = ResourceAmountFromContract(contractCard);
 
+            List<EffectLifeTime> effectsToRemove = new List<EffectLifeTime>();
+
             foreach(EffectLifeTime effect in activeEffects)
             {
                 resourcesAmount = effect.ModifyContract(resourcesAmount,ResourceAmountFromStored());
+
+                if(effect.lifeTimeEnded)
+                {
+                    effectsToRemove.Add(effect);
+                }
             }
 
+            foreach(EffectLifeTime effect in effectsToRemove)
+            {
+                RemoveActiveEffect(effect);
+            }
 
             if (resourcesAmount.wheatCost != -1)
             {
@@ -525,6 +536,24 @@ public class GameStateLogic : MonoBehaviour
 
 
 
+    }
+
+    private void RemoveActiveEffect(EffectLifeTime effectLifeTime)
+    {
+        int indexToRemove = -1;
+        SpecialCard cardToAdd = null;
+        for(int i = 0; i < activeEffects.Count; i++)
+        {
+            if (activeEffects[i] == effectLifeTime)
+            {
+                indexToRemove = i;
+                cardToAdd = specialCardRegistry[activeEffects[i].cardIdentifier];
+            }
+        }
+
+        specialCardDeck.Add(cardToAdd);
+        activeEffects.RemoveAt(indexToRemove);
+        
     }
 
     private void AnimalProductionPhase()

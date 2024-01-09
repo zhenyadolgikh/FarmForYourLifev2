@@ -1253,7 +1253,7 @@ public class GameStateLogic : MonoBehaviour
 
         moneyStored -= increaseActionsCost;
 
-        currentActions -= 1;
+       // currentActions += 1;
     }
 
     private void IncreaseStorage(IncreaseStorageAction action)

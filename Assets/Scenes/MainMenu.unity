@@ -5913,7 +5913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level2
-  tutorialName: Tutorial2
+  tutorialName: TutorialFinalForm
 --- !u!4 &384490038
 Transform:
   m_ObjectHideFlags: 0
@@ -6657,7 +6657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a4895ca491ed343a48244aabfb3c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: 
+  levelToLoad: Level3
 --- !u!1 &777970948
 GameObject:
   m_ObjectHideFlags: 0
@@ -13057,6 +13057,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3a07ed0c299410c9dd61fd183af941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardMovedSound: {fileID: 0}
+  pigDiedSound: {fileID: 0}
+  specialCardPlayed: {fileID: 0}
+  contractCardPlayed: {fileID: 0}
+  takeCardToHandSound: {fileID: 0}
 --- !u!1 &2028107002
 GameObject:
   m_ObjectHideFlags: 0

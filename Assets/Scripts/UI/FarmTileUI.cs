@@ -122,11 +122,15 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
                         BuildAction ba = new BuildAction();
                         ba.farmTileIndex = farmTileIndex;
                         IsActionValidMessage message = manager.IsActionValid(ba);
-                        if (message.wasActionValid == false)
+                        if(message != null)
                         {
-                            manager.SendErrorMessage(message.errorMessage);
+                            if (message.wasActionValid == false)
+                            {
+                                manager.SendErrorMessage(message.errorMessage);
+                            }
                         }
                     }
+
                 }
             }
             

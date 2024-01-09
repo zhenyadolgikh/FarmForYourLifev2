@@ -10,6 +10,13 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip cardMovedSound;
 
+    public AudioClip pigDiedSound;
+
+    public AudioClip specialCardPlayed;
+
+    public AudioClip contractCardPlayed;
+    public AudioClip takeCardToHandSound;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -44,7 +51,38 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMoveSound()
     {
-        print(" vad är audiosourcen sen " + audioSource);
         audioSource.PlayOneShot(cardMovedSound);
     }
+
+    public void PlayPigDied()
+    {
+        audioSource.PlayOneShot(pigDiedSound);
+    }
+
+    public void PlayContractCard()
+    {
+        audioSource.PlayOneShot(contractCardPlayed);
+    }
+
+    public void PlaySpecialCard()
+    {
+        audioSource.PlayOneShot(specialCardPlayed);
+    }
+    public void PlayTakeCardToHand()
+    {
+        audioSource.PlayOneShot(takeCardToHandSound);
+    }
+    public void PlayMouseClick()
+    {
+        audioSource.PlayOneShot(cardMovedSound);
+    }
+    public  void PlayButtonSound()
+    {
+
+    }
+    public void PlayPurchaseFarm()
+    {
+
+    }
+
 }

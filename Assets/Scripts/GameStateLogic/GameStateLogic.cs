@@ -460,6 +460,8 @@ public class GameStateLogic : MonoBehaviour
             contractCardsOnTable[action.index] = null;
             cardsInHand.Add(contractCardRegistry[cardName]);
         }
+
+        soundManager.PlayTakeCardToHand();
     }
 
     private void PlayCard( PlayCardAction playCardAction)
@@ -484,6 +486,8 @@ public class GameStateLogic : MonoBehaviour
             {
                 specialCardDeck.Add((SpecialCard)cardPLayed);
             }
+
+            soundManager.PlaySpecialCard();
         }
         else
         {
@@ -530,6 +534,7 @@ public class GameStateLogic : MonoBehaviour
             }
 
             AddResources(Resource.money, resourcesAmount.moneyGained);
+            soundManager.PlayContractCard();
             uiManager.MoneyFromContract();
 
            // moneyStored += resourcesAmount.moneyGained;
@@ -1195,6 +1200,8 @@ public class GameStateLogic : MonoBehaviour
                 int amountSlaughtered = farmTile.amountOfAnimals / 2;
                 farmTile.amountOfAnimals = farmTile.amountOfAnimals / 2;
 
+                uiManager.SlaughterEffect(action.farmTileIndex  );
+                soundManager.PlayPigDied();
 
                 AddResources(Resource.pigMeat, amountSlaughtered);
                 //pigMeatStored += amountSlaughtered;
@@ -1317,6 +1324,7 @@ public class GameStateLogic : MonoBehaviour
                     int amountSlaughtered = farmTile.amountOfAnimals / 2;
                     farmTile.amountOfAnimals = farmTile.amountOfAnimals / 2;
 
+                    soundManager.PlayPigDied();
 
                     AddResources(Resource.pigMeat, amountSlaughtered);
                     //pigMeatStored += amountSlaughtered;

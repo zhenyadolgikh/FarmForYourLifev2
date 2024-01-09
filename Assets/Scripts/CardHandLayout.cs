@@ -51,15 +51,15 @@ public class CardHandLayout : MonoBehaviour
         float positionsLeft;
         Vector2 originPosition;// = new Vector3();
         
-        if(cardsToOrderSorted.Count % 2 == 0)
+        if(cardsToOrderSorted.Count % 2 == 0 )
         {
             positionsLeft = cardsToOrderSorted.Count / 2;
-            originPosition = new Vector2(middleX - (cardWidth + paddingX) * positionsLeft, rectTransform.position.y);
+            originPosition = new Vector2((middleX - (cardWidth + paddingX) * positionsLeft) + cardWidth / 2, rectTransform.position.y);
         }
         else
         {
             positionsLeft = cardsToOrderSorted.Count / 2;
-            originPosition = new Vector2(middleX - (cardWidth + paddingX) * positionsLeft, rectTransform.position.y);
+            originPosition = new Vector2((middleX - (cardWidth + paddingX) * positionsLeft ) , rectTransform.position.y);
         }
 
         for(int i = 0; i < cardsToOrderSorted.Count; i++)

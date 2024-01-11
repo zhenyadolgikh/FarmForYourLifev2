@@ -1210,11 +1210,15 @@ public class GameStateLogic : MonoBehaviour
                     pigMeatStored = currentStorage / 10;
                 }
                 // ResetNumbers();
-                workerRegistry[action.workerId].workType = WorkType.unassigned;
             }
         }
 
         workerRegistry[action.workerId].workType = action.workType;
+        if (workerRegistry[action.workerId].workType == WorkType.slaughtering )
+        {
+            workerRegistry[action.workerId].workType = WorkType.unassigned;
+
+        }
         farmTileRegistry[action.farmTileIndex].workersOnTile.Add(workerRegistry[action.workerId]);
         
 

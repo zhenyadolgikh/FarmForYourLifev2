@@ -172,7 +172,6 @@ public class GameStateLogic : MonoBehaviour
             uiManager = UIManager.instance;
         }
 
-        uiManager.SetDebugText("I borjan av setup");
         effectInterface = new EffectInterface(this);
 
         for (int i = 0; i < 9; i++)
@@ -210,22 +209,17 @@ public class GameStateLogic : MonoBehaviour
 
         AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
-        uiManager.SetDebugText("innan add resources");
         AddResources(Resource.money,1500);
-        uiManager.SetDebugText("innan fill cards special");
 
         FillCardsOnTable();
-        uiManager.SetDebugText("innan fill contractcards table");
 
         FillContractCardsOnTable();
-        uiManager.SetDebugText("innan get is tutorial");
 
         if (UIManager.instance.GetIsTutorial())
         {
             AddResources(Resource.money, 1500);
 
         }
-        uiManager.SetDebugText("efter get tutorial");
 
     }
 

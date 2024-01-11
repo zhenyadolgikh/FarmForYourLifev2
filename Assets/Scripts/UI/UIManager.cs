@@ -691,7 +691,8 @@ public class UIManager : MonoBehaviour
             if (effect is WheatAlchemyLifeTime)
             {
                 particleSystem = wheatResource.GetComponentInChildren<ParticleSystem>();
-                particleSystem.loop = true;
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+                mainModule.loop = true;
                 particleSystem.Play();
 
                 if(!playingVFXeffects.ContainsKey(effect.cardIdentifier))
@@ -707,7 +708,8 @@ public class UIManager : MonoBehaviour
             if (effect is UnionCrackDownLifeTime)
             {
                 particleSystem = moneyResource.GetComponentInChildren<ParticleSystem>();
-                particleSystem.loop = true;
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+                mainModule.loop = true;
                 particleSystem.Play();
 
                 if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
@@ -718,7 +720,8 @@ public class UIManager : MonoBehaviour
             if (effect is LabourRushLifeTime)
             {
                 particleSystem = workers.GetComponentInChildren<ParticleSystem>();
-                particleSystem.loop = true;
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+                mainModule.loop = true;
                 particleSystem.Play();
 
                 if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
@@ -731,7 +734,8 @@ public class UIManager : MonoBehaviour
             if (effect is ActionCostLifeTime)
             {
                 particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
-                particleSystem.loop = true;
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+                mainModule.loop = true;
                 particleSystem.Play();
 
                 if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
@@ -743,7 +747,8 @@ public class UIManager : MonoBehaviour
             if (effect is ActionCostLifeTime)
             {
                 particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
-                particleSystem.loop = true;
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+                mainModule.loop = true;
                 particleSystem.Play();
 
                 if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
@@ -754,7 +759,8 @@ public class UIManager : MonoBehaviour
             if (effect is ActionCostLifeTime)
             {
                 particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
-                particleSystem.loop = true;
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+                mainModule.loop = true;
                 particleSystem.Play();
 
                 if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))
@@ -765,7 +771,8 @@ public class UIManager : MonoBehaviour
             if (effect is ActionCostLifeTime)
             {
                 particleSystem = workersAssignment.GetComponentInChildren<ParticleSystem>();
-                particleSystem.loop = true;
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+                mainModule.loop = true;
                 particleSystem.Play();
 
                 if (!playingVFXeffects.ContainsKey(effect.cardIdentifier))

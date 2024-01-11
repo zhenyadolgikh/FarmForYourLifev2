@@ -11,8 +11,8 @@ public class ContractLayout : MonoBehaviour
 
     private RectTransform rectTransform;
 
-    private float cardWidth = 0;
-    private float cardHeight = 0;
+    public float cardWidth = 0;
+    public float cardHeight = 0;
 
 
     private void Start()
@@ -40,19 +40,20 @@ public class ContractLayout : MonoBehaviour
         {
             if(i < 3)
             {
-                displayCards[i].GetComponent<RectTransform>().transform.position = new Vector3(rectTransform.position.x + ((cardWidth + paddingX) * i), rectTransform.position.y, rectTransform.position.z);
+               displayCards[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(rectTransform.anchoredPosition.x + ((cardWidth + paddingX) * i), rectTransform.anchoredPosition.y);
+
             }
 
             //hard codat af vilket är wack
             if(i == 3)
             {
-                displayCards[i].GetComponent<RectTransform>().transform.position = new Vector3(rectTransform.position.x + ((cardWidth/2) + (paddingX/2)) , rectTransform.position.y - cardHeight - paddingY, rectTransform.position.z);
+                displayCards[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(rectTransform.anchoredPosition.x + ((cardWidth/2) + (paddingX/2)) , rectTransform.anchoredPosition.y - cardHeight - paddingY);
             }
             if( i == 4)
             {
-                displayCards[i].GetComponent<RectTransform>().transform.position = new Vector3(rectTransform.position.x + ((cardWidth / 2) + (paddingX * 1.5f) ) + cardWidth, rectTransform.position.y - cardHeight -paddingY, rectTransform.position.z);
+                displayCards[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(rectTransform.anchoredPosition.x + ((cardWidth / 2) + (paddingX * 1.5f) ) + cardWidth, rectTransform.anchoredPosition.y - cardHeight -paddingY);
 
-            }
+            }// 
         }
     }
 

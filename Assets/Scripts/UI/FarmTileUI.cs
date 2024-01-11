@@ -153,9 +153,6 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
         {
             if (assignWorkersPanel != null)
             {
-
-                //   print(Input.mousePosition);
-
                 Vector2 mousePosition = Input.mousePosition;
                 assignWorkersPanel.transform.position = new Vector3(mousePosition.x, mousePosition.y + 130);
                 bool isActive = assignWorkersPanel.activeSelf;

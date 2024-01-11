@@ -26,16 +26,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714388027313305785}
-  m_LocalRotation: {x: -0.32518613, y: 0.052776963, z: -0.052569494, w: 0.94271153}
-  m_LocalPosition: {x: 0, y: 0, z: 0.11485308}
+  m_LocalRotation: {x: -0.0448752, y: -0.943695, z: 0.32633692, w: 0.030499311}
+  m_LocalPosition: {x: 0, y: 0, z: 0.08363066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1355678963325323775}
-  m_LocalEulerAnglesHint: {x: -37.414, y: 9.691, z: -9.672}
+  m_LocalEulerAnglesHint: {x: 37.82, y: -173.688, z: 7.609}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.55718994, y: 0.8321533}
+  m_AnchoredPosition: {x: -0.070373535, y: 0.7490845}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8126863006465166472
@@ -250,6 +250,7 @@ MonoBehaviour:
   buildSprite: {fileID: 21300000, guid: 2b1a2ae0dabd84e31a3f3a1e14d39e16, type: 3}
   harvestSprite: {fileID: 21300000, guid: ceedab3fdec954bdab5765d794089040, type: 3}
   idleSprite: {fileID: 21300000, guid: e58c156e67b1c4e749eb54e6dfdf9bb3, type: 3}
+  workerId: -1
 --- !u!1001 &6508720445128186690
 PrefabInstance:
   m_ObjectHideFlags: 0

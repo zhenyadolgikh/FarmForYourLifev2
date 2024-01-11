@@ -5913,7 +5913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level2
-  tutorialName: TutorialFinalForm
+  tutorialName: Tutorial
 --- !u!4 &384490038
 Transform:
   m_ObjectHideFlags: 0

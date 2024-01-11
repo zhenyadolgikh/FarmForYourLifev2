@@ -1,12 +1,5 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Xml;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class GameStateLogic : MonoBehaviour
@@ -42,7 +35,6 @@ public class GameStateLogic : MonoBehaviour
     public int maxTurn = 0;
 
     private int workersCreated = 0;
-    private int workerPay = 100;
     private int buyWorkerCost = 200;
 
     private SortedDictionary<int, Worker> workerRegistry = new SortedDictionary<int, Worker>();
@@ -175,7 +167,12 @@ public class GameStateLogic : MonoBehaviour
 
     public void Setup()
     {
+        if(uiManager == null)
+        {
+            uiManager = UIManager.instance;
+        }
 
+        uiManager.SetDebugText("I borjan av setup");
         effectInterface = new EffectInterface(this);
 
         for (int i = 0; i < 9; i++)
@@ -213,14 +210,23 @@ public class GameStateLogic : MonoBehaviour
 
         AddWorker();
         //farmTileRegistry[0].workersOnTile.Add(workerRegistry[0]);
+        uiManager.SetDebugText("innan add resources");
         AddResources(Resource.money,1500);
+        uiManager.SetDebugText("innan fill cards special");
+
         FillCardsOnTable();
+        uiManager.SetDebugText("innan fill contractcards table");
+
         FillContractCardsOnTable();
-        if(UIManager.instance.GetIsTutorial())
+        uiManager.SetDebugText("innan get is tutorial");
+
+        if (UIManager.instance.GetIsTutorial())
         {
             AddResources(Resource.money, 1500);
 
         }
+        uiManager.SetDebugText("efter get tutorial");
+
     }
 
 

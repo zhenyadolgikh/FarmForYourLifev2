@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CardDeck : MonoBehaviour
 {
@@ -9,7 +7,6 @@ public class CardDeck : MonoBehaviour
  
 
     public GameObject DisplayedCard;
-    public GameObject[] Clones;
     public GameObject SpecialCardsPanel;
     public GameObject contractCardsPanel;
 
@@ -25,7 +22,7 @@ public class CardDeck : MonoBehaviour
 
     public UIManager uiManager; 
 
-
+    //
     private void CreateCardDisplays(TypeOfCard cardType)
     {
         List<Card> cardsOnTable = uiManager.gameStateLogic.getCardsOnTable(cardType);

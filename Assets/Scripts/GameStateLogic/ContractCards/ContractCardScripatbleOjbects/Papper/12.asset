@@ -16,6 +16,6 @@ MonoBehaviour:
   cardDescription: 
   wheatNeeded: 40
   applesNeeded: 40
-  cinnamonsNeeded: 40
+  cinnamonsNeeded: -1
   pigMeatNeeded: -1
-  moneyEarned: 1800
+  moneyEarned: 1000

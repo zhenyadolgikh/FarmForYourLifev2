@@ -17,10 +17,11 @@ public class WheatAlchemyLifeTime : EffectLifeTime
 
         int wheatNeeded = 0; 
         ResourcesAmount potenialContract = contractCost;
+        bool onlyWheatNeeded = true;
 
         if(contractCost.wheatCost != -1)
         {
-            wheatNeeded = storedResources.wheatCost;
+            wheatNeeded = contractCost.wheatCost;
         }
         if(contractCost.appleCost != -1) 
         {
@@ -29,6 +30,7 @@ public class WheatAlchemyLifeTime : EffectLifeTime
                 wheatNeeded += contractCost.appleCost - storedResources.appleCost;
                 potenialContract.appleCost = storedResources.appleCost;
             }
+            onlyWheatNeeded = false;
         }
         if(contractCost.cinnamonCost != -1) 
         {
@@ -38,6 +40,7 @@ public class WheatAlchemyLifeTime : EffectLifeTime
                 potenialContract.cinnamonCost = storedResources.cinnamonCost;
 
             }
+            onlyWheatNeeded = false;
         }
 
         //
@@ -49,6 +52,7 @@ public class WheatAlchemyLifeTime : EffectLifeTime
                 potenialContract.pigMeatCost = storedResources.pigMeatCost;
 
             }
+            onlyWheatNeeded = false;
         }
         potenialContract.wheatCost = wheatNeeded;
         //
@@ -57,7 +61,7 @@ public class WheatAlchemyLifeTime : EffectLifeTime
             wheatNeeded = -1;
         }
 
-        if(wheatNeeded <= storedResources.wheatCost && wheatNeeded != contractCost.wheatCost)
+        if(wheatNeeded <= storedResources.wheatCost && !onlyWheatNeeded && wheatNeeded != -1)
         {
             lifeTimeEnded = true;
         }

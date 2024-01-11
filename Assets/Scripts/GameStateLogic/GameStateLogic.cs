@@ -11,11 +11,14 @@ using UnityEngine;
 
 public class GameStateLogic : MonoBehaviour
 {
-    private UIManager uiManager; 
+    private UIManager uiManager;
+    private SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
         uiManager = UIManager.instance;
+        soundManager = SoundManager.instance;
+
     }
     private int maxActions = 0;
     private int currentActions = 0;
@@ -457,6 +460,8 @@ public class GameStateLogic : MonoBehaviour
             contractCardsOnTable[action.index] = null;
             cardsInHand.Add(contractCardRegistry[cardName]);
         }
+
+        soundManager.PlayTakeCardToHand();
     }
 
     private void PlayCard( PlayCardAction playCardAction)
@@ -481,6 +486,8 @@ public class GameStateLogic : MonoBehaviour
             {
                 specialCardDeck.Add((SpecialCard)cardPLayed);
             }
+
+            soundManager.PlaySpecialCard();
         }
         else
         {
@@ -527,6 +534,7 @@ public class GameStateLogic : MonoBehaviour
             }
 
             AddResources(Resource.money, resourcesAmount.moneyGained);
+            soundManager.PlayContractCard();
             uiManager.MoneyFromContract();
 
            // moneyStored += resourcesAmount.moneyGained;
@@ -1192,6 +1200,8 @@ public class GameStateLogic : MonoBehaviour
                 int amountSlaughtered = farmTile.amountOfAnimals / 2;
                 farmTile.amountOfAnimals = farmTile.amountOfAnimals / 2;
 
+                uiManager.SlaughterEffect(action.farmTileIndex  );
+                soundManager.PlayPigDied();
 
                 AddResources(Resource.pigMeat, amountSlaughtered);
                 //pigMeatStored += amountSlaughtered;
@@ -1224,7 +1234,7 @@ public class GameStateLogic : MonoBehaviour
         {
             MoveCards<ContractCard>(contractCardsOnTable, contractCardDeck);
         }
-
+        soundManager.PlayMoveSound();
     }
 
     private void BuyWorker(BuyWorkerAction action)
@@ -1243,7 +1253,7 @@ public class GameStateLogic : MonoBehaviour
 
         moneyStored -= increaseActionsCost;
 
-        currentActions -= 1;
+       // currentActions += 1;
     }
 
     private void IncreaseStorage(IncreaseStorageAction action)
@@ -1314,6 +1324,7 @@ public class GameStateLogic : MonoBehaviour
                     int amountSlaughtered = farmTile.amountOfAnimals / 2;
                     farmTile.amountOfAnimals = farmTile.amountOfAnimals / 2;
 
+                    soundManager.PlayPigDied();
 
                     AddResources(Resource.pigMeat, amountSlaughtered);
                     //pigMeatStored += amountSlaughtered;

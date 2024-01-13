@@ -208,7 +208,7 @@ public class UIManager : MonoBehaviour
 
 
 
-        contractLayout = FindAnyObjectByType<ContractLayout>();
+     //   contractLayout = FindAnyObjectByType<ContractLayout>();
 
         for (int i = 0; i < 9; i++)
         {

@@ -597,7 +597,7 @@ public class GameStateLogic : MonoBehaviour
 
             print("mängden som ska ätas " + amountToBeEaten);
 
-            if (amountToBeEaten < wheatStored)
+            if (amountToBeEaten <= wheatStored)
             {
                 wheatStored -= amountToBeEaten;
 

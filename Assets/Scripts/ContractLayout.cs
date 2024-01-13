@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ContractLayout : MonoBehaviour
@@ -14,7 +12,7 @@ public class ContractLayout : MonoBehaviour
     public float cardWidth = 0;
     public float cardHeight = 0;
 
-
+    
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -29,7 +27,11 @@ public class ContractLayout : MonoBehaviour
     public void OrderCards()
     {
         DisplayCard[] displayCards = GetComponentsInChildren<DisplayCard>(true);
+        if(rectTransform == null)
+        {
+            rectTransform = GetComponent<RectTransform>();
 
+        }
         if (displayCards.Length > 0 ) 
         {
             cardWidth = displayCards[0].GetComponent<RectTransform>().rect.width;

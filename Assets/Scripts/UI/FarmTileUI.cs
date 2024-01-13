@@ -28,6 +28,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 
     public Color normalColor;
     public Color hoverOverColor;
+    public Image farmTileImage;
 
     bool mouseOver = false;
 
@@ -56,12 +57,15 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
     void OnMouseEnter()
     {
         mouseOver = true;
-        GetComponent<Renderer>().material.SetColor("_Color", hoverOverColor);
+        Debug.Log(hoverOverColor);
+        Debug.Log(farmTileImage);
+        farmTileImage.color = hoverOverColor;
+        
     }
     void OnMouseExit()
     {
         mouseOver = false;
-        GetComponent<Renderer>().material.SetColor("_Color", normalColor);
+        farmTileImage.color = normalColor;
     }
 
     private void OnMouseUp()

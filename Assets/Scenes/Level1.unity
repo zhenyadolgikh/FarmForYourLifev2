@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21111,7 +21111,7 @@ PrefabInstance:
 
 
         Get
-        me 360 apples and 80 cinnamon buns in 12 turns and I''ll think about it.'
+        me 160 apples and 80 cinnamon buns in 12 turns and I''ll think about it.'
       objectReference: {fileID: 0}
     - target: {fileID: 1041455471043203024, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
       propertyPath: uiCamera

@@ -17,7 +17,7 @@ public class UICostManager : MonoBehaviour
         {
             button.interactable = true;
             Transform moneyTextTransform = button.transform.Find("ButtonText/MoneyText (TMP)");
-            Transform actionTextTransform = button.transform.Find("ButtonText/ActionText (TMP)");
+            Transform actionTextTransform = button.transform.Find("ButtonText/Action");
 
             if (moneyTextTransform != null)
             {

@@ -12,9 +12,6 @@ using static UnityEngine.EventSystems.PointerEventData;
 
 public class FarmTileUI : MonoBehaviour, IPointerClickHandler
 {
-    //public GameStateLogic gameStateLogic;
-
-    //public TextMeshProUGUI farmTileText;
     public GameObject farmTile;
     public GameObject optionPanel;
     public Button[] options;
@@ -206,8 +203,7 @@ public class FarmTileUI : MonoBehaviour, IPointerClickHandler
         {
             UIManager.instance.MouseClickHandled();
         }
-        //Output to console the clicked GameObject's name and the following message. You can replace this with your own actions for when clicking the GameObject.
-     //   Debug.Log(name + " Game Object Clicked!");
+
         if(pointerEventData.button == InputButton.Right)
         {
             return;

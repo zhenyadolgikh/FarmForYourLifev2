@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21311,6 +21311,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1978942604}
+    - target: {fileID: 6611729893164350960, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 413
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611729893164350960, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6619671532900004185, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 303d49e7838363243b212fe68fae65c8, type: 3}
     - target: {fileID: 6808810559022916471, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21625,14 +21637,14 @@ SceneRoots:
   - {fileID: 1293844255}
   - {fileID: 734837448}
   - {fileID: 353173235}
-  - {fileID: 4847050736790735864}
   - {fileID: 1927526110}
   - {fileID: 230499462}
   - {fileID: 1828082156}
   - {fileID: 1482169892}
   - {fileID: 602547119}
+  - {fileID: 1620354046}
+  - {fileID: 7598422657070988462}
   - {fileID: 250326502}
   - {fileID: 7205463987339158219}
   - {fileID: 1123705554}
-  - {fileID: 1620354046}
-  - {fileID: 7598422657070988462}
+  - {fileID: 4847050736790735864}

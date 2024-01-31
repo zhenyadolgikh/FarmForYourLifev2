@@ -436,4 +436,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc11406491f7914cbb6359aed74ec40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: 
+  cardNameText: {fileID: 7035383365824917206}
+  turnCountText: {fileID: 7465618334493305851}

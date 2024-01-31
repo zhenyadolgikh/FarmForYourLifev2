@@ -18876,6 +18876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverTextPrefab: {fileID: 9177368893680945490, guid: ff8fd687ab051f048892e6b655e90371, type: 3}
+  paddingY: 60
 --- !u!114 &1869826519 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3402889562100769296, guid: 4966517a9b282e44faf20d277d39fea2, type: 3}

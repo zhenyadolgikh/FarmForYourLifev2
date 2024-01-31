@@ -21,7 +21,6 @@ public class UnionCrackDown : SpecialCard
 class UnionCrackDownLifeTime : EffectLifeTime
 {
 
-    int turnCount = 3;
 
     public UnionCrackDownLifeTime(string cardId, TypeOfCard type) : base(cardId, type)
     {
@@ -32,7 +31,7 @@ class UnionCrackDownLifeTime : EffectLifeTime
     {
         turnAmount -= 1;
 
-        if(turnCount < 0)
+        if(turnAmount < 0)
         {
             lifeTimeEnded = true;
         }

@@ -15,6 +15,8 @@ public class ActiveEffectHover : MonoBehaviour, IPointerEnterHandler
 
     private bool effectsShowing = false;
 
+    [SerializeField] private int paddingY = 30;
+
     private void Start()
     {
         manager = UIManager.instance;
@@ -44,6 +46,11 @@ public class ActiveEffectHover : MonoBehaviour, IPointerEnterHandler
             {
                 GameObject createdCardHover = Instantiate<GameObject>(hoverTextPrefab);
 
+                if(!effectsShowing)
+                {
+                    createdCardHover.SetActive(false);
+                }
+
                 createdCardHover.transform.SetParent(gameObject.transform, false);
 
                 EffectHover effectHover = createdCardHover.GetComponent<EffectHover>();
@@ -54,20 +61,41 @@ public class ActiveEffectHover : MonoBehaviour, IPointerEnterHandler
 
                 effectsPlaced.Add(effectHover);
             }
+            else
+            {
+                effectsPlaced[GetEffectHover(activeEffect.cardIdentifier)].UpdateTurnCount(effect.turnAmount);
+            }
         }
+
+        List<string> cardsToRemove = new List<string>();
         foreach (EffectHover effect in effectsPlaced)
         {
             string cardName = effect.cardName;
 
             if (ContainsInEffectList(activeEffects,cardName)== false)
             {
-                GameObject actorToRemove = effectsPlaced[GetEffectHover(cardName)].gameObject;
-
-                effectsPlaced.RemoveAt(GetEffectHover(cardName));
-
-                Destroy(actorToRemove);
+                cardsToRemove.Add(cardName);
             }
         }
+        foreach(string cardName in cardsToRemove)
+        {
+            RemoveWithString(cardName);
+        }
+
+        OrderChildren();
+    }
+
+    private void OrderChildren()
+    {
+        EffectHover[] hovers = GetComponentsInChildren<EffectHover>(true);
+
+        RectTransform parentRect = GetComponent<RectTransform>();
+
+        for(int i = 0; i < hovers.Length; i++)
+        {
+            hovers[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(parentRect.anchoredPosition.x, parentRect.anchoredPosition.y + (paddingY  +(paddingY * i)));
+        }
+
     }
 
     private bool ContainsInEffectHover(string cardName)
@@ -110,10 +138,28 @@ public class ActiveEffectHover : MonoBehaviour, IPointerEnterHandler
         return -1;
     }
 
+    private void RemoveWithString(string cardName)
+    {
+        int indexToRemove = -1;
+        for(int i = 0; i < effectsPlaced.Count; i++)
+        {
+            if(effectsPlaced[i].cardName.Equals(cardName))
+            {
+                indexToRemove = i; break;
+            }
+        }
+
+        Destroy(effectsPlaced[indexToRemove].gameObject);
+
+        effectsPlaced.RemoveAt(indexToRemove);
+    }
+
     public void OnClick()
     {
 
         if (manager == null) { manager = UIManager.instance; }
+
+        manager.InactivateCardView();
 
         EffectHover[] children = gameObject.GetComponentsInChildren<EffectHover>(true);
 

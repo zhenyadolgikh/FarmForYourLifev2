@@ -18,13 +18,12 @@ public class AnimalFasting : SpecialCard
 }
 public class AnimalFastingLifeTime : EffectLifeTime
 {
-    int turnCount = 3;
 
 
 
     public AnimalFastingLifeTime(string cardId, TypeOfCard type) : base(cardId, type)
     {
-
+        turnAmount = 3; 
     }
 
     public override int ModifyAmountToBeEaten(int amountToBeEaten)
@@ -35,8 +34,8 @@ public class AnimalFastingLifeTime : EffectLifeTime
 
     public override void UpdateLifeTime()
     {
-        turnCount -= 1;
-        if (turnCount < 0)
+        turnAmount -= 1;
+        if (turnAmount < 0)
         {
             lifeTimeEnded = true;
         }

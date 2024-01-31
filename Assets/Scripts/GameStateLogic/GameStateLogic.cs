@@ -1526,6 +1526,10 @@ public class GameStateLogic : MonoBehaviour
         return farmTileRegistry;
     }
 
+    public Card GetSpecialCardFromName(string name)
+    {
+        return specialCardRegistry[name];
+    }
 
     public void CardSetupTutorial()
     {

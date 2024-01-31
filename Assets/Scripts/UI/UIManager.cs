@@ -114,8 +114,8 @@ public class UIManager : MonoBehaviour
 
     private Dictionary<string, ParticleSystem> playingVFXeffects = new Dictionary<string, ParticleSystem>();
 
-
-
+    [SerializeField] private CardViewer cardViewer;
+    [SerializeField] private ActiveEffectHover activeEffectHover;
 
     void Start()
     {
@@ -256,6 +256,16 @@ public class UIManager : MonoBehaviour
         Refresh();
 
 
+    }
+
+    public void InactivateCardView()
+    {
+        cardViewer.InactivateCardView();
+    }
+
+    public void SetCardView(Card card) 
+    {
+        cardViewer.SetCardView(card);
     }
         
     private WorkType GetWorkTypeFromFarm(int farmindex)
@@ -417,6 +427,7 @@ public class UIManager : MonoBehaviour
     {
 
         cardDeck.Refresh();
+        activeEffectHover.CreateActiveEffects(); 
         PlaceMeshes();
         PlaceWorkers();
         UpdateResourceText();

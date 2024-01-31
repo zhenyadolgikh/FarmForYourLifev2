@@ -44,6 +44,8 @@ public class DisplayCard : MonoBehaviour
     public GameObject specialCardVariant;
 
 
+    public bool disableOnClick = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,7 +85,12 @@ public class DisplayCard : MonoBehaviour
     }
 
     public void OnCardClick()
-    {
+    {   
+
+        if(disableOnClick)
+        {
+            return;
+        }
         if(inHand == false)
         {
             AddCardToHandAction addCardToHandAction = new AddCardToHandAction();

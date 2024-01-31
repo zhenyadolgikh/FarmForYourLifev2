@@ -9,8 +9,10 @@ public abstract class EffectLifeTime
 
     public string cardIdentifier;
 
-    public TypeOfCard typeOfCard; 
+    public TypeOfCard typeOfCard;
 
+    public int turnAmount = -1;
+    
 
     public  EffectLifeTime(string cardId, TypeOfCard type)
     {

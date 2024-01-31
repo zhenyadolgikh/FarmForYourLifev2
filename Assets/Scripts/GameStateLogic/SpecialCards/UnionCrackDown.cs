@@ -25,11 +25,12 @@ class UnionCrackDownLifeTime : EffectLifeTime
 
     public UnionCrackDownLifeTime(string cardId, TypeOfCard type) : base(cardId, type)
     {
+        turnAmount = 3; 
     }
 
     public override void UpdateLifeTime()
     {
-        turnCount -= 1;
+        turnAmount -= 1;
 
         if(turnCount < 0)
         {

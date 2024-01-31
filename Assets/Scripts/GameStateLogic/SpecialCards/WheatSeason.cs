@@ -12,7 +12,10 @@ public class WheatSeason : SpecialCard
     }
 
     override public EffectLifeTime PlayCard(GameStateLogic.EffectInterface effectInterface)
-    {
+    {   
+        
+
+        
 
         return new WheatSeasonLifeTme(cardName,TypeOfCard.special);
     }

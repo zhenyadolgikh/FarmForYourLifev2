@@ -19,12 +19,12 @@ public class LabourRush : SpecialCard
 
 public class LabourRushLifeTime : EffectLifeTime
 {
-    int turnAmount = 3;
     GameStateLogic.EffectInterface effectInterfacet;
 
     public LabourRushLifeTime(string cardId, TypeOfCard type, GameStateLogic.EffectInterface effectInterfacet) : base(cardId, type)
     {
         this.effectInterfacet = effectInterfacet;
+        turnAmount = 3;
     }
 
     public override void UpdateLifeTime()

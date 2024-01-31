@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class WheatSeasonLifeTme : EffectLifeTime
 {
-    private int turnCount = 3;
 
 
 
 
     public WheatSeasonLifeTme(string cardId, TypeOfCard type): base(cardId, type)
     {
+        turnAmount = 3; 
 
+        
     }
 
 
@@ -32,9 +33,9 @@ public class WheatSeasonLifeTme : EffectLifeTime
 
     public override void UpdateLifeTime()
     {
-        turnCount -= 1;
+        turnAmount -= 1;
 
-        if(turnCount < 0)
+        if(turnAmount < 0)
         {
             lifeTimeEnded = true;
         }

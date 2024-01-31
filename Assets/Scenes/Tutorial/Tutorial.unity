@@ -17522,6 +17522,8 @@ MonoBehaviour:
   contractLayout: {fileID: 1466386809}
   specialCardLayout: {fileID: 1154369625}
   handLayout: {fileID: 1020488375}
+  cardViewer: {fileID: 7205463987339158221}
+  activeEffectHover: {fileID: 7205463987339158220}
 --- !u!4 &1758990683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8363c259dfa0d454abda6a18a853171e, type: 3}
@@ -21707,6 +21709,28 @@ PrefabInstance:
       addedObject: {fileID: 1892476131}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+--- !u!114 &7205463987339158220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5875541375608725072, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+  m_PrefabInstance: {fileID: 7205463987339158219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141d8326b0a153b45a3e9b61866a6103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7205463987339158221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3282629835519319278, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+  m_PrefabInstance: {fileID: 7205463987339158219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9700ad83e4bdc33408dfd36f8262773c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17579,6 +17579,8 @@ MonoBehaviour:
   contractLayout: {fileID: 1466386809}
   specialCardLayout: {fileID: 1154369625}
   handLayout: {fileID: 1020488375}
+  cardViewer: {fileID: 7205463987339158222}
+  activeEffectHover: {fileID: 7205463987339158221}
 --- !u!4 &1758990683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8363c259dfa0d454abda6a18a853171e, type: 3}
@@ -21727,6 +21729,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8946559823747124150, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
   m_PrefabInstance: {fileID: 7205463987339158219}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7205463987339158221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5875541375608725072, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+  m_PrefabInstance: {fileID: 7205463987339158219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141d8326b0a153b45a3e9b61866a6103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7205463987339158222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3282629835519319278, guid: c92ce5c5e14ab1544a80016d3bbaa334, type: 3}
+  m_PrefabInstance: {fileID: 7205463987339158219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9700ad83e4bdc33408dfd36f8262773c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

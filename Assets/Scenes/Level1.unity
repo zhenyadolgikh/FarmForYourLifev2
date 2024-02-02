@@ -20405,7 +20405,7 @@ PrefabInstance:
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: victorCondition
       value: 
-      objectReference: {fileID: 11400000, guid: a562773f28189334ab2e550e8e49fd4c, type: 2}
+      objectReference: {fileID: 11400000, guid: f573b5d636d4ba24896c28413582c363, type: 2}
     - target: {fileID: 3096440395567629510, guid: 228ad6ae00038ee458a5988038c59fdd, type: 3}
       propertyPath: componentDeck.Array.size
       value: 1

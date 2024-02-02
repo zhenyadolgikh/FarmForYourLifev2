@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -16,6 +17,7 @@ public class ActiveEffectHover : MonoBehaviour, IPointerEnterHandler
     private bool effectsShowing = false;
 
     [SerializeField] private int paddingY = 30;
+    [SerializeField] private TextMeshProUGUI amountText;
 
     private void Start()
     {
@@ -34,7 +36,7 @@ public class ActiveEffectHover : MonoBehaviour, IPointerEnterHandler
 
     public void CreateActiveEffects()
     {
-        
+        amountText.text = UIManager.instance.gameStateLogic.GetActiveEffects().Count.ToString();
 
         List<EffectLifeTime> activeEffects = UIManager.instance.gameStateLogic.GetActiveEffects();
 

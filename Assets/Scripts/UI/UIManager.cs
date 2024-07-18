@@ -137,6 +137,19 @@ public class UIManager : MonoBehaviour
 
             tutorialAcceptedActions.Add(assignAction);
 
+            AssignIndividualWorker assignIndividualWorker = new AssignIndividualWorker();
+            assignIndividualWorker.workerId = 0;
+            assignIndividualWorker.farmTileIndex = 4;
+            assignIndividualWorker.workType = WorkType.building;
+
+            tutorialAcceptedActions.Add(assignIndividualWorker);
+
+            AssignIndividualWorker assignIndividualWorkerSecond = new AssignIndividualWorker();
+            assignIndividualWorkerSecond.workerId = 0;
+            assignIndividualWorkerSecond.farmTileIndex = 3;
+            assignIndividualWorkerSecond.workType = WorkType.building;
+
+            tutorialAcceptedActions.Add(assignIndividualWorkerSecond);
 
             AddCardToHandAction addCardToHandAction = new AddCardToHandAction();
             addCardToHandAction.index = 2;
@@ -551,11 +564,6 @@ public class UIManager : MonoBehaviour
 
         if (isTutorial)
         {
-            if(action is AssignWorkersAction)
-            {
-                int hej = 4;
-            }
-
             if (tutorialAcceptedActions.Count > 0 &&!action.Equals(tutorialAcceptedActions[0]))
             {
                 return ;

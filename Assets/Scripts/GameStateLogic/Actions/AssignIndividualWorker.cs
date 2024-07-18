@@ -19,7 +19,7 @@ public class AssignIndividualWorker : Action
         {
             return true;
         }
-        if (!(other is BuildAction))
+        if (!(other is AssignIndividualWorker))
         {
             return false;
         }
